@@ -1,0 +1,1154 @@
+// Helpers
+Number.prototype.toMoney = function() {
+    return this.toLocaleString().replace(/,/g, '.') + ' đ';
+};
+
+function debounce(func, wait) {
+    var timeout;
+
+    return function() {
+        var context = this,
+            args = arguments;
+
+        var executeFunction = function() {
+            func.apply(context, args);
+        };
+
+        clearTimeout(timeout);
+        timeout = setTimeout(executeFunction, wait);
+    };
+}
+
+function getLocaleText(text, locale) {
+    var regex = new RegExp('\\[:' + locale +'\\]([^\\[]+)?\\[:', 'i'),
+        result = text;
+
+    if(text){
+        text.replace(regex, function(match, $1) {
+            result = (typeof $1 !== 'undefined') ? $1 : '';
+        });
+    }
+    return result;
+}
+
+function flyToCart($flyer, $target) {
+    $flyerClone = $flyer.clone().addClass('dish-fly');
+
+    $flyerClone
+        .offset({
+            /*top: $flyer.offset().top + 75,
+             left: $flyer.offset().left + 100*/
+            top: $flyer.offset().top + 275,
+            left: $flyer.offset().left + 100
+        })
+        .appendTo($('body'))
+        .animate({
+            top: $target.offset().top+ 15,
+            left: $target.offset().left + 120,
+            width: 75,
+            height: 75
+        }, 350)
+        .animate({
+            width: 0,
+            height: 0
+        }, 300, function() {
+            $(this).detach();
+        });
+}
+
+function copyToClipboard(text) {
+    var $temp = $('<input>').val(text);
+    $('body').append($temp);
+    $temp.select();
+    document.execCommand('copy');
+    $temp.remove();
+}
+
+function removeLastDirectoryPartOf(the_url) {
+    var the_arr = the_url.split('/');
+    the_arr.pop();
+    return( the_arr.join('/') );
+}
+
+function MenuOpenCloseTimer(dDelay, fActionFunction, node) {
+    if (typeof this.delayTimer == "number") {
+        clearTimeout(this.delayTimer);
+        this.delayTimer = '';
+    }
+    if (node)
+        this.delayTimer = setTimeout(function() { fActionFunction(node); }, dDelay);
+    else
+        this.delayTimer = setTimeout(function() { fActionFunction(); }, dDelay);
+}
+
+function recruitShow(elem, duration) {
+    var $icon = elem.children('.icon').children('.fa');
+    $icon.removeClass('fa-angle-double-down').addClass('fa-times');
+    elem.next('.content').show(duration);
+    elem.addClass('active');
+}
+
+function recruitHide(elem, duration) {
+    var $icon = elem.children('.icon').children('.fa');
+    $icon.removeClass('fa-times').addClass('fa-angle-double-down');
+    elem.next('.content').hide(duration);
+}
+
+// Global variables
+primaryColor = '#CE181F';
+currentLocale = $('html').attr('lang');
+messageAlert = null;
+
+app = angular.module('jollibee', ['ksSwiper', 'ng-sweet-alert']);
+app.run(['$rootScope', function($rootScope) {
+    $rootScope.getTranslate = function(text) {
+        return getLocaleText(text, currentLocale);
+    };
+}]);
+
+
+$customerLogin = $('#modal-login');
+$productModal = $('#product-modal');
+
+$customerProfile = $('#modal-profile');
+$newsBlock = $('.page-news .board > .block');
+$newsBlockLoadMore = $('.page-news #news-list');
+
+var menu = {};
+var page = {};
+var index = {};
+var map;
+var infoWindow;
+var curentPos;
+
+
+/*phuclong*/
+menu.init = function () {
+    $(".h_menu__btn, .h_menu__overlay").click(function () {
+        $(".h_menu").toggleClass("active");
+    });
+    if($(window).width() <= 991){
+        $(".main-full").css("margin-top",function () {
+            return $("header").outerHeight(true);// + $(".h_logo").outerHeight(true) + 15;
+        });
+        $(".h_menu__main").children("li").each(function () {
+            $(this).click(function () {
+                $(this).toggleClass("active");
+            });
+        });
+        $(".h_search_menu li").each(function () {
+            $(this).click(function (e) {
+                e.preventDefault();
+                $(this).toggleClass("active");
+            });
+        });
+    }
+};
+
+
+
+index.animate_cover = function () {
+    $('#home_id ul li').each(function () {
+        $(this).hover(function () {
+            $(this).children("img").toggleClass('animated bounceIn');
+        });
+    });
+};
+
+// Main
+(function() {
+    if (window.location.hash && window.location.hash === '#_=_') {
+        if (window.history && history.pushState) {
+            window.history.pushState('', document.title, window.location.pathname);
+        } else {
+            // Prevent scrolling by storing the page's current scroll offset
+            var scroll = {
+                top: document.body.scrollTop,
+                left: document.body.scrollLeft
+            };
+            window.location.hash = '';
+            // Restore the scroll offset, should be flicker free
+            document.body.scrollTop = scroll.top;
+            document.body.scrollLeft = scroll.left;
+        }
+    }
+
+    if (currentLocale === 'vi') {
+        $.extend( $.validator.messages, {
+            required: "Không được để trống",
+            email: "Email không hợp lệ",
+            digits: "Hãy nhập chữ số",
+            maxlength: $.validator.format( "Tối đa {0} kí tự" ),
+            minlength: $.validator.format( "Tối thiểu {0} kí tự" ),
+            rangelength: $.validator.format( "Hãy nhập từ {0} đến {1} kí tự" ),
+            equalTo: "2 giá trị không khớp nhau",
+        } );
+    }
+
+    app.controller('CustomerLoginController', ['$scope', '$http', '$filter', function($scope, $http, $filter) {
+        $scope.tab = 1;
+        $scope.cities = [];
+        $scope.districts = [];
+        $scope.city = 1;
+        $scope.district = null;
+
+    /*    $scope.city = cookieCity;
+        $scope.district = cookieDistrict;*/
+
+
+        $scope.isTab = function(value) {
+            return $scope.tab === value;
+        };
+
+        $scope.setTab = function(value) {
+            $scope.tab = value;
+            if (value === 4 || value === 5) {
+                $http.get('/api/area').success(function(response) {
+                    $scope.cities = response.cities;
+                    $scope.districts = response.districts;
+                });
+            }
+
+        };
+
+        $scope.openTab = function(value, isClose) {
+            /*isClose = (typeof isClose !== 'undefined') ? isClose : true;
+             if (isClose) $customerLogin.modal('show');
+             else $customerLogin.modal({ backdrop: 'static', keyboard: false }).modal('show');*/
+            $customerLogin.modal('show');
+            $scope.$apply(function() { $scope.setTab(value); });
+        };
+
+        $scope.getMinPrice = function() {
+            if ($scope.district === null) return '';
+            var found = $filter('filter')($scope.districts, {id: $scope.district}, true);
+            if (found.length) return parseInt(found[0].min_price).toMoney();
+            else return '';
+        };
+    }]);
+
+    swal.setDefaults({
+        confirmButtonColor: primaryColor,
+        html: true
+    });
+
+    $('img.lazy').lazyload({
+        effect: 'fadeIn',
+        placeholder: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='
+    });
+
+    $('.lazy-bg').lazyload();
+
+
+    $(document).ready(function() {
+        if ($(window).width() <= 640) {
+            $('.bg-xs').css('background-image', 'url("' + $('.bg-xs').children('img').prop('currentSrc') + '")');
+        }
+
+        $('.scrollbar-macosx, .scrollbar-inner').scrollbar();
+
+
+        $('.h_logo__bxslider').owlCarousel({
+            animateOut: 'fadeOut',
+            animateIn: 'fadeIn',
+            items:1,
+            margin:0,
+            stagePadding:0,
+            smartSpeed:350,
+            autoplay: true,
+            autoplayTimeout: 2000,
+            mouseDrag: false,
+            loop: true,
+            dots: false,
+            thumbs: false
+        });
+
+        $('.owl-1-item.nav-btn.dots').owlCarousel({
+            animateOut: 'fadeOut',
+            animateIn: 'fadeIn',
+            items:1,
+            margin:0,
+            stagePadding:0,
+            smartSpeed:350,
+            autoplay: true,
+            nav: true,
+            navText:['<i class="icon-pli-arrow-left"></i>','<i class="icon-pli-arrow-right"></i>'],
+            dots: true,
+            lazyLoad: true,
+            mouseDrag: true,
+            thumbs: false,
+            loop: $('.owl-1-item.nav-btn.dots').find('.item').length > 1 ? true:false
+        });
+        $('.owl-1-item.nav-btn').owlCarousel({
+            animateOut: 'fadeOut',
+            animateIn: 'fadeIn',
+            items:1,
+            margin:0,
+            stagePadding:0,
+            smartSpeed:350,
+            autoplay: true,
+            nav: true,
+            navText:['<i class="icon-pli-arrow-left"></i>','<i class="icon-pli-arrow-right"></i>'],
+            dots: false,
+            lazyLoad: true,
+            mouseDrag: true,
+            thumbs: false,
+            loop: $('.owl-1-item.nav-btn').find('.item').length > 1 ? true:false
+        });
+
+        $('.owl-3-items.nav-btn').owlCarousel({
+            animateOut: 'fadeOut',
+            animateIn: 'fadeIn',
+            items:1,
+            margin:20,
+            stagePadding:0,
+            smartSpeed:350,
+            autoplay: true,
+            nav: false,
+            navText:['<i class="icon-pli-arrow-left"></i>','<i class="icon-pli-arrow-right"></i>'],
+            dots: true,
+            lazyLoad: true,
+            mouseDrag: true,
+            thumbs: false,
+            loop: $('.owl-3-items.nav-btn').find('.item').length > 1 ? true:false,
+            responsiveClass:true,
+            responsive:{
+                0:{
+                    items:1
+                },
+                600:{
+                    items:2
+                },
+                1024:{
+                    items:3
+                }
+            }
+        });
+
+        $('.owl-1-item').owlCarousel({
+            animateOut: 'fadeOut',
+            animateIn: 'fadeIn',
+            items:1,
+            margin:0,
+            stagePadding:0,
+            smartSpeed:350,
+            autoplay: true,
+            loop: $('.owl-1-item').find('.item').length > 1 ? true:false,
+            nav: false,
+            lazyLoad: true,
+            mouseDrag: true,
+            thumbs: false
+        });
+
+        var owlVideo = $('.owl-1-item-video').owlCarousel({
+            animateOut: 'fadeOut',
+            animateIn: 'fadeIn',
+            items:1,
+            margin:0,
+            stagePadding:0,
+            smartSpeed:350,
+            autoplay: true,
+            loop:$('.owl-1-item-video').find('.item').length > 1 ? true:false,
+            nav: false,
+            lazyLoad: true,
+            mouseDrag: true,
+            thumbs: false,
+            video:true,
+            videoHeight: 565,
+            center:true
+        });
+
+        $('.owl-thumbnails').owlCarousel({
+            thumbs: true,
+            items:1,
+            nav: true,
+            dots: false,
+            thumbImage: true,
+            thumbsPrerendered: false,
+            thumbContainerClass: 'owl-thumbs',
+            thumbItemClass: 'owl-thumb-item',
+            navText:['<i class="icon-pli-arrow-left"></i>','<i class="icon-pli-arrow-right"></i>']
+        });
+
+        /*menu*/
+        menu.init();
+
+        $('a.smooth-scroll').click(function(e){
+            $(this).parent('li').toggleClass('active');
+            $(this).parent('li').siblings().removeClass('active');
+
+            $('html, body').animate({
+                scrollTop: $( $(this).attr('href') ).offset().top - 140
+            }, 500);
+            return false;
+        });
+
+        /*totop*/
+        $(window).scroll(function() {
+            if($(this).scrollTop() != 0) {
+                $('#toTop').fadeIn();
+            } else {
+                $('#toTop').fadeOut();
+            }
+        });
+
+        $('#toTop').click(function() {
+            $('body,html').animate({scrollTop:0},800);
+        });
+
+        if ($('.middle_img').length > 0) {
+            $('.middle_img').each(
+                function(){
+                    var height = $(this).find('img').outerHeight(),
+                        width = $(this).find('img').outerWidth();
+                    if(height > width){
+                        $(this).find('img').css({'width': '100%'});
+                    }else{
+                        $(this).find('img').css({'height': '100%'});
+
+                    }
+                }
+            )
+        }
+
+        $(window).bind("load", function() {
+            // Lazy img
+            $('.img-lazy').each(function () {
+                var src = $(this).attr('data-src');
+                $(this).attr('src', src);
+                $(this).removeClass('img-lazy').addClass('img-loaded');
+            }); // end Lazy img
+            // Lazy bg
+            $('.bg-lazy').each(function () {
+                var src = $(this).attr('data-src');
+                $(this).css('background-image', 'url(' + src + ')');
+                $(this).removeClass('bg-lazy').addClass('bg-loaded');
+            }); // end Lazy bg
+        });
+
+        if($('body').hasClass('page-team')){
+            $('.count_block .count').each(function(){
+                var $this = $(this),
+                    countTo = $this.attr('data-count');
+
+                $({ countNum: $this.text()}).animate({
+                        countNum: countTo
+                    },
+                    {
+                        duration: 8000,
+                        easing:'linear',
+                        step: function() {
+                            $this.text(Math.floor(this.countNum));
+                        },
+                        complete: function() {
+                            $this.text(this.countNum);
+                            //alert('finished');
+                        }
+                    });
+
+            });
+            var $gridMasonry = $('.grid-masonry').imagesLoaded(function(){
+                $gridMasonry.masonry({
+                    // options
+                    itemSelector: '.grid-masonry--item',
+                    gutter: 30,
+                    columnWidth: '.grid-sizer',
+                    percentPosition: true
+                });
+                if ($(window).width() < 480) {
+                    $('.grid').masonry({
+                        gutter: 15
+                    });
+                }
+            });
+        }
+
+        if($('body').hasClass('page-about')){
+            var sync1 = $(".timeline_slider");
+            var sync2 = $(".year_slider");
+            var syncedSecondary = true;
+
+            sync1.owlCarousel({
+                items : 1,
+                slideSpeed : 2000,
+                nav: true,
+                autoplay: false,
+                dots: false,
+                loop: true,
+                thumbs: false,
+                responsiveRefreshRate : 200,
+                navSpeed:500,
+                navText: ['<i class="icon-pli-arrow-left"></i>','<i class="icon-pli-arrow-right"></i>']
+            }).on('changed.owl.carousel', syncPosition);
+
+// add animate.css class(es) to the elements to be animated
+            function setAnimation ( _elem, _InOut ) {
+                // Store all animationend event name in a string.
+                // cf animate.css documentation
+                var animationEndEvent = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+
+                _elem.each ( function () {
+                    var $elem = $(this);
+                    var $animationType = 'animated ' + $elem.data( 'animation-' + _InOut );
+
+                    $elem.addClass($animationType).one(animationEndEvent, function () {
+                        $elem.removeClass($animationType); // remove animate.css Class at the end of the animations
+                    });
+                });
+            }
+
+// Fired before current slide change
+            sync1.on('change.owl.carousel', function(event) {
+                var $currentItem = $('.owl-item', sync1).eq(event.item.index);
+                var $elemsToanim = $currentItem.find("[data-animation-out]");
+                setAnimation ($elemsToanim, 'out');
+            });
+
+// Fired after current slide has been changed
+            sync1.on('changed.owl.carousel', function(event) {
+
+                var $currentItem = $('.owl-item', sync1).eq(event.item.index);
+                var $elemsToanim = $currentItem.find("[data-animation-in]");
+                setAnimation ($elemsToanim, 'in');
+            });
+
+
+            sync2.on('initialized.owl.carousel', function () {
+                sync2.find(".owl-item").eq(0).addClass("current");
+            }).owlCarousel({
+                items : 7,
+                dots: false,
+                nav: true,
+                thumbs: false,
+                smartSpeed: 200,
+                slideSpeed : 500,
+                slideBy: 7, //alternatively you can slide by 1, this way the active slide will stick to the first item in the second carousel
+                responsiveRefreshRate : 100,
+                margin: 80,
+                navText: ['<i class="icon-pli-arrow-left"></i>','<i class="icon-pli-arrow-right"></i>'],
+                responsiveClass:true,
+                responsive:{
+                    0:{
+                        items:1
+                    },
+                    480:{
+                        items:4
+                    },
+                    992:{
+                        items:5
+                    },
+                    1200:{
+                        items:7
+                    }
+                }
+            }).on('changed.owl.carousel', syncPosition2);
+
+            function syncPosition(el) {
+                //if you set loop to false, you have to restore this next line
+                //var current = el.item.index;
+
+                //if you disable loop you have to comment this block
+                var count = el.item.count-1;
+                var current = Math.round(el.item.index - (el.item.count/2) - .5);
+
+                if(current < 0) {
+                    current = count;
+                }
+                if(current > count) {
+                    current = 0;
+                }
+
+                //end block
+
+                sync2
+                    .find(".owl-item")
+                    .removeClass("current")
+                    .eq(current)
+                    .addClass("current");
+                var onscreen = sync2.find('.owl-item.active').length - 1;
+                var start = sync2.find('.owl-item.active').first().index();
+                var end = sync2.find('.owl-item.active').last().index();
+
+                if (current > end) {
+                    sync2.data('owl.carousel').to(current, 100, true);
+                }
+                if (current < start) {
+                    sync2.data('owl.carousel').to(current - onscreen, 100, true);
+                }
+            }
+
+            function syncPosition2(el) {
+                if(syncedSecondary) {
+                    var number = el.item.index;
+                    sync1.data('owl.carousel').to(number, 100, true);
+                }
+            }
+
+            sync2.on("click", ".owl-item", function(e){
+                e.preventDefault();
+                var number = $(this).index();
+                sync1.data('owl.carousel').to(number, 300, true);
+            });
+        }
+
+        // if ($('body').hasClass('home')) {
+
+        //     var slider = new MasterSlider();
+        //     slider.setup('masterslider', {
+        //         width: 1920, // slider standard width
+        //         height: 1080, // slider standard height
+        //         space: 0,
+        //         layout: "fullwidth",
+        //         speed: 50,
+        //         centerControls: false,
+        //         loop: false,
+        //         autoplay: false,
+        //         parallaxMode: "mouse",
+        //         mouse: false
+        //         // more slider options goes here...
+        //         // check slider options section in documentation for more options.
+        //     });
+        //     // adds Arrows navigation control to the slider.
+        //     MSScrollParallax.setup(slider, 50, 80, true);
+
+        //     if ($('#slider').length > 0) {
+        //         window.f = new flux.slider('#slider', {
+        //             autoplay: true,
+        //             pagination: false,
+        //             width: $(window).width(),
+        //             height: $(window).width() / 2,
+        //             transitions: ['tiles3d', 'blocks', 'bars3d']
+        //         });
+        //     }
+
+        //     index.animate_cover();
+
+        // } else if ($('body').hasClass('page')) {
+
+        // }
+
+        // Menu
+        $('.submenu_toggle').on('click', function() {
+            $(this).next('.sub-menu').toggle('slow', 'swing');
+        });
+
+        $('.menu-backdrop').click(function(event) {
+            $('#btn-toggle').prop('checked', false);
+        });
+
+        $('.btn-icon.login,.text.login, .change-pass').click(function(event) {
+            event.preventDefault();
+            angular.element($customerLogin[0]).scope().openTab(1);
+        });
+
+        $('.update-account').click(function(event) {
+            event.preventDefault();
+            angular.element($customerLogin[0]).scope().openTab(5);
+        });
+
+        $('.text.register').click(function(event) {
+            event.preventDefault();
+            angular.element($customerLogin[0]).scope().openTab(2);
+        });
+
+        $('.scroll-down').on('click', function() {
+            $('html, body').animate({
+                scrollTop: $('#scroll-down').offset().top
+            }, 500);
+        });
+
+        // Order
+        $('.dish-item > .item-wrapper > img').hover(function() {
+            $(this).siblings('.add-to-cart').addClass('hover');
+        }, function() {
+            $(this).siblings('.add-to-cart').removeClass('hover');
+        });
+
+        $('.side-group-overlay').click(function(event) {
+            $(this).parent('.side-group').toggleClass('enable');
+        });
+
+        // Contact
+        $('#map-overlay').click(function(event) {
+            $(this).detach();
+        });
+
+        // News
+        $('.btn-news-more').click(function(event) {
+            event.preventDefault();
+            var self = $(this);
+            self.addClass('loading');
+            $.get(self.attr('href'), function(data) {
+                $newsBlock.append(data.posts);
+                $newsBlockLoadMore.append(data.posts);
+                self.removeClass('loading');
+
+                if (data.nextUrl === null) $newsBlock.siblings().addClass('hidden');
+                if (data.nextUrl === null) $newsBlockLoadMore.siblings().addClass('hidden');
+                else self.attr('href', data.nextUrl);
+            });
+        });
+
+        // Recruit
+        $('.recruit-dropdown').on('click', '.item', function(event){
+            var $icon = $(this).children('.icon').children('.fa');
+            if ($icon.hasClass('fa-angle-double-down')) {
+                $('.recruit-dropdown').each(function(){
+                    recruitHide($(this).children('.item'), 500);
+                    $(this).children('.item').removeClass('active');
+                });
+                recruitShow($(this), 500);
+            } else {
+                recruitHide($(this), 500);
+                $(this).delay(duration - 100).queue(function(){
+                    $(this).removeClass('active');
+                    $(this).dequeue();
+                });
+            }
+        });
+
+        $('.filter-city').change(function(event) {
+            var value = $(this).val();
+            var $rows = $(this).parent('.location').next('.job-list').find('.recruit-dropdown');
+            if (value === '') {
+                $rows.removeClass('hidden');
+                return;
+            }
+            $rows.each(function(index, el) {
+                if ($(el).data('city') != value) $(el).addClass('hidden');
+                else $(el).removeClass('hidden');
+            });
+        });
+
+        // Forms
+        $('#modal-login form').each(function(index, val) {
+            var type = $(val).data('type');
+            $(val).validate({
+                rules: {
+                    name: {
+                        required: true,
+                        minlength: 3
+                    },
+                    password: {
+                        required: true,
+                        minlength: 6
+                    },
+                    password_confirmation: {
+                        required: true,
+                        minlength: 6,
+                        equalTo: "#input-password"
+                    },
+                    city: 'required',
+                    district: 'required'
+                },
+                submitHandler: function(form) {
+                    var self = $(form),
+                        btnSubmit = self.find('.btn-color');
+                    $.ajax({
+                            url: self.attr('action'),
+                            type: 'POST',
+                            beforeSend: function() {
+                                btnSubmit.addClass('m-progress');
+                            },
+                            data: self.serialize(),
+                        })
+                        .done(function(data) {
+                            if (data.status === 'error') swal("Oops...", data.message, "error");
+                            else if (data.status === 'success') {
+                                if (type === 'register') window.location.reload();
+                                else if (type === 'login') {
+                                    if (self.children('input[name="getShareLink"]').length === 0) window.location.reload();
+                                    else $('#form-share-link').unbind('submit').submit();
+                                }
+                                else if (type === 'forgot' || type === 'change-pass') {
+                                    swal('', data.message, 'success');
+                                    self[0].reset();
+                                } else if (type === 'area') {
+                                    $customerLogin.modal('hide');
+                                    $.cookie('customerFirstCart', 'false');
+                                }
+                            }
+                        })
+                        .fail(function(data) {
+                            $.each(data.responseJSON, function(index, val) {
+                                swal("Oops...", val, "error");
+                            });
+                        })
+                        .always(function() {
+                            btnSubmit.removeClass('m-progress').blur();
+                        });
+                }
+            });
+        });
+
+        $('#form-checkout').validate({
+            rules: {
+                name: {
+                    required: true,
+                    minlength: 3
+                },
+                address: {
+                    required: true,
+                    minlength: 6
+                },
+                phone: {
+                    required: true,
+                    digits: true,
+                    minlength: 10
+                },
+                city: {
+                    required: true
+                },
+                district: {
+                    required: true
+                }
+            },
+            errorElement : 'div',
+            errorPlacement: function(error, element) {
+                var placement = $(element).data('error');
+                if (placement) $(placement).append(error);
+                else error.insertAfter(element);
+            },
+            submitHandler: function(form) {
+                var self = $(form),
+                    btnSubmit = self.find('.btn-submit');
+                $.ajax({
+                        url: self.attr('action'),
+                        type: 'POST',
+                        beforeSend: function() {
+                            btnSubmit.addClass('m-progress');
+                        },
+                        data: self.serialize(),
+                    })
+                    .done(function(data) {
+                        if (data.status === 'success') {
+                            $.removeCookie('customerFirstCart');
+                            window.location = data.message;
+                        } else swal("Oops...", data.message, "error");
+                    })
+                    .fail(function(data) {
+                        $.each(data.responseJSON, function(index, val) {
+                            swal("Oops...", val, "error");
+                        });
+                    })
+                    .always(function() {
+                        btnSubmit.removeClass('m-progress').blur();
+                    });
+            }
+        });
+
+        $('#form-contact').validate({
+            rules: {
+                name: {
+                    required: true,
+                    minlength: 3
+                },
+                phone: {
+                    required: true,
+                    digits: true,
+                    minlength: 10
+                },
+                email: {
+                    required: true,
+                    email: true
+                },
+                message: {
+                    required: true,
+                    minlength: 3
+                }
+            },
+            onfocusout: function(element) { $(element).valid(); },
+            submitHandler: function(form) {
+                var self = $(form),
+                    $btnSubmit = self.find('.btn-submit');
+                $.ajax({
+                        url: self.attr('action'),
+                        type: 'POST',
+                        beforeSend: function() {
+                            $btnSubmit.addClass('m-progress');
+                        },
+                        data: self.serialize(),
+                    })
+                    .done(function(data) {
+                        if (data.status === 'success') {
+                            swal('', data.message, 'success');
+                            self[0].reset();
+                        } else swal('Oops...', data.message, 'error');
+                    })
+                    .fail(function(data) {
+                        $.each(data.responseJSON, function(index, val) {
+                            swal("Oops...", val, "error");
+                        });
+                    })
+                    .always(function() {
+                        $btnSubmit.removeClass('m-progress').blur();
+                    });
+            }
+        });
+
+         /*custom-script.js*/
+
+           // Responsive OWL   
+        // $('.OwlSlider').on('click', '.item', function () {
+        //     var target = $(this).find('a').attr('target');
+        //     if (typeof target != 'undefined' && target == '_blank') {
+        //         window.open($(this).find('a').attr('href'), '_blank');
+        //     } else {
+        //         window.location.href = $(this).find('a').attr('href');
+        //     }
+        // });
+
+        // $('.home .owl-carousel').on('click', '.item', function () {
+        //     var target = $(this).find('a').attr('target');
+        //     if (typeof target != 'undefined' && target == '_blank') {
+        //         window.open($(this).find('a').attr('href'), '_blank');
+        //     } else {
+        //         window.location.href = $(this).find('a').attr('href');
+        //     }
+        // });
+        function ResOwlSlider() {
+            $(".OwlSlider.owl-carousel").each(function () {
+                var $slider = $(this);
+                var responsive =  $slider.attr('data-res');
+                var margin =  $slider.attr('data-margin');    
+                var autospeed = $slider.attr('data-autospeed'); 
+                var dataout = $slider.attr('data-out'); 
+                var datain = $slider.attr('data-in'); 
+
+                if(!responsive) { responsive = '1,1,1,1,1'; }
+                responsive = responsive.split(',');
+                if(!margin) { margin = '0,0,0,0,0'; }
+                margin = margin.split(',');
+
+                //console.log(dataout);
+                $slider.imagesLoaded(function(){    
+                    $slider.owlCarousel({
+                        navText: ["<i class='fa fa-angle-left'></i>","<i class='fa fa-angle-right'></i>"],
+                        nav:($slider.hasClass('s-nav') ? true : false),
+                        dots:($slider.hasClass('s-dots') ? true : false),
+                        loop: $slider.hasClass('s-loop') ? true : false,
+                        autoplay: $slider.hasClass('s-auto') ? true : false,
+                        autoplayHoverPause:true,
+                        autoplayTimeout: (autospeed ? parseInt(autospeed) : 5000),
+                        center: $slider.hasClass('s-center') ? true : false,
+                        autoWidth: ($slider.hasClass('s-width') ? true : false),
+                        autoHeight: ($slider.hasClass('s-height') ? true : false),
+                        lazyLoad:($slider.hasClass('s-lazy') ? true : false),
+                        video:($slider.hasClass('s-video') ? true : false),
+                        animateOut: dataout,
+                        animateIn: datain,       
+
+                        responsive:{
+                            0:{
+                                margin: parseInt(margin[4]),
+                                items:parseInt(responsive[4]),
+                                lazyLoad:true,
+                                dots:false
+                            },
+                            480:{
+                                margin: parseInt(margin[3]),
+                                items:parseInt(responsive[3]),
+                                lazyLoad:true,
+                                dots:false
+                            },
+                            768:{
+                                margin: parseInt(margin[2]),
+                                items:parseInt(responsive[2]),
+                                lazyLoad:true,
+                                dots:false
+                            },
+                            992:{
+                                margin: parseInt(margin[1]),
+                                items:parseInt(responsive[1]),
+                                lazyLoad:true
+                            },
+                            1200:{
+                                margin: parseInt(margin[0]),
+                                items:parseInt(responsive[0]),
+                                lazyLoad:true
+                            }
+
+                        }
+                    })
+
+                });
+            });    
+        }        
+        ResOwlSlider();    
+
+
+        // Responsive OWL    
+        function SynOwlSlider() {
+            $(".wrap-syn-owl").each(function () {
+                var $this = $(this);
+                var sync1 = $this.find(".syn-slider-1");
+                var sync2 = $this.find(".syn-slider-2");
+
+                var autospeed = sync1.attr('data-autospeed'); 
+
+                var autospeed2 = sync2.attr('data-autospeed'); 
+                var responsive =  sync2.attr('data-res').split(',');
+                var margin =  sync2.attr('data-margin').split(',');  
+
+
+                var dataout1 = sync1.attr('data-out'); 
+                var datain1 = sync1.attr('data-in'); 
+
+                  var slidesPerPage = 5; //globaly define number of elements per page
+                  var syncedSecondary = true;
+
+                  sync1.owlCarousel({
+                    singleItem: true,
+                    items:1,
+                    loop: true,
+                    navText: ["<i class='fa fa-angle-left'></i>","<i class='fa fa-angle-right'></i>"],
+                    nav:(sync1.hasClass('s-nav') ? true : false),
+                    dots:(sync1.hasClass('s-dots') ? true : false),
+                    autoplay: sync1.hasClass('s-auto') ? true : false,
+                    autoplayHoverPause:true,
+                    autoplayTimeout: (autospeed ? parseInt(autospeed) : 5000),
+                    center: sync1.hasClass('s-center') ? true : false,
+                    autoWidth: (sync1.hasClass('s-width') ? true : false),
+                    autoHeight: (sync1.hasClass('s-height') ? true : false),
+                    lazyLoad:(sync1.hasClass('s-lazy') ? true : false),
+                    video:(sync1.hasClass('s-video') ? true : false),
+                        animateOut: dataout1,
+                        animateIn: datain1,                           
+                    responsiveRefreshRate: 100
+
+                  }).on('changed.owl.carousel', syncPosition);
+
+                  sync2
+                    .on('initialized.owl.carousel', function () {
+                      sync2.find(".owl-item").eq(0).addClass("current");
+                    })
+                    .owlCarousel({
+                        smartSpeed: 200,
+                        slideSpeed : 500,
+                        slideBy: slidesPerPage, //alternatively you can slide by 1, this way the active slide will stick to the first item in the second carousel
+                        responsiveRefreshRate : 100,
+                        navText: ["<i class='fa fa-angle-left'></i>","<i class='fa fa-angle-right'></i>"],
+                        nav:(sync2.hasClass('s-nav') ? true : false),
+                        dots:(sync2.hasClass('s-dots') ? true : false),
+                        autoplay: sync1.hasClass('s-auto') ? true : false,
+                        autoWidth: (sync2.hasClass('s-width') ? true : false),
+                        autoHeight: (sync2.hasClass('s-height') ? true : false),
+                        lazyLoad:(sync2.hasClass('s-lazy') ? true : false),
+                        responsive:{
+                            0:{
+                                margin: parseInt(margin[4]),
+                                items:parseInt(responsive[4])
+                            },
+                            480:{
+                                margin: parseInt(margin[3]),
+                                items:parseInt(responsive[3])
+                            },
+                            768:{
+                                margin: parseInt(margin[2]),
+                                items:parseInt(responsive[2])
+                            },
+                            992:{
+                                margin: parseInt(margin[1]),
+                                items:parseInt(responsive[1])
+                            },
+                            1200:{
+                                margin: parseInt(margin[0]),
+                                items:parseInt(responsive[0])
+                            }
+
+                        }
+
+                  }).on('changed.owl.carousel', syncPosition2);
+
+                  function syncPosition(el) {
+                    //if you set loop to false, you have to restore this next line
+                    //var current = el.item.index;
+                    // var current = el.item.index;
+                    // if (current > 1 && current < el.item.count)
+                    // {
+                    //     sync2.trigger('to.owl.carousel', [current, 100, true]);
+                    // }
+                    // else
+                    // {
+                    //     sync2.trigger('to.owl.carousel', [0, 100, true]);
+                    // }
+                    //if you disable loop you have to comment this block
+                    var count = el.item.count-1;
+                    var current = Math.round(el.item.index - (el.item.count/2) - .5);
+                    
+                    if(current < 0) {
+                      current = count;
+                    }
+                    if(current > count) {
+                      current = 0;
+                    }
+                    
+                    //end block
+
+                    sync2
+                      .find(".owl-item")
+                      .removeClass("current")
+                      .eq(current)
+                      .addClass("current");
+                    var onscreen = sync2.find('.owl-item.active').length - 1;
+                    var start = sync2.find('.owl-item.active').first().index();
+                    var end = sync2.find('.owl-item.active').last().index();
+                    
+                    if (current > end) {
+                      sync2.data('owl.carousel').to(current, 100, true);
+                    }
+                    if (current < start) {
+                      sync2.data('owl.carousel').to(current - onscreen, 100, true);
+                    }
+                  }
+                  
+                  function syncPosition2(el) {
+                    if(syncedSecondary) {
+                      var number = parseInt(el.item.index);
+                      sync1.data('owl.carousel').to(number, 100, true);
+                    }
+                  }
+                  
+                  sync2.on("click", ".owl-item", function(e){
+                    
+                   // var $target = $(e.target);
+                    // var href = $target.attr('href');
+                    // if(href != undefined && ($target.hasClass('btn') || $target.hasClass('list_title'))){
+                    //     window.open(href,"_self");
+                    //     return;
+                    // }
+
+                    // var $target = $(e.target);
+                    var href = $(e.target).attr('href');
+                    if(href != undefined && ($(e.target).hasClass('btn') || $(e.target).hasClass('list_title'))){
+                        window.open(href,"_self");
+                        return;
+                    }
+
+                    e.preventDefault();
+                    var number = parseInt($(this).index());
+                    sync1.data('owl.carousel').to(number, 300, true);
+                    //test
+                    //e.stopPropagation();
+
+                  });
+            });    
+        }        
+        SynOwlSlider();    
+
+    });
+
+
+
+    $(window).on('load', function(event) {
+        event.preventDefault();
+        if (messageAlert !== null) swal('', messageAlert);
+    });
+
+
+
+   
+
+})();
+
+//# sourceMappingURL=app.js.map
