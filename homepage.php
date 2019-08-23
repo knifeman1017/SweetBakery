@@ -33,7 +33,7 @@
             <div class="container-fluid" style="height: 100px;">
                 <div class=" row top-header">
                     <div class="col-sm-2" style="left: 100px;" >
-                        <a href="homepage.php"><img width="100"  height=" 100" src="../images/logo.jpg"  alt="logo" /></a>
+                        <a href="homepage.php"><img width="100"  height=" 100" src="images/logo.jpg"  alt="logo" /></a>
                     </div>
                     <div class="col-sm-8" style="text-align: center;color: #FF5B35;font-weight: bold;top: 40px;font-size: 1.2em;">
                         <p>Welcome SweetsBakery</p>
@@ -65,7 +65,7 @@
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li>
-                                <a href="checkout.php"><button class="btn btn-success btn-lg" type="button" style="background-color: #FF5B35">
+                                <a href="#"><button class="btn btn-success btn-lg" type="button" style="background-color: #FF5B35">
                                     <i class="glyphicon glyphicon-shopping-cart"></i> <span class="badge"> 
                                         <?php
                                         if (isset($_SESSION["totalQty"])) {
@@ -98,18 +98,18 @@
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner">
                     <div class="item active">
-                        <img src="../images/logo1.jpg" alt="slide1" style="width:50%">
+                        <img src="images/logo1.jpg" alt="slide1" style="width:50%">
                     </div>
 
                     <div class="item">
-                        <img src="../images/logo5.jpg" alt="slide2" style="width:50%;">
+                        <img src="images/logo5.jpg" alt="slide2" style="width:50%;">
                     </div>
 
                     <div class="item">
-                        <img src="../images/logo13.jpg" alt="slide3" style="width:50%;">
+                        <img src="images/logo13.jpg" alt="slide3" style="width:50%;">
                     </div>
                     <div class="item">
-                        <img src="../images/logo7.jpg" alt="slide4" style="width:50%;">
+                        <img src="images/logo7.jpg" alt="slide4" style="width:50%;">
                     </div>
                 </div>
 
