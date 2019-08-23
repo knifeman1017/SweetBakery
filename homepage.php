@@ -98,7 +98,7 @@
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner">
                     <div class="item active">
-                        <img src="../images/logo1.jpg" alt="slide1" style="width:50%;">
+                        <img src="../images/logo1.jpg" alt="slide1" style="width:50%">
                     </div>
 
                     <div class="item">
@@ -197,7 +197,7 @@
     background: #FF5B35;
     color: white;
 }
-.carousel-inner{
-    horizontal-align: center;
+img{
+    vertical-align: center;
 }
         </style>
