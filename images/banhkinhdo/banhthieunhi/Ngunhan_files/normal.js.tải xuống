@@ -1,0 +1,393 @@
+var swiperInstances = {},
+    $orderBar = $('#order-bar'),
+    $miniCart = $('#mini-cart');
+
+if ($.cookie('customerFirstCart') === null) $.cookie('customerFirstCart', 'true');
+
+
+$(window).on('load', function(event) {
+    event.preventDefault();
+});
+
+app.controller('CartController', ['$scope', '$http', function($scope, $http) {
+    $scope.products = [];
+
+    $scope.getCart = function() {
+        $http.get('/cart').success(function(response) {
+            var old = $scope.products.length;
+            $scope.products = response.data;
+            if (old === 0 && $scope.products.length > old) {
+                setTimeout(function() { $(window).trigger('resize'); }, 50);
+            }
+        });
+    };
+
+    $scope.increase = function(product) {
+        product.qty++;
+        $http.post('/cart/rowId'.replace('rowId', product.rowId), {qty: product.qty, _method: 'PUT'});
+    };
+
+    $scope.decrease = function(product) {
+        if (product.qty > 1) {
+            product.qty--;
+            $http.post('/cart/rowId'.replace('rowId', product.rowId), {qty: product.qty, _method: 'PUT'});
+        }
+    };
+
+    $scope.delete = function(index, product) {
+        $http.post('/cart/id'.replace('id', product.rowId), {_method: 'DELETE'});
+        $scope.products.splice(index, 1);
+        if ($scope.products.length === 0) {
+            setTimeout(function() { $orderBar.trigger('resize'); }, 50);
+        }
+    };
+
+    $scope.calculateProductPrice = function(price, priceSize){
+        var p = parseInt(priceSize);
+        return (p > 0) ? p : price;
+    }
+
+    $scope.subtotal = function(product) {
+        var total = 0;
+
+/*        if(product.options.length > 0 && product.options.notes.size && parseInt(product.options.notes.size.price) > 0){
+            total = parseInt(product.options.notes.size.price);
+        }
+        else{
+            total = product.price;
+        }
+
+        angular.forEach(product.options.extra, function(e, k) {
+            total += e.price * e.qty;
+        });*/
+
+        total = product.price * product.qty;
+        return total;
+
+    };
+
+
+    $scope.total = function() {
+        var count = 0, total = 0;
+        angular.forEach($scope.products, function(value, key) {
+            count += value.qty;
+            total += $scope.subtotal(value);
+        });
+        return {
+            count: count,
+            money: total.toMoney()
+        };
+    };
+
+    $scope.countProduct = function () {
+        var count = 0;
+        angular.forEach($scope.products, function(value, key) {
+            count += value.qty;
+        });
+
+        return count;
+    }
+
+    $scope.getCart();
+}]);
+
+$('.grid-item.category-drink .add-to-cart').click(function(event) {
+    event.preventDefault();
+
+    var id = $(this).data('id');
+
+    var info = $(this).siblings( ".hidden.combo-info" );
+
+    angular.element($productModal.scope().getProduct(id, info));
+    angular.element($productModal[0]).scope().openTab(1);
+});
+
+app.controller('ProductController', ['$scope', '$http', function($scope, $http) {
+    $scope.isCheckMobile = false;
+    $scope.productRate = [];
+
+    $scope.toggleSelection = function toggleSelection(extraId,title,extraPrice) {
+        var idx = -1;
+        for(var k = 0; k < $scope.productExtraSelected.length; k++){
+            if($scope.productExtraSelected[k].id == extraId){
+                idx = k;
+                break;
+            }
+        }
+        // Is currently selected
+        if (idx > -1) {
+            $scope.productExtraSelected.splice(idx, 1);
+        }
+
+        // Is newly selected
+        else {
+            $scope.productExtraSelected.push({title: title,id: extraId, price: extraPrice});
+        }
+    };
+
+    $scope.isSelected = function isSelected(extraId) {
+        var idx = -1;
+        for(var k = 0; k < $scope.productExtraSelected.length; k++){
+            if($scope.productExtraSelected[k].id == extraId){
+                idx = k;
+                break;
+            }
+        }
+
+        return (idx > -1)? true: false;
+    };
+
+    $scope.createRating = function(rate){
+        /*rating from 0 to 4*/
+        for(var i = 0; i < 5; i++) {
+            if(i <= rate){
+                $scope.productRate.push(1);
+            }
+            else{
+                $scope.productRate.push(0);
+            }
+        }
+    };
+
+    $scope.subtotal = function(product) {
+        var total = 0;
+
+        if(!product) {
+            return 0;
+        }
+
+        if($scope.productSize){
+            product.price = $scope.calculateProductPrice(product.price,$scope.productSize.price);
+        }
+
+        if(product.price) {
+            total += parseInt(product.price);
+            // console.log(total);
+        }
+
+        /*calculate product option extra*/
+        angular.forEach($scope.productExtraSelected, function(e) {
+            total = total + parseInt(e.price);
+            // console.log('second' + total);
+        });
+
+        total = total * product.qty;
+        return total;
+
+    };
+
+    $scope.getProduct = function(productId, info) {
+
+        var link = $('body').hasClass('en')? '/en/san-pham-JSON/' : '/san-pham-JSON/';
+
+        $http.get(link + productId).success(function(response) {
+            // var old = $scope.product.length;
+            $scope.product = response.data;
+            $scope.extras = [];
+            $scope.productSizes = [];
+            $scope.orderNotes = '';
+            $scope.productExtraSelected = [];
+            //reset
+            $scope.productRate = [];
+
+            for(var i = 0; i < response.data.size.length; i++) {
+                if(parseInt(response.data.size[i].price) >= 0){
+                    $scope.productSizes.push(response.data.size[i]);
+                }
+            }
+
+            // $scope.productState = $scope.productStates[0];
+            $scope.productSize = $scope.productSizes[0];
+
+            $scope.createRating(response.data.rate);
+
+            if(info){
+                var children = info.children('.combo-item');
+                for(var j = 0; j < children.length; j++){
+
+                    var $c =  $(children[j]);
+                    var img = $c.data("img");
+                    var title = $c.data("title");
+                    var price = $c.data("price");
+                    var extraid = $c.data('extraid');
+                    $scope.extras.push({
+                        'id': extraid,
+                        'img' : img,
+                        'title': title,
+                        'price': price
+                    });
+                }
+            }
+
+
+        });
+    };
+
+
+    $scope.changeSize = function (size) {
+        $scope.productSize = size;
+    };
+    
+    $scope.calculateProductPrice = function(price, priceSize){
+        var p = parseInt(priceSize);
+        return (p > 0) ? p : price;
+    }
+
+    $scope.increase = function(product) {
+        product.qty++;
+        // $http.post('/cart/rowId'.replace('rowId', product.id), {qty: product.qty, _method: 'PUT'});
+    };
+
+    $scope.updateQty = function (product) {
+        $http.post('/cart/rowId'.replace('rowId', product.id), {qty: product.qty, _method: 'PUT'});
+    }
+
+    $scope.decrease = function(product) {
+        if (product.qty > 1) {
+            product.qty--;
+            //   $http.post('/san-pham-JSON/productId'.replace('rowId', product.rowId), {qty: product.qty, _method: 'PUT'});
+        }
+    };
+
+
+    $scope.openTab = function(value, isMobile) {
+
+        isMobile = isMobile  | 0;
+        $scope.$apply(function() { $scope.setMobile(isMobile); });
+
+        $productModal.modal('show');
+        $scope.$apply(function() { $scope.setTab(value); });
+    };
+    $scope.isMobile = function(value) {
+        return $scope.isCheckMobile  === value;
+    };
+    $scope.setMobile = function(value) {
+        $scope.isCheckMobile = value;
+    };
+
+    $scope.setTab = function(value) {
+        $scope.tab = value;
+    };
+
+    $scope.isTab = function(value) {
+        return $scope.tab === value;
+    };
+
+}]);
+
+// desktop view thuc-uong modal
+$('.add-to-cart.single:not(.mobile)').click(function(event) {
+    event.preventDefault();
+    var self = $(this),
+        $item = self.closest('.product-item, #product-modal'),
+        $target = $('.h_cart'),
+        ids = [];
+
+
+    if ($item.hasClass('combo')) {
+
+        $container = $item.find('.item-info__extra');
+        $container.find('.list-inline .active').each(function(index, el) {
+            var chosen_dish = $(el);
+            ids.push(chosen_dish.data('exid'));
+        });
+    }
+
+    $.ajax({
+        url: '/cart',
+        type: 'POST',
+        dataType: 'json',
+        beforeSend: function() {
+            self.attr('disabled', true);
+        },
+        data: {
+            // id: self.data('id'),
+            id: self.attr('data-id'),
+            ids: ids,
+            size:  $('input[name=productSize]').val(),
+            extra: $('input[name=productExtraSelected]').val(), //main
+            extraPrice :  $('input[name=productExtraPrice]').val(),
+            extras: $('input[name=productExtras]').val(),
+            qty : $('input[name=productQty]').val(),
+            orderNotes:  $('input[name=orderNotes]').val(),
+            productSizeId : $('input[name=productSizeId]').val()
+
+        }
+    })
+    .done(function(data) {
+        if (data.status === 'success') {
+            angular.element($miniCart[0]).scope().getCart();
+        }
+    })
+    .always(function() {
+        self.attr('disabled', false);
+    });
+
+    $('#product-modal').modal('hide');
+    var $imgtodrag = $item.find('.item-img');
+    flyToCart($imgtodrag, $target);
+});
+
+// desktop san pham kho
+$('.add-to-cart.cart-product:not(.mobile)').click(function(event) {
+    event.preventDefault();
+    var self = $(this),
+        $item = self.closest('.product-top'),
+        $target = $('.h_cart');
+
+
+   
+    $.ajax({
+            url: '/cart',
+            type: 'POST',
+            dataType: 'json',
+            beforeSend: function() {
+                self.attr('disabled', true);
+            },
+            data: {
+                id: self.attr('data-id'),
+                qty : $('input[name=productQty]').val()
+            }
+        })
+        .done(function(data) {
+            if (data.status === 'success') {
+                angular.element($miniCart[0]).scope().getCart();
+            }
+        })
+        .always(function() {
+            self.attr('disabled', false);
+        });
+
+     var $imgtodrag = $item.find('.item-img .item img');
+    flyToCart($imgtodrag, $target);
+
+
+});
+
+
+
+
+/*=TODO: not use*/
+$('input.change-size').change(function(event) {
+    var value = parseInt($(this).closest('p').text().replace(/\D/g, '')),
+        $target = $(this).closest('.side-group').siblings('.confirm').children('.combo-price'),
+        targetValue = parseInt($target.text().replace(/\D/g, ''));
+
+    if ($(this).is(':checked')) targetValue += value;
+    else targetValue -= value;
+    $target.text(targetValue.toMoney());
+});
+
+
+$('.combo-close').click(function(event) {
+    $(this).parent('.combo-container').parent('.dish-item').toggleClass('active');
+});
+
+$('.order-toggle').click(function(event) {
+    $orderBar.slideUp('fast', function() {
+        $orderBar.toggleClass('active')/*.trigger('resize')*/;
+        $orderBar.slideDown(400);
+    });
+});
+
+//# sourceMappingURL=normal.js.map
