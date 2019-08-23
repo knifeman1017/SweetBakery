@@ -2,6 +2,15 @@
 <!--
 
 -->
+<?php
+include_once '../SweetBakery/lib/connect.inc';
+$sql = "select * from tb_product";
+$result = mysqli_query($link, $sql);
+if (mysqli_errno($link)) {
+    echo mysqli_error($link);
+    exit();
+}
+?>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -63,7 +72,7 @@
             width: 15%;
             margin-bottom: 16px;
             padding: 0 8px;
-            
+
         }
 
         /* Display the columns below each other instead of side by side on small screens */
@@ -130,105 +139,20 @@
             <div class="row">
                 <div class="column">
                     <div class="card">
-                        <img src="../Images/Bread01-Baguette.png" alt=""style="width:100%"/>
-                        <div class="container">
-                            <h2>Bánh Mì</h2>
-                            <p>Những ổ bánh mì vàng đều với lớp vỏ ngoài giòn tan và phần ruột bên trong xốp mềm.</p><br>
-                            <p><button class="button">Order</button></p>
-                        </div>
+                        <?php
+                        while ($row = mysqli_fetch_row($result)) {
+                            echo "<img src='../Images/$row[3]' style='width:100%'/>";
+                            echo "<div class='container'>";
+                            echo "<h2>$row[1]</h2>";
+                            echo "<p>$row[2]</p>";
+                            echo "<p>$row[4]</p>";
+                            echo "<p><button class='button'>Order</button></p>";
+                            echo "</div>";
+                        }
+                        ?>
                     </div>
                 </div>
-                <div class="column">
-                    <div class="card">
-                        <img src="../Images/Bread02-Pizza-ABCT201.png" alt=""style="width:100%"/>
-                        <div class="container">
-                            <h2>Pizza</h2>                            
-                            <p>Chiếc pizza có bánh đế giòn xốp được phủ bởi lớp phô mai béo ngậy, xúc xích và ớt chuông xanh.</p>                       
-                            <p><button class="button">Order</button></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="card">
-                        <img src="../Images/Bread03-.png" alt="" style="width:100%"/>
-                        <div class="container">
-                            <h2>Jambon Phô Mai</h2>
-                            <p>Bánh mì tươi, mềm kết hợp với vị béo mằn mặn của lớp chà bông cùng sốt mayonnaise.</p>
-                            <p><button class="button">Order</button></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="card">
-                        <img src="../Images/Bread04-.png" alt="" style="width:100%"/>
-                        <div class="container">
-                            <h2>Bánh Mì Sốt Nắm</h2>
-                            <p>Chiếc bánh thơm ngon mang mùi vị độc đáo đến từ sốt nấm và thịt ham.</p><br>
-                            <p><button class="button">Order</button></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="card">
-                        <img src="../Images/Bread05-.png" alt="" style="width:100%"/>
-                        <div class="container">
-                            <h2>Pizza Xúc Xích</h2>
-                            <p>Phần ăn đầy đủ dinh dưỡng với xúc xích, thịt jambon cắt nhỏ và phô mai.</p><br>
-                            <p><button class="button">Order</button></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="card">
-                        <img src="../Images/Bread06-.png" alt="" style="width:100%"/>
-                        <div class="container">
-                            <h2>Bánh Mì Châu Âu</h2>
-                            <p>Bên cạnh một chút vị ngọt nhẹ đến từ bánh mì, còn có chút vị mặn của chà bông và béo thơm của trứng cút.</p>
-                            <p><button class="button">Order</button></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="card">
-                        <img src="../Images/Pastry02-.png" alt=""style="width:100%"/>
-                        <div class="container">
-                            <h2>Su kem</h2>
-                            <p>Lớp vỏ giòn giòn, mềm và thơm phức với lớp kem béo mịn ngon tuyệt.</p>
-                            <p><button class="button">Order</button></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="card">
-                        <img src="../Images/Bread07-.png" alt="" style="width:100%"/>
-                        <div class="container">
-                            <h2>Bánh Đan Mạch Xúc Xích</h2>
-                            <p>Lớp bánh đan mạch cuộc xúc xích được phủ thêm chà bông gà và sốt mayonnaise.</p>
-                            <p><button class="button">Order</button></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="card">
-                        <img src="../Images/Bread08.png" alt="" style="width:100%"/>
-                        <div class="container">
-                            <h2>Bánh Mì Salad Kẹp</h2>
-                            <p>Bánh mì mè kẹp thịt ham, phô mai, rau xà lách và cà chua thơm ngon và bổ dưỡng</p>
-                            <p><button class="button">Order</button></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="card">
-                        <img src="../Images/Bread09-.png" alt="" style="width:100%"/>
-                        <div class="container">
-                            <h2>Bánh Mì Salad</h2>
-                            <p>Bánh mì kèp salad nhiều thành phần gồm jambon, cà rốt, bắp, bắp cải, dưa leo và sốt mayonaise.e sauce.</p>
-                            <p><button class="button">Order</button></p>
-                        </div>
-                    </div>
-                </div>
-                
+
             </div>
         </div>
 
@@ -236,101 +160,16 @@
             <div class="row">
                 <div class="column">
                     <div class="card">
-                        <img src="../Images/SliCake08-.png" alt="" style="width:100%"/>
-                        <div class="container">
-                            <h2>Blueberry Vani</h2>
-                            <p>Chiếc bánh bốn tầng được làm từ những lớp bánh bông lan tươi mịn, lớp mousse blueberry thơm ngọt và lớp mousse kem sữa béo mịn.</p>
-                            <p><button class="button">Order</button></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="card">
-                        <img src="../Images/SliCake06-.png" alt="" style="width:100%"/>
-                        <div class="container">
-                            <h2>Chocolate Cocoa</h2>
-                            <p>Trải nghiệm từng tần hương vị của lớp bông lan mềm mịn, lớp kem mousse thơm béo và vị chocolate quyến rũ.</p>
-                            <p><button class="button">Order</button></p>
-                        </div>
-                    </div>
-                </div> 
-                <div class="column">
-                    <div class="card">
-                        <img src="../Images/SliCake04-Mini-Black-Forest.png" alt="" style="width:100%"/>
-                        <div class="container">
-                            <h2>Black Forest</h2>
-                            <p>Những chiếc Black Forest với kích thước nhỏ nhưng vẫn giữ được mùi vị sôcôla đặc trưng của mình.</p><br>
-                            <p><button class="button">Order</button></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="card">
-                        <img src="../Images/SliCake09-.png" alt="" style="width:100%"/>
-                        <div class="container">
-                            <h2>Orange Vani</h2>
-                            <p>Cảm nhận vị cam hòa quyện giữa lớp kem mousse béo ngọt và bánh bông lan mịn màng.</p>
-                            <br><br>
-                            <p><button class="button">Order</button></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="card">
-                        <img src="../Images/SliCake02-.png" alt=""style="width:100%"/>
-                        <div class="container">
-                            <h2>Lemon Cream Cake</h2>
-                            <p>Chiếc bánh nhỏ nhắn mang vị chanh nhẹ nhàng sẽ làm tươi mới mọi vị giác của bạn.</p>
-                            <br>
-                            <p><button class="button">Order</button></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="card">
-                        <img src="../Images/SliCake01-.png" alt=""style="width:100%"/>
-                        <div class="container">
-                            <h2>Chocolate Almond Cake</h2>                            
-                            <p>Được làm từ bông lan nâu, đen, bên cạnh lớp chocolate đen và viền hạnh nhân lát, mang đến mùi vị bùi thơm ngọt ngào.</p>                       
-                            <p><button class="button">Order</button></p>
-                        </div>
-                    </div>
-                </div>                                                                                    
-                <div class="column">
-                    <div class="card">
-                        <img src="../Images/SliCake03-.png" alt="" style="width:100%"/>
-                        <div class="container">
-                            <h2>Marble Cheesecake</h2>
-                            <p>Từ vị béo của phô mai anchor hoà cùng vị ngọt của chocolate trắng và đen đã tạo nên chiếc bánh marble cheesecake mềm mại và thơm ngon.</p>
-                            <p><button class="button">Order</button></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="card">
-                        <img src="../Images/SliCake05-Carrot-Cake.png" alt="" style="width:100%"/>
-                        <div class="container">
-                            <h2>Bánh Cà Rốt</h2>
-                            <p>Với sự kết hợp của các mùi vị cà rốt, quả óc chó, bơ lạt, phô mai đã tạo nên chiếc bánh kem cà rốt thơm ngon và tốt cho sức khỏe.</p><br>
-                            <p><button class="button">Order</button></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="card">
-                        <img src="../Images/SliCake07-.png" alt="" style="width:100%"/>
-                        <div class="container">
-                            <h2>Strawberry Dome</h2>
-                            <p>Khối cầu mang mùi hương dịu nhẹ cùng vị ngọt đến từ lớp kem mousse và kem sữa tươi.</p>
-                            <p><button class="button">Order</button></p>
-                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
 
         <div id="Banhngot" class="tabcontent">
+            <div class="card">
 
+            </div>
         </div>
         <div id="Banhkem" class="tabcontent">
 
@@ -366,7 +205,7 @@
             }
         </script>
         <?php
-        // put your code here
+// put your code here
         ?>
     </body>
 </html>
