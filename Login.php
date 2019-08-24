@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -26,9 +25,10 @@
         
         <!--Prevent Jquery conflict -->
         <script>var $j = jQuery.noConflict(true);</script>
+          
     </head>
     <body>
-        <!-- Header-->
+          <!-- Header-->
         <div class="header" style="background-color: #F4F4F4">
             <div class="container-fluid" style="height: 100px;">
                 <div class=" row top-header">
@@ -80,47 +80,45 @@
                         
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="SignUp.php"   style="color: #FF5B35"><span class="glyphicon glyphicon-user" ></span> Sign Up</a></li>
-                            <li><a href="Login.php"  style="color: #FF5B35"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                        <li><a href="#"  style="color: #FF5B35"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                         </ul>
                     </div>
                 </nav>
             </div>
-
-            <!-- Carousel -->
-            <div id="myCarousel" class="carousel slide" data-ride="carousel" >
-                <!-- Indicators -->
-                <ol class="carousel-indicators">
-                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                    <li data-target="#myCarousel" data-slide-to="1"></li>
-                    <li data-target="#myCarousel" data-slide-to="2"></li>
-                    <li data-target="#myCarousel" data-slide-to="3"></li>
-                </ol>
-
-                <!-- Wrapper for slides -->
-                <div class="carousel-inner">
-                    <div class="item active">
-                        <img src="../images/logo1.jpg" alt="slide1" style="width:50%;">
+        
+        
+        
+        
+        <!--Đăng nhập-->
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h3 class="modal-title" style="text-align: center;font-weight: bolder;color: #A82128">LOGIN ACCOUNT</h3>
                     </div>
-
-                    <div class="item">
-                        <img src="../images/logo5.jpg" alt="slide2" style="width:50%;">
-                    </div>
-
-                    <div class="item">
-                        <img src="../images/logo13.jpg" alt="slide3" style="width:50%;">
-                    </div>
-                    <div class="item">
-                        <img src="../images/logo7.jpg" alt="slide4" style="width:50%;">
+                    <div class="modal-body">
+                        <div class="modal-body">
+                            <h4 id="wronginfo" style="color: red"></h4>
+                            <div class="form-group">
+                                <label for="AccountID">Account ID</label>
+                                <input  type="text" class="form-control" name="AccountID" id="AccountID" required="" title="Please type your account ID " placeholder="Enter you account ID">
+                            </div>
+                            <div class="form-group">
+                                <label for="AccountPass">Password</label>
+                                <input type="password" class="form-control" name="AccountPass" id="AccountPass" required="" title="Please type your password" placeholder="Enter your password">
+                            </div>
+                            <a href="SignUp.php"><p data-toggle="modal" data-target="#Signup" data-dismiss="modal">Do not have an account?</p></a>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success btn-lg" id="btnOK">LOGIN</button>
+                        </div>
                     </div>
                 </div>
-
             </div>
         </div>
         
-        <div class="row">
-            <a href="viewProduct.php"><button type="button" class="col-md-offset-5 col-md-2 btn btn-success" style="margin-top: 30px; background-color: #FF5B35;">All products</button></a> 
-        </div>
         
+              <!--footer -->
         <div class="container">
             <div class="contact-section-grids">
                  <div class="col-md-3 contact-section-grid wow fadeInLeft" data-wow-delay="0.4s">
@@ -211,3 +209,5 @@
     horizontal-align: center;
 }
         </style>
+    </body>
+</html>
