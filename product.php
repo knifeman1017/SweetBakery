@@ -3,7 +3,7 @@
 
 -->
 <?php
-include_once '../SweetBakery/lib/connect.inc';
+include_once 'lib/connect.inc';
 $sql = "select * from tb_product";
 $result = mysqli_query($link, $sql);
 if (mysqli_errno($link)) {
