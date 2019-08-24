@@ -15,111 +15,9 @@ if (mysqli_errno($link)) {
     <head>
         <meta charset="UTF-8">
         <title>Product</title>
-
+        <link href="css/css/product.css" rel="stylesheet" type="text/css"/>
     </head>
-    <style>
-        h2{
-            color: #A82128;
-        }
-        h1{
-            text-align: center;
-            color:#A82128;
-        }
-        /* Style the tab */
-        .tab {
-            overflow: hidden;
-            background-color: white;
-            width: 500px;
-
-        }
-
-        /* Style the buttons that are used to open the tab content */
-        .tab button {
-            background-color: inherit;
-            float: left;
-            border: none;
-            outline: none;
-            cursor: pointer;
-            padding: 14px 16px;
-            transition: 0.3s;
-
-        }
-
-        /* Change background color of buttons on hover */
-        .tab button:hover {
-            background-color: #ccc;
-        }
-
-        /* Create an active/current tablink class */
-        .tab button.active {
-            background-color: #ddd;
-        }
-
-        /* Style the tab content */
-        .tabcontent {
-            padding: 6px 12px;
-        }
-        .tablinks{
-            color:#A82128;
-        }
-        body{
-            background-color:white;
-        }
-        /* Three columns side by side */
-        .column {
-            float: left;
-            width: 15%;
-            margin-bottom: 16px;
-            padding: 0 8px;
-
-        }
-
-        /* Display the columns below each other instead of side by side on small screens */
-        @media screen and (max-width: 650px) {
-            .column {
-                width: 100%;
-                display: block;
-            }
-        }
-
-        /* Add some shadows to create a card effect */
-        .card {
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-            background-color: wheat;
-        }
-
-        /* Some left and right padding inside the container */
-        .container {
-            padding: 0 16px;
-        }
-
-        /* Clear floats */
-        .container::after, .row::after {
-            content: "";
-            clear: both;
-            display: table;
-        }
-        .title {
-            color: grey;
-        }
-        
-        .button{
-            border: none;
-            outline: 0;
-            display: inline-block;
-            padding: 5px;
-            color: #ddd;
-            background-color: #FF5B36;
-            text-align: center;
-            cursor: pointer;
-            width: 50%;
-        }
-
-        .button:hover {
-            background-color: #2ECC71;
-        }
-        
-    </style>
+  
     <body>
 
         <h1>Sản Phẩm</h1>
@@ -130,8 +28,8 @@ if (mysqli_errno($link)) {
             <button class="tablinks" onclick="openCity(event)"><a href="banhngot.php">Bánh Ngọt</a></button>
             <button class="tablinks" onclick="openCity(event)"><a href="banhkem.php">Bánh Kem</a></button>
             <button class="tablinks" onclick="openCity(event)"><a href="donggoi.php">Đóng Gói</a></button>
-            <button class="tablinks" onclick="openCity(event)"><a href="banhkem.php">Theo mùa</a></button>
-            <button class="tablinks" onclick="openCity(event)"><a href="banhkem.php">Khác</a></button>
+            <button class="tablinks" onclick="openCity(event)"><a href="theomua.php.php">Theo mùa</a></button>
+            <button class="tablinks" onclick="openCity(event)"><a href="khac.php.php">Khác</a></button>
         </div>
 
         <!-- Tab content -->
@@ -141,7 +39,7 @@ if (mysqli_errno($link)) {
                 while ($row = mysqli_fetch_row($result)) {
                     echo "<div class='column'>";
                     echo"<div class='card'>";
-                    echo "<img src='../Images/$row[3]' style='width:100%'/>";
+                    echo "<img src='../SweetBakery/Images/$row[3]' style='width:100%'/>";
                     echo "<div class='container'>";
                     echo "<h2>$row[1]</h2>";
                     echo "<p>$row[2]</p>";

@@ -3,7 +3,7 @@
 $host = "127.0.0.1";
 $user="root";
 $pwd="";
-$database="product";
+$database="sweetsbakery";
 //ket noi den CSDL TestDB1
 $link= mysqli_connect($host, $user, $pwd, $database);
 if($link==NULL){
