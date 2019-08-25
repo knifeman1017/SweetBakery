@@ -88,9 +88,9 @@
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" style="color: #FF5B35" href="#">MENU<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a style="color: #FF5B35" href="banhmi.php?cat=banhmi" >Bánh.....</a></li>
-                                    <li><button style="color: #FF5B35" onclick="showProduct(value)" value="banhmi" >Bánh.....</button></li>
-                                    <li><button style="color: #FF5B35" onclick="showProduct(value)" value="banhmi" >Bánh.....</button></li>
+                                    <li><a style="color: #FF5B35" href="banhmi.php?cat=banhmi" >Bánh Mì</a></li>
+                                    <li><a style="color: #FF5B35" href="banhmi.php?cat=banhmi" >Bánh Ngọt</a></li>
+                                    <li><a style="color: #FF5B35" href="banhmi.php?cat=banhmi" >Bánh Kem</a></li>
                                 </ul>
                             </li>
 =======
