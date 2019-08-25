@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>SweetsBakery - Login</title>
+        <title>SweetsBakery - Cart</title>
 
-        <!-- SweetsBakery. logo-->
+        <!-- SweetsBakery. Cart-->
         <link rel="icon" href="../images/logo.jpg">
 
 
@@ -58,7 +58,7 @@
                         
                         <ul class="nav navbar-nav navbar-right">
                             <li>
-                                <a href="cart.php"><button class="btn btn-success btn-lg" type="button" style="background-color: #FF5B35; padding: 5px;">
+                                <a href="#"><button class="btn btn-success btn-lg" type="button" style="background-color: #FF5B35; padding: 5px;">
                                     <i class="glyphicon glyphicon-shopping-cart"></i> <span class="badge"> 
                                         <?php
                                         if (isset($_SESSION["totalQty"])) {
@@ -73,42 +73,57 @@
                         
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="SignUp.php"   style="color: #FF5B35"><span class="glyphicon glyphicon-user" ></span> Sign Up</a></li>
-                        <li><a href="#"  style="color: #FF5B35"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                            <li><a href="Login.php"  style="color: #FF5B35"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                         </ul>
                     </div>
                 </nav>
             </div>
         
-        
-        
-        
-        <!--Đăng nhập-->
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h3 class="modal-title" style="text-align: center;font-weight: bolder;color: #A82128">LOGIN ACCOUNT</h3>
-                    </div>
-                    <div class="modal-body">
-                        <div class="modal-body">
-                            <h4 id="wronginfo" style="color: red"></h4>
-                            <div class="form-group">
-                                <label for="AccountID">Account ID</label>
-                                <input  type="text" class="form-control" name="AccountID" id="AccountID" required="" title="Please type your account ID " placeholder="Enter you account ID">
-                            </div>
-                            <div class="form-group">
-                                <label for="AccountPass">Password</label>
-                                <input type="password" class="form-control" name="AccountPass" id="AccountPass" required="" title="Please type your password" placeholder="Enter your password">
-                            </div>
-                            <a href="SignUp.php"><p data-toggle="modal" data-target="#Signup" data-dismiss="modal">Do not have an account?</p></a>
+        <!--Cart-->
+            <div class="container-fluid" style="min-height: 150px;">
+            <h2 style="color: #FF5B35;margin-bottom: 10px;margin-top: 10px;">SHOPPING CART</h2>
+                <div class="row">
+
+                    <!--Cart-->
+                    <div class="col-md-8">
+                        <div class="container-fluid" style="background-color: white;border-radius: 10px;height: 500px;overflow: auto;">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Photo Product</th>
+                                        <th>Product Name</th>
+                                        <th>Quantity</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                            </table>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-success btn-lg" id="btnOK">LOGIN</button>
+                    </div>
+                    
+                    
+                    <div class="col-md-4">
+                        <div class="panel panel-danger" style="border-radius: 10px;height: 320px;">
+                            <div class="panel-heading form-group form-inline">
+                                <label for="Edit" style="margin-right: 80px; color: #FF5B35"><h3>ORDER INFORMATION</h3></label>
+                                <a href="" data-toggle="modal" data-target="#Orderinfo"><button id="Edit" type="button" class="btn btn-primary form-control"><i class="glyphicon glyphicon-edit"></i></button></a>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table"> 
+                                    <tr>
+                                        <td><a href="pizza.php" ><button  type="submit" class="btn btn-primary btn-lg">Continue shopping</button></a></td>
+                                        <td style="padding-left: 50px;">
+                                            <form action="#" method="post" id="frCheckout">
+                                                <input  type="submit" name="btnCheckout" class="btn btn-success btn-lg" value="Checkout">
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        
         
         
               <!--footer -->
