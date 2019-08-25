@@ -1,11 +1,11 @@
 
 <!DOCTYPE html>
 <html>
-    <head>,,
-        <title>SweetsBakery - HOME</title>
+    <head>
+        <title>SweetsBakery - SignUp</title>
 
-        <!-- Pizworld Inc. logo-->
-        <link rel="icon" href="../SweetBakery/images/logo.jpg">
+        <!-- SweetsBakery. logo-->
+        <link rel="icon" href="../images/logo.jpg">
 
 
         <!--CSS FRAMEWORK-->
@@ -13,14 +13,7 @@
         <link rel="stylesheet" href="css/jquery.fancybox.min.css" type="text/css"/>
         <link href = "//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel = "stylesheet">
         <link href="css/animate.css" rel='stylesheet' type='text/css' />
-        <!-- JAVASCRIPT FRAMEWORK-->
-        <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-        <script type="text/javascript" src="js/bootstrap.bundle.js" ></script>
-        <script type="text/javascript" src="js/jquery.min.js" ></script>
-        <script type="text/javascript" src="js/jquery.flexisel.js"></script>
-        <script type="text/javascript" src="js/move-top.js"></script>
-        <script type="text/javascript" src="js/easing.js"></script>
-        <script src="js/wow.min.js"></script>
+        
        
         <link href="css/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
         
@@ -67,7 +60,7 @@
                         
                         <ul class="nav navbar-nav navbar-right">
                             <li>
-                                <a href="#"><button class="btn btn-success btn-lg" type="button" style="background-color: #FF5B35; padding: 5px;">
+                                <a href="cart.php"><button class="btn btn-success btn-lg" type="button" style="background-color: #FF5B35; padding: 5px;">
                                     <i class="glyphicon glyphicon-shopping-cart"></i> <span class="badge"> 
                                         <?php
                                         if (isset($_SESSION["totalQty"])) {

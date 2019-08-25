@@ -4,8 +4,8 @@
     <head>
         <title>SweetsBakery - HOME</title>
 
-        <!--  logo-->
-        <link rel="icon" href="images/logo.jpg">
+        <!-- SweetsBakery. logo-->
+        <link rel="icon" href="../images/logo.jpg">
 
 
         <!--CSS FRAMEWORK-->
@@ -13,52 +13,13 @@
         <link rel="stylesheet" href="css/jquery.fancybox.min.css" type="text/css"/>
         <link href = "//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel = "stylesheet">
         <link href="css/animate.css" rel='stylesheet' type='text/css' />
-        <!-- JAVASCRIPT FRAMEWORK-->
-        <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-        <script type="text/javascript" src="js/bootstrap.bundle.js" ></script>
-        <script type="text/javascript" src="js/jquery.min.js" ></script>
-        <script type="text/javascript" src="js/jquery.flexisel.js"></script>
-        <script type="text/javascript" src="js/move-top.js"></script>
-        <script type="text/javascript" src="js/easing.js"></script>
-        <script src="js/wow.min.js"></script>
-
+        
+        
+       
         <link href="css/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 
         <!--Prevent Jquery conflict -->
         <script>var $j = jQuery.noConflict(true);</script>
-        <style>
-            .fa {
-                padding: 20px;
-                font-size: 30px;
-                width: 70px;
-                text-align: center;
-                text-decoration: none;
-                margin: 5px 2px;
-                border-radius: 50%;
-            }
-
-            .fa:hover {
-                opacity: 0.7;
-            }
-
-            .fa-facebook {
-                background: #FF5B35;
-                color: white;
-            }
-
-            .fa-twitter {
-                background: #FF5B35;
-                color: white;
-            }
-
-            .fa-google {
-                background: #FF5B35;
-                color: white;
-            }
-            img{
-                vertical-align: center;
-            }
-        </style>
     </head>
     <body>
         <!-- Header-->
@@ -84,6 +45,8 @@
                     <div class="container-fluid" >
                         <ul class="nav navbar-nav">
                             <li ><a href="homepage.php" style="color: #FF5B35"><i class="glyphicon glyphicon-home"></i></a></li>
+<<<<<<< HEAD
+=======
                             <li class="dropdown">
 <<<<<<< HEAD
 
@@ -103,6 +66,7 @@
                                 </ul>
                             </li>
 =======
+>>>>>>> 30ee1b4935732f377c8d9683a32d3b0478e2b132
                             
                             <li><a href="banhmi.php" style="color: #FF5B35" href="banhmi.php">Bánh mì</a></li>
                             <li><a href="banhkem.php" style="color: #FF5B35" href="banhkem.php">Bánh kem</a></li>
@@ -110,8 +74,11 @@
                             <li><a href="donggoi.php" style="color: #FF5B35" href="donggoi.php">Đóng gói</a></li>
                             <li><a href="theomua.php" style="color: #FF5B35" href="theomua.php">Theo mùa</a></li>
                             <li><a href="khac.php" style="color: #FF5B35" href="khac.php">Khác</a></li>
+<<<<<<< HEAD
+=======
 >>>>>>> 6a0e8da1fc3b781534e98437ec467dde740a4ae0
 >>>>>>> 6de56338d4bfba0315804d72122b1295c12b9b47
+>>>>>>> 30ee1b4935732f377c8d9683a32d3b0478e2b132
                             <li><a style="color: #FF5B35" href="viewStores.php">Cửa hàng</a></li>
                             <li><a style="color: #FF5B35" href="aboutus.php">Về chúng tôi </a></li>
 
@@ -119,6 +86,18 @@
 
                         <ul class="nav navbar-nav navbar-right">
                             <li>
+<<<<<<< HEAD
+                                <a href="cart.php"><button class="btn btn-success btn-lg" type="button" style="background-color: #FF5B35; padding: 5px;">
+                                    <i class="glyphicon glyphicon-shopping-cart"></i> <span class="badge"> 
+                                        <?php
+                                        if (isset($_SESSION["totalQty"])) {
+                                            echo $_SESSION["totalQty"];
+                                        } else {
+                                            echo 0;
+                                        }
+                                        ?></span>
+                                </button></a>
+=======
                                 <a href="#"><button class="btn btn-success btn-lg" type="button" style="background-color: #FF5B35; padding: 5px;">
                                         <i class="glyphicon glyphicon-shopping-cart"></i> <span class="badge"> 
                                             <?php
@@ -129,6 +108,7 @@
                                             }
                                             ?></span>
                                     </button></a>
+>>>>>>> 30ee1b4935732f377c8d9683a32d3b0478e2b132
                             </li>
                         </ul>
 
@@ -228,7 +208,45 @@
                 </div>
 
             </div>
+            
+            
         </div>
+<<<<<<< HEAD
+    
+<style>
+            .fa {
+    padding: 20px;
+    font-size: 30px;
+    width: 70px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+    border-radius: 50%;
+}
+ 
+.fa:hover {
+    opacity: 0.7;
+}
+ 
+.fa-facebook {
+    background: #FF5B35;
+    color: white;
+}
+ 
+.fa-twitter {
+    background: #FF5B35;
+    color: white;
+}
+ 
+.fa-google {
+    background: #FF5B35;
+    color: white;
+}
+.carousel-inner{
+    horizontal-align: center;
+}
+        </style>
+=======
 
         <script>
             function showProduct(ten) {
@@ -250,3 +268,4 @@
 </html>
 
 
+>>>>>>> 30ee1b4935732f377c8d9683a32d3b0478e2b132
