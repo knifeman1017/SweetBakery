@@ -66,7 +66,7 @@
             <div class="container-fluid" style="height: 100px;">
                 <div class=" row top-header">
                     <div class="col-sm-2" style="left: 100px;" >
-                        <a href="homepage.php"><img width="100"  height=" 100" src="images/logo.jpg"  alt="logo" /></a>
+                        <a href="homepage.php"><img width="100"  height=" 100" src="../images/logo.jpg"  alt="logo" /></a>
                     </div>
                     <div class="col-sm-8" style="text-align: center;color: #FF5B35;font-weight: bold;top: 40px;font-size: 1.2em;">
                         <p>Welcome SweetsBakery</p>
@@ -84,6 +84,7 @@
                     <div class="container-fluid" >
                         <ul class="nav navbar-nav">
                             <li ><a href="homepage.php" style="color: #FF5B35"><i class="glyphicon glyphicon-home"></i></a></li>
+<<<<<<< HEAD
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" style="color: #FF5B35" href="#">MENU<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
@@ -92,13 +93,23 @@
                                     <li><button style="color: #FF5B35" onclick="showProduct(value)" value="banhmi" >Bánh.....</button></li>
                                 </ul>
                             </li>
+=======
+                            
+                            <li><a href="banhmi.php" style="color: #FF5B35" href="banhmi.php">Bánh mì</a></li>
+                            <li><a href="banhkem.php" style="color: #FF5B35" href="banhkem.php">Bánh kem</a></li>
+                            <li><a href="banhngot.php" style="color: #FF5B35" href="banhngot.php">Bánh ngọt</a></li>
+                            <li><a href="donggoi.php" style="color: #FF5B35" href="donggoi.php">Đóng gói</a></li>
+                            <li><a href="theomua.php" style="color: #FF5B35" href="theomua.php">Theo mùa</a></li>
+                            <li><a href="khac.php" style="color: #FF5B35" href="khac.php">Khác</a></li>
+>>>>>>> 6a0e8da1fc3b781534e98437ec467dde740a4ae0
                             <li><a style="color: #FF5B35" href="viewStores.php">Cửa hàng</a></li>
                             <li><a style="color: #FF5B35" href="aboutus.php">Về chúng tôi </a></li>
 
                         </ul>
+                        
                         <ul class="nav navbar-nav navbar-right">
                             <li>
-                                <a href="#"><button class="btn btn-success btn-lg" type="button" style="background-color: #FF5B35">
+                                <a href="#"><button class="btn btn-success btn-lg" type="button" style="background-color: #FF5B35; padding: 5px;">
                                     <i class="glyphicon glyphicon-shopping-cart"></i> <span class="badge"> 
                                         <?php
                                         if (isset($_SESSION["totalQty"])) {
@@ -110,16 +121,17 @@
                                 </button></a>
                             </li>
                         </ul>
+                        
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="#" data-toggle="modal" data-target="#Signup" style="color: #FF5B35"><span class="glyphicon glyphicon-user" ></span> Sign Up</a></li>
-                        <li><a href="#" data-toggle="modal" data-target="#Login" style="color: #FF5B35"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                            <li><a href="SignUp.php"   style="color: #FF5B35"><span class="glyphicon glyphicon-user" ></span> Sign Up</a></li>
+                            <li><a href="Login.php"  style="color: #FF5B35"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                         </ul>
                     </div>
                 </nav>
             </div>
 
             <!-- Carousel -->
-            <div id="myCarousel" class="carousel slide" data-ride="carousel" style="align-content: center">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel" >
                 <!-- Indicators -->
                 <ol class="carousel-indicators">
                     <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -131,18 +143,18 @@
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner">
                     <div class="item active">
-                        <img src="images/logo1.jpg" alt="slide1" style="width:50%">
+                        <img src="../images/logo1.jpg" alt="slide1" style="width:50%;">
                     </div>
 
                     <div class="item">
-                        <img src="images/logo5.jpg" alt="slide2" style="width:50%;">
+                        <img src="../images/logo5.jpg" alt="slide2" style="width:50%;">
                     </div>
 
                     <div class="item">
-                        <img src="images/logo13.jpg" alt="slide3" style="width:50%;">
+                        <img src="../images/logo13.jpg" alt="slide3" style="width:50%;">
                     </div>
                     <div class="item">
-                        <img src="images/logo7.jpg" alt="slide4" style="width:50%;">
+                        <img src="../images/logo7.jpg" alt="slide4" style="width:50%;">
                     </div>
                 </div>
 
@@ -158,26 +170,35 @@
                  <div class="col-md-3 contact-section-grid wow fadeInLeft" data-wow-delay="0.4s">
                     <h4 style="color: #FF5B35">Site Links</h4>
                     <ul>
-                      <li class="data"><a style="color: #FF5B35" href="#">Về chúng tôi</a></li>
+                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="#">Về chúng tôi</a></li>
                     </ul>
                     <ul>
-                        <li class="data"><a style="color: #FF5B35" href="#">Giỏ hàng</a></li>
+                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="#">Giỏ hàng</a></li>
                     </ul>
                     <ul>
-                        <li class="data"><a style="color: #FF5B35" href="#">Cửa hàng</a></li>
+                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="#">Cửa hàng</a></li>
                     </ul>
                 </div>
                 
                 <div class="col-md-3 contact-section-grid wow fadeInLeft" data-wow-delay="0.4s">
                     <h4 style="color: #FF5B35">Menu</h4>
                     <ul>
-                       <li style="color: #FF5B35" href="#">Bánh...</li>
+                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="banhmi.php" >Bánh Mì</a></li>
                     </ul>
                     <ul>
-                        <li style="color: #FF5B35" href="#">Bánh...</li>
+                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="banhkem.php" >Bánh Kem</a></li>
                     </ul>
                     <ul>
-                        <li style="color: #FF5B35" href="#">Bánh...</li>
+                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="banhngot.php" >Bánh Ngọt</a></li>
+                    </ul>
+                    <ul>
+                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="donggoi.php" >Đóng Gói</a></li>
+                    </ul>
+                    <ul>
+                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="theomua.php" >Theo Mùa</a></li>
+                    </ul>
+                    <ul>
+                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="khac.php" >Khác</a></li>
                     </ul>
                 </div>
             
@@ -198,6 +219,7 @@
                 
             </div>
         </div>
+<<<<<<< HEAD
 
         <script>
             function showProduct(ten) {
@@ -219,3 +241,39 @@
         </script>
     </body>
 </html>
+=======
+    
+<style>
+            .fa {
+    padding: 20px;
+    font-size: 30px;
+    width: 70px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+    border-radius: 50%;
+}
+ 
+.fa:hover {
+    opacity: 0.7;
+}
+ 
+.fa-facebook {
+    background: #FF5B35;
+    color: white;
+}
+ 
+.fa-twitter {
+    background: #FF5B35;
+    color: white;
+}
+ 
+.fa-google {
+    background: #FF5B35;
+    color: white;
+}
+.carousel-inner{
+    horizontal-align: center;
+}
+        </style>
+>>>>>>> 6a0e8da1fc3b781534e98437ec467dde740a4ae0
