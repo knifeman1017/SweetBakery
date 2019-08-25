@@ -17,7 +17,7 @@
         
        
         <link href="css/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-        
+
         <!--Prevent Jquery conflict -->
         <script>var $j = jQuery.noConflict(true);</script>
     </head>
@@ -33,7 +33,7 @@
                         <p>Welcome SweetsBakery</p>
                         <p>VIỆT NAM</p>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -45,6 +45,28 @@
                     <div class="container-fluid" >
                         <ul class="nav navbar-nav">
                             <li ><a href="homepage.php" style="color: #FF5B35"><i class="glyphicon glyphicon-home"></i></a></li>
+<<<<<<< HEAD
+=======
+                            <li class="dropdown">
+<<<<<<< HEAD
+
+                            </li>                            
+                            <li><a style="color: #FF5B35" href="banhmi.php?cat=banhmi">Bánh mì</a></li>
+                            <li><a style="color: #FF5B35" href="banhkem.php?cat=banhkem">Bánh kem</a></li>
+                            <li><a style="color: #FF5B35" href="banhngot.php?cat=banhngot">Bánh ngọt</a></li>
+                            <li><a style="color: #FF5B35" href="donggoi.php?cat=donggoi">Đóng gói</a></li>
+                            <li><a style="color: #FF5B35" href="theomua.php?cat=theomua">Theo mùa</a></li>
+                            <li><a style="color: #FF5B35" href="khac.php?cat=khac">Khác</a></li>
+=======
+                                <a class="dropdown-toggle" data-toggle="dropdown" style="color: #FF5B35" href="#">MENU<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a style="color: #FF5B35" href="banhmi.php?cat=banhmi" >Bánh Mì</a></li>
+                                    <li><a style="color: #FF5B35" href="banhmi.php?cat=banhmi" >Bánh Ngọt</a></li>
+                                    <li><a style="color: #FF5B35" href="banhmi.php?cat=banhmi" >Bánh Kem</a></li>
+                                </ul>
+                            </li>
+=======
+>>>>>>> 30ee1b4935732f377c8d9683a32d3b0478e2b132
                             
                             <li><a href="banhmi.php" style="color: #FF5B35" href="banhmi.php">Bánh mì</a></li>
                             <li><a href="banhkem.php" style="color: #FF5B35" href="banhkem.php">Bánh kem</a></li>
@@ -52,13 +74,19 @@
                             <li><a href="donggoi.php" style="color: #FF5B35" href="donggoi.php">Đóng gói</a></li>
                             <li><a href="theomua.php" style="color: #FF5B35" href="theomua.php">Theo mùa</a></li>
                             <li><a href="khac.php" style="color: #FF5B35" href="khac.php">Khác</a></li>
+<<<<<<< HEAD
+=======
+>>>>>>> 6a0e8da1fc3b781534e98437ec467dde740a4ae0
+>>>>>>> 6de56338d4bfba0315804d72122b1295c12b9b47
+>>>>>>> 30ee1b4935732f377c8d9683a32d3b0478e2b132
                             <li><a style="color: #FF5B35" href="viewStores.php">Cửa hàng</a></li>
                             <li><a style="color: #FF5B35" href="aboutus.php">Về chúng tôi </a></li>
 
                         </ul>
-                        
+
                         <ul class="nav navbar-nav navbar-right">
                             <li>
+<<<<<<< HEAD
                                 <a href="cart.php"><button class="btn btn-success btn-lg" type="button" style="background-color: #FF5B35; padding: 5px;">
                                     <i class="glyphicon glyphicon-shopping-cart"></i> <span class="badge"> 
                                         <?php
@@ -69,9 +97,21 @@
                                         }
                                         ?></span>
                                 </button></a>
+=======
+                                <a href="#"><button class="btn btn-success btn-lg" type="button" style="background-color: #FF5B35; padding: 5px;">
+                                        <i class="glyphicon glyphicon-shopping-cart"></i> <span class="badge"> 
+                                            <?php
+                                            if (isset($_SESSION["totalQty"])) {
+                                                echo $_SESSION["totalQty"];
+                                            } else {
+                                                echo 0;
+                                            }
+                                            ?></span>
+                                    </button></a>
+>>>>>>> 30ee1b4935732f377c8d9683a32d3b0478e2b132
                             </li>
                         </ul>
-                        
+
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="SignUp.php"   style="color: #FF5B35"><span class="glyphicon glyphicon-user" ></span> Sign Up</a></li>
                             <li><a href="Login.php"  style="color: #FF5B35"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
@@ -110,14 +150,14 @@
 
             </div>
         </div>
-        
+
         <div class="row">
             <a href="viewProduct.php"><button type="button" class="col-md-offset-5 col-md-2 btn btn-success" style="margin-top: 30px; background-color: #FF5B35;">All products</button></a> 
         </div>
-        
+
         <div class="container">
             <div class="contact-section-grids">
-                 <div class="col-md-3 contact-section-grid wow fadeInLeft" data-wow-delay="0.4s">
+                <div class="col-md-3 contact-section-grid wow fadeInLeft" data-wow-delay="0.4s">
                     <h4 style="color: #FF5B35">Site Links</h4>
                     <ul>
                         <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="#">Về chúng tôi</a></li>
@@ -129,48 +169,49 @@
                         <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="#">Cửa hàng</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="col-md-3 contact-section-grid wow fadeInLeft" data-wow-delay="0.4s">
                     <h4 style="color: #FF5B35">Menu</h4>
                     <ul>
-                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="banhmi.php" >Bánh Mì</a></li>
+                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="banhmi.php?cat=banhmi" >Bánh Mì</a></li>
                     </ul>
                     <ul>
-                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="banhkem.php" >Bánh Kem</a></li>
+                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="banhkem.php?cat=banhkem" >Bánh Kem</a></li>
                     </ul>
                     <ul>
-                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="banhngot.php" >Bánh Ngọt</a></li>
+                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="banhngot.php?cat=banhngot" >Bánh Ngọt</a></li>
                     </ul>
                     <ul>
-                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="donggoi.php" >Đóng Gói</a></li>
+                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="donggoi.php?cat=donggoi" >Đóng Gói</a></li>
                     </ul>
                     <ul>
-                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="theomua.php" >Theo Mùa</a></li>
+                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="theomua.php?cat=theomua" >Theo Mùa</a></li>
                     </ul>
                     <ul>
-                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="khac.php" >Khác</a></li>
+                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="khac.php?cat=khac" >Khác</a></li>
                     </ul>
                 </div>
-            
-                 <div id="link" class="col-md-3 contact-section-grid wow fadeInLeft">
-                     <h4 style="color: #FF5B35">Follow Us On...</h4>
-                <a href="#" class="fa fa-facebook"></a>
-                
-                <a href="#" class="fa fa-twitter"></a>
-                <a href="#" class="fa fa-google"></a>
+
+                <div id="link" class="col-md-3 contact-section-grid wow fadeInLeft">
+                    <h4 style="color: #FF5B35">Follow Us On...</h4>
+                    <a href="#" class="fa fa-facebook"></a>
+
+                    <a href="#" class="fa fa-twitter"></a>
+                    <a href="#" class="fa fa-google"></a>
                 </div>
                 <div class="col-md-3 contact-section-grid wow fadeInLeft">
                     <i class="fa fa-map-marker" style="color: #FF5B35" ></i>
                     <h4 style="color: #FF5B35">590 Cách Mạng Tháng Tám, Quận 3, TPHCM</h4>
                     <i class="fa fa-phone" style="color: #FF5B35"></i>
                     <h4 style="color: #FF5B35">099 999 999</h4>
-                    
+
                 </div>
-                
+
             </div>
             
             
         </div>
+<<<<<<< HEAD
     
 <style>
             .fa {
@@ -205,3 +246,26 @@
     horizontal-align: center;
 }
         </style>
+=======
+
+        <script>
+            function showProduct(ten) {
+                if (window.XMLHttpRequest) {
+                    // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp = new XMLHttpRequest();
+                } else { // code for IE6, IE5
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("proList").innerHTML = this.responseText;
+                    }
+                }
+        </script>
+
+    </div>
+</body>
+</html>
+
+
+>>>>>>> 30ee1b4935732f377c8d9683a32d3b0478e2b132
