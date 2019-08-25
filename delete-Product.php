@@ -6,7 +6,7 @@ if (isset($_GET["id"]) == FALSE) {
 }
 $ms = $_GET["id"]; //lay ma so sp muon doi gia
 include_once '../SweetBakery/lib/connect.inc';
-$sql = "delete from tb_product where product_id =$ms";
+$sql = "delete from tb_product where product_id ='$ms'";
 mysqli_query($link, $sql);
 
 if (mysqli_errno($link)) {

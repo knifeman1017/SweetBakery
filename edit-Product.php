@@ -6,7 +6,7 @@ if (isset($_GET["id"]) == FALSE) {
 }
 $ms = $_GET["id"]; //lay ma so sp muon doi gia
 include_once '../SweetBakery/lib/connect.inc';
-$sql = "select*from tb_product where product_id =$ms";
+$sql = "select*from tb_product where product_id ='$ms'";
 $result = mysqli_query($link, $sql);
 
 if (mysqli_num_rows($result) == 0) {
@@ -20,7 +20,7 @@ $sp = mysqli_fetch_row($result);
     <head>
         <meta charset="UTF-8">
         <title></title>
-        <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../SweetBakery/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <div class="container">
