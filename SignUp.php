@@ -5,7 +5,7 @@
         <title>SweetsBakery - HOME</title>
 
         <!-- Pizworld Inc. logo-->
-        <link rel="icon" href="../images/logo.jpg">
+        <link rel="icon" href="../SweetBakery/images/logo.jpg">
 
 
         <!--CSS FRAMEWORK-->
