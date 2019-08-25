@@ -141,7 +141,7 @@ if (mysqli_errno($link)) {
                     <div class="card">
                         <?php
                         while ($row = mysqli_fetch_row($result)) {
-                            echo "<img src='../Images/$row[3]' style='width:100%'/>";
+                            echo "<img src='../SweetBakery/Images/$row[3]' style='width:100%'/>";
                             echo "<div class='container'>";
                             echo "<h2>$row[1]</h2>";
                             echo "<p>$row[2]</p>";
