@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: localhost
--- Thời gian đã tạo: Th8 24, 2019 lúc 05:16 AM
--- Phiên bản máy phục vụ: 10.3.16-MariaDB
--- Phiên bản PHP: 7.1.30
+-- Máy chủ: 127.0.0.1:3306
+-- Thời gian đã tạo: Th8 25, 2019 lúc 06:25 AM
+-- Phiên bản máy phục vụ: 5.7.26
+-- Phiên bản PHP: 7.2.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `product`
+-- Cơ sở dữ liệu: `sweetsbakery`
 --
 
 -- --------------------------------------------------------
@@ -28,13 +28,15 @@ SET time_zone = "+00:00";
 -- Cấu trúc bảng cho bảng `tb_product`
 --
 
-CREATE TABLE `tb_product` (
+DROP TABLE IF EXISTS `tb_product`;
+CREATE TABLE IF NOT EXISTS `tb_product` (
   `product_id` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
   `product_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `product_description` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
   `Images` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `product_price` float NOT NULL,
-  `product_category` varchar(50) COLLATE utf8_unicode_ci NOT NULL
+  `product_category` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -85,17 +87,12 @@ INSERT INTO `tb_product` (`product_id`, `product_name`, `product_description`, `
 ('N06', 'Chocolate Cocoa', 'Trải nghiệm từng tần hương vị của lớp bông lan mềm mịn, lớp kem mousse thơm béo và vị chocolate quyến rũ.', 'SliCake06-.png', 27000, 'Banhngot'),
 ('N07', 'Strawberry Dome', 'Khối cầu mang mùi hương dịu nhẹ cùng vị ngọt đến từ lớp kem mousse và kem sữa tươi.', 'SliCake07-.png', 29000, 'Banhngot'),
 ('N08', 'Blueberry Vani', 'Chiếc bánh bốn tầng được làm từ những lớp bánh bông lan tươi mịn, lớp mousse blueberry thơm ngọt và lớp mousse kem sữa béo mịn.', 'SliCake08-.png', 33000, 'Banhngot'),
-('N09', 'Orange Vani', 'Cảm nhận vị cam hòa quyện giữa lớp kem mousse béo ngọt và bánh bông lan mịn màng.', 'SliCake09-.png', 35000, 'Banhngot');
-
---
--- Chỉ mục cho các bảng đã đổ
---
-
---
--- Chỉ mục cho bảng `tb_product`
---
-ALTER TABLE `tb_product`
-  ADD PRIMARY KEY (`product_id`);
+('N09', 'Orange Vani', 'Cảm nhận vị cam hòa quyện giữa lớp kem mousse béo ngọt và bánh bông lan mịn màng.', 'SliCake09-.png', 35000, 'Banhngot'),
+('TT01', 'Prenium', '', '8L2A5292-223x300.png', 780000, 'Theomua'),
+('TT02', 'Modern Harmony', '', '8L2A0509-683x1024.png', 670000, 'Theomua'),
+('TT03', 'Lava', '', 'lava-683x1024.png', 789000, 'Theomua'),
+('TT04', 'Royal', '', '8L2A7253-683x1024.png', 750000, 'Theomua'),
+('TT05', 'Golden Lava', '', 'goldenLavaBox.png', 860000, 'Theomua');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
