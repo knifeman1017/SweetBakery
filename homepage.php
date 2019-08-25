@@ -85,6 +85,7 @@
                         <ul class="nav navbar-nav">
                             <li ><a href="homepage.php" style="color: #FF5B35"><i class="glyphicon glyphicon-home"></i></a></li>
                             <li class="dropdown">
+<<<<<<< HEAD
 
                             </li>                            
                             <li><a style="color: #FF5B35" href="banhmi.php?cat=banhmi">Bánh mì</a></li>
@@ -93,6 +94,24 @@
                             <li><a style="color: #FF5B35" href="donggoi.php?cat=donggoi">Đóng gói</a></li>
                             <li><a style="color: #FF5B35" href="theomua.php?cat=theomua">Theo mùa</a></li>
                             <li><a style="color: #FF5B35" href="khac.php?cat=khac">Khác</a></li>
+=======
+                                <a class="dropdown-toggle" data-toggle="dropdown" style="color: #FF5B35" href="#">MENU<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a style="color: #FF5B35" href="banhmi.php?cat=banhmi" >Bánh Mì</a></li>
+                                    <li><a style="color: #FF5B35" href="banhmi.php?cat=banhmi" >Bánh Ngọt</a></li>
+                                    <li><a style="color: #FF5B35" href="banhmi.php?cat=banhmi" >Bánh Kem</a></li>
+                                </ul>
+                            </li>
+=======
+                            
+                            <li><a href="banhmi.php" style="color: #FF5B35" href="banhmi.php">Bánh mì</a></li>
+                            <li><a href="banhkem.php" style="color: #FF5B35" href="banhkem.php">Bánh kem</a></li>
+                            <li><a href="banhngot.php" style="color: #FF5B35" href="banhngot.php">Bánh ngọt</a></li>
+                            <li><a href="donggoi.php" style="color: #FF5B35" href="donggoi.php">Đóng gói</a></li>
+                            <li><a href="theomua.php" style="color: #FF5B35" href="theomua.php">Theo mùa</a></li>
+                            <li><a href="khac.php" style="color: #FF5B35" href="khac.php">Khác</a></li>
+>>>>>>> 6a0e8da1fc3b781534e98437ec467dde740a4ae0
+>>>>>>> 6de56338d4bfba0315804d72122b1295c12b9b47
                             <li><a style="color: #FF5B35" href="viewStores.php">Cửa hàng</a></li>
                             <li><a style="color: #FF5B35" href="aboutus.php">Về chúng tôi </a></li>
 
