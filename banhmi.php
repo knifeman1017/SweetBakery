@@ -3,8 +3,10 @@
 
 -->
 <?php
+$prodcat = '%'.$_GET["cat"].'%';
+echo $prodcat;
 include_once '../SweetBakery/lib/connect.inc';
-$sql = "select * from tb_product where product_category='Banhmi'";
+$sql = "select * from tb_product where product_category like '$prodcat' ";
 $result = mysqli_query($link, $sql);
 if (mysqli_errno($link)) {
     echo mysqli_error($link);
