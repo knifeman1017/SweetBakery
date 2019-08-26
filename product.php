@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<!--
-
--->
 <?php
-include_once 'lib/connect.inc';
-$sql = "select * from tb_product";
+$prodcat = '%'.$_GET["cat"].'%';
+echo $prodcat;
+include_once '../SweetBakery/lib/connect.inc';
+$sql = "select * from tb_product where product_category like '$prodcat' ";
 $result = mysqli_query($link, $sql);
 if (mysqli_errno($link)) {
     echo mysqli_error($link);
@@ -15,197 +14,155 @@ if (mysqli_errno($link)) {
     <head>
         <meta charset="UTF-8">
         <title>Product</title>
-
+        <link href="css/css/product.css" rel="stylesheet" type="text/css"/>
+        <!-- logo-->
+        <link rel="icon" href="images/logo.jpg">
+        <!--CSS FRAMEWORK-->
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="css/jquery.fancybox.min.css" type="text/css"/>
+        <link href = "//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel = "stylesheet">
+        <link href="css/animate.css" rel='stylesheet' type='text/css' />
+        <link href="css/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        
     </head>
-    <style>
-        h2{
-            color: #A82128;
-        }
-        h1{
-            text-align: center;
-            color:#A82128;
-        }
-        /* Style the tab */
-        .tab {
-            overflow: hidden;
-            background-color: white;
-            width: 500px;
-
-        }
-
-        /* Style the buttons that are used to open the tab content */
-        .tab button {
-            background-color: inherit;
-            float: left;
-            border: none;
-            outline: none;
-            cursor: pointer;
-            padding: 14px 16px;
-            transition: 0.3s;
-
-        }
-
-        /* Change background color of buttons on hover */
-        .tab button:hover {
-            background-color: #ccc;
-        }
-
-        /* Create an active/current tablink class */
-        .tab button.active {
-            background-color: #ddd;
-        }
-
-        /* Style the tab content */
-        .tabcontent {
-            display: none;
-            padding: 6px 12px;
-        }
-        .tablinks{
-            color:#A82128;
-        }
-        body{
-            background-color:white;
-        }
-        /* Three columns side by side */
-        .column {
-            float: left;
-            width: 15%;
-            margin-bottom: 16px;
-            padding: 0 8px;
-
-        }
-
-        /* Display the columns below each other instead of side by side on small screens */
-        @media screen and (max-width: 650px) {
-            .column {
-                width: 100%;
-                display: block;
-            }
-        }
-
-        /* Add some shadows to create a card effect */
-        .card {
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-            background-color: wheat;
-        }
-
-        /* Some left and right padding inside the container */
-        .container {
-            padding: 0 16px;
-        }
-
-        /* Clear floats */
-        .container::after, .row::after {
-            content: "";
-            clear: both;
-            display: table;
-        }
-        .title {
-            color: grey;
-        }
-
-        .button {
-            border: none;
-            outline: 0;
-            display: inline-block;
-            padding: 5px;
-            color: #ddd;
-            background-color: #FF5B36;
-            text-align: center;
-            cursor: pointer;
-            width: 50%;
-        }
-
-        .button:hover {
-            background-color: #2ECC71;
-        }
-
-    </style>
+  
     <body>
-
-        <h1>Sản Phẩm</h1>
-        <br>
-        <!-- Tab links -->
-        <div class="tab" >
-            <button class="tablinks" onclick="openCity(event, 'Banhmi')">Bánh Mì</button>
-            <button class="tablinks" onclick="openCity(event, 'Banhngot')">Bánh Ngọt</button>
-            <button class="tablinks" onclick="openCity(event, 'Banhkem')">Bánh Kem</button>
-            <button class="tablinks" onclick="openCity(event, 'Theomua')">Theo mùa</button>
-            <button class="tablinks" onclick="openCity(event, 'Khac')">Khác</button>
+<!-- Header-->
+        <div class="header" style="background-color: #F4F4F4">
+            <div class="container-fluid" style="height: 100px;">
+                <div class=" row top-header">
+                    <div class="col-sm-2" style="left: 100px;" >
+                        <a href="homepage.php"><img width="100"  height=" 100" src="../SweetBakery/images/logo.jpg"  alt="logo" /></a>
+                    </div>
+                    <div class="col-sm-8" style="text-align: center;color: #FF5B35;font-weight: bold;top: 40px;font-size: 1.2em;">
+                        <p>Welcome SweetsBakery</p>
+                        <p>VIỆT NAM</p>
+                    </div>
+                    
+                </div>
+            </div>
         </div>
+<!--Menu-->
+        <div class="menu-bar">
+            <div class="container-fluid">
+                <nav class="navbar navbar-inverse">
+                    <div class="container-fluid" >
+                        <ul class="nav navbar-nav">
+                            <li><a style="color: #FF5B35" href="product.php?cat=banhmi">Bánh mì</a></li>
+                            <li><a style="color: #FF5B35" href="product.php?cat=banhkem">Bánh kem</a></li>
+                            <li><a style="color: #FF5B35" href="product.php?cat=banhngot">Bánh ngọt</a></li>
+                            <li><a style="color: #FF5B35" href="product.php?cat=donggoi">Đóng gói</a></li>
+                            <li><a style="color: #FF5B35" href="product.php?cat=theomua">Theo mùa</a></li>
+                            <li><a style="color: #FF5B35" href="product.php?cat=khac">Khác</a></li>
+                            <li><a style="color: #FF5B35" href="viewStores.php">Cửa hàng</a></li>
+                            <li><a style="color: #FF5B35" href="aboutus.php">Về chúng tôi </a></li>
+
+                        </ul>
+                        
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a href="#"><button class="btn btn-success btn-lg" type="button" style="background-color: #FF5B35; padding: 5px;">
+                                    <i class="glyphicon glyphicon-shopping-cart"></i> <span class="badge"> 
+                                        <?php
+                                        if (isset($_SESSION["totalQty"])) {
+                                            echo $_SESSION["totalQty"];
+                                        } else {
+                                            echo 0;
+                                        }
+                                        ?></span>
+                                </button></a>
+                            </li>
+                        </ul>
+                        
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="SignUp.php"   style="color: #FF5B35"><span class="glyphicon glyphicon-user" ></span> Sign Up</a></li>
+                            <li><a href="Login.php"  style="color: #FF5B35"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        <h1 style="color: #FF5B35;">Sản Phẩm</h1>
+        <br>
+       
 
         <!-- Tab content -->
-        <div id="Banhmi" class="tabcontent">
-            <div class="row">
-                <div class="column">
-                    <div class="card">
-                        <?php
-                        while ($row = mysqli_fetch_row($result)) {
-                            echo "<img src='../SweetBakery/Images/$row[3]' style='width:100%'/>";
-                            echo "<div class='container'>";
-                            echo "<h2>$row[1]</h2>";
-                            echo "<p>$row[2]</p>";
-                            echo "<p>$row[4]</p>";
-                            echo "<p><button class='button'>Order</button></p>";
-                            echo "</div>";
-                        }
-                        ?>
-                    </div>
+        <div id="Banhmi" class="tabcontent" >
+            <div class="row" >
+                <?php
+                while ($row = mysqli_fetch_row($result)) {
+                    echo "<div class='column'>";
+                    echo " <div class='card'>";
+                    echo "<img src='../SweetBakery/Images/$row[3]' style='width:100%'/>";
+                    echo "<div class='container'>";
+                    echo "<h5>$row[1]</h5>";
+                    echo "<p>$row[4]đ</p>";
+                    echo "<p><button class='btn btn-success btn-lg' class='button'>Order</button></p>";
+                    echo "</div>";
+                    echo "</div>";
+                    echo "</div>";
+                }
+                ?>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="contact-section-grids">
+                <div class="col-md-3 contact-section-grid wow fadeInLeft" data-wow-delay="0.4s">
+                    <h4 style="color: #FF5B35">Site Links</h4>
+                    <ul>
+                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="#">Về chúng tôi</a></li>
+                    </ul>
+                    <ul>
+                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="#">Giỏ hàng</a></li>
+                    </ul>
+                    <ul>
+                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="#">Cửa hàng</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-3 contact-section-grid wow fadeInLeft" data-wow-delay="0.4s">
+                    <h4 style="color: #FF5B35">Menu</h4>
+                    <ul>
+                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="product.php?cat=banhmi" >Bánh Mì</a></li>
+                    </ul>
+                    <ul>
+                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="product.php?cat=banhkem" >Bánh Kem</a></li>
+                    </ul>
+                    <ul>
+                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="product.php?cat=banhngot" >Bánh Ngọt</a></li>
+                    </ul>
+                    <ul>
+                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="product.php?cat=donggoi" >Đóng Gói</a></li>
+                    </ul>
+                    <ul>
+                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="product.php?cat=theomua" >Theo Mùa</a></li>
+                    </ul>
+                    <ul>
+                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="product.php?cat=khac" >Khác</a></li>
+                    </ul>
+                </div>
+
+                <div id="link" class="col-md-3 contact-section-grid wow fadeInLeft">
+                    <h4 style="color: #FF5B35">Follow Us On...</h4>
+                    <a href="#" class="fa fa-facebook"></a>
+
+                    <a href="#" class="fa fa-twitter"></a>
+                    <a href="#" class="fa fa-google"></a>
+                </div>
+                <div class="col-md-3 contact-section-grid wow fadeInLeft">
+                    <i class="fa fa-map-marker" style="color: #FF5B35" ></i>
+                    <h4 style="color: #FF5B35">590 Cách Mạng Tháng Tám, Quận 3, TPHCM</h4>
+                    <i class="fa fa-phone" style="color: #FF5B35"></i>
+                    <h4 style="color: #FF5B35">099 999 999</h4>
+
                 </div>
 
             </div>
         </div>
 
-        <div id="Banhngot" class="tabcontent">
-            <div class="row">
-                <div class="column">
-                    <div class="card">
+    </div>
+</div>
 
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <div id="Banhngot" class="tabcontent">
-            <div class="card">
-
-            </div>
-        </div>
-        <div id="Banhkem" class="tabcontent">
-
-        </div>
-        <div id="Theomua" class="tabcontent">
-
-        </div>
-
-        <script>
-            function openCity(evt, cityName) {
-                // Declare all variables
-                var i, tabcontent, tablinks, button;
-
-                // Get all elements with class="tabcontent" and hide them
-                tabcontent = document.getElementsByClassName("tabcontent");
-                for (i = 0; i < tabcontent.length; i++) {
-                    tabcontent[i].style.display = "none";
-                }
-
-                // Get all elements with class="tablinks" and remove the class "active"
-                tablinks = document.getElementsByClassName("tablinks");
-                for (i = 0; i < tablinks.length; i++) {
-                    tablinks[i].className = tablinks[i].className.replace(" active", "");
-                }
-                button = document.getElementsByClassName("button");
-                for (i = 0; i < button.length; i++) {
-                    button[i].className = button[i].className.replace(" active", "");
-                }
-
-                // Show the current tab, and add an "active" class to the button that opened the tab
-                document.getElementById(cityName).style.display = "block";
-                evt.currentTarget.className += " active";
-            }
-        </script>
-        <?php
-// put your code here
-        ?>
-    </body>
+</body>
 </html>

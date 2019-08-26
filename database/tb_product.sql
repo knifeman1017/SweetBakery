@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1:3306
--- Thời gian đã tạo: Th8 25, 2019 lúc 06:25 AM
+-- Thời gian đã tạo: Th8 26, 2019 lúc 02:18 AM
 -- Phiên bản máy phục vụ: 5.7.26
 -- Phiên bản PHP: 7.2.18
 
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `tb_product` (
 --
 
 INSERT INTO `tb_product` (`product_id`, `product_name`, `product_description`, `Images`, `product_price`, `product_category`) VALUES
-('BK01', 'Yogurt cup', 'Những ly yogourt mềm mịn cùng vị chua thanh nhẹ nhàng.', 'O1-.png', 25000, 'Khac'),
+('BK01', 'Yogurt cup', 'Những ly yogourt mềm mịn cùng vị chua thanh nhẹ nhàng.', 'O1-.png', 18000, 'khac'),
 ('BK02', 'Coffee Cup', 'Vị thơm của kem cà phê bên cạnh những lớp bánh mềm mịn, làm nên món tráng miệng ngon tuyệt.', 'O2-Coffee-Cup.png', 30000, 'Khac'),
 ('BK03', 'Chocolate Cup', 'Kem chocolate kết hợp với từng lớp bánh bông lan, thật dễ dàng phát hiện tình yêu.', 'O3-Chocolate-Cup.png', 35000, 'Khac'),
 ('BK04', 'Brownie', 'Tín đồ của chocolate sẽ không thể nào bỏ qua brownie, loại bánh xốp dẻo vừa phải nhưng cũng đủ độ cứng giòn sẽ mang lại năng lượng tràn đầy bằng hương vị ngọt bùi của nó.', 'O4-Brownie.png', 33000, 'Khac'),
@@ -65,12 +65,14 @@ INSERT INTO `tb_product` (`product_id`, `product_name`, `product_description`, `
 ('K02', ' ', 'Bánh bông lan được phủ bởi lớp kem sữa tươi và trái cây.', 'WhoCake02.png', 320000, 'Banhkem'),
 ('K03', '', 'Bánh kem sữa tươi.', 'WhoCake03.png', 280000, 'Banhkem'),
 ('K04', '', 'Bánh kem socola.', 'WhoCake04.png', 360000, 'Banhkem'),
-('K05', '', 'Bánh kem mocha round với lớp kem cà phê, bông lan cà phê và bột cacao.', 'WhoCake05.png', 340000, 'Banhkem'),
+('K05', '', '', 'fresh-cream-cake1-12.png', 340000, 'Banhkem'),
 ('K06', '', '\r\nBánh kem sữa tươi được trang trí với trái cây và socola.', 'WhoCake06.png', 320000, 'Banhkem'),
 ('K07', '', 'Bánh kem socola trang trí với mức, socola và trái cây.', 'WhoCake07.png', 360000, 'Banhkem'),
 ('K08', '', '\r\nBánh kem sữa tươi hình khuôn mặt dễ thương.', 'WhoCake08.png', 370000, 'Banhkem'),
 ('K09', '', 'Bánh kem đặc biệt.', 'WhoCake09.png', 390000, 'Banhkem'),
 ('K10', '', '\r\nBánh kem sữa tươi đặc biệt trang trí với mức, trái cây và socola.', 'WhoCake10.png', 380000, 'Banhkem'),
+('K11', '', '', 'fresh-cream-cake1-06.png', 360000, 'Banhkem'),
+('K12', '', '', 'fresh-cream-cake1-11.png', 350000, 'Banhkem'),
 ('M01', 'Bánh Mì', 'Những ổ bánh mì vàng đều với lớp vỏ ngoài giòn tan và phần ruột bên trong xốp mềm.', 'Bread01-Baguette.png', 10000, 'Banhmi'),
 ('M02', 'Pizza', 'Chiếc pizza có bánh đế giòn xốp được phủ bởi lớp phô mai béo ngậy, xúc xích và ớt chuông xanh.\r\n', 'Bread02-Pizza-ABCT201.png', 30000, 'Banhmi'),
 ('M03', 'Jambon Phô Mai', 'Bánh mì tươi, mềm kết hợp với vị béo mằn mặn của lớp chà bông cùng sốt mayonnaise.', 'Bread03-.png', 25000, 'Banhmi'),
@@ -79,6 +81,10 @@ INSERT INTO `tb_product` (`product_id`, `product_name`, `product_description`, `
 ('M06', 'Bánh Mì Châu Âu', 'Bên cạnh một chút vị ngọt nhẹ đến từ bánh mì, còn có chút vị mặn của chà bông và béo thơm của trứng cút.', 'Bread06-.png', 25000, 'Banhmi'),
 ('M07', 'Bánh Đan Mạch Xúc Xích', '\r\nLớp bánh đan mạch cuộc xúc xích được phủ thêm chà bông gà và sốt mayonnaise.', 'Bread07-.png', 20000, 'Banhmi'),
 ('M08', 'Bánh Mì Salad Kẹp', 'Bánh mì mè kẹp thịt ham, phô mai, rau xà lách và cà chua thơm ngon và bổ dưỡng', 'Bread08.png', 32000, 'Banhmi'),
+('M09', 'Croissant', '\r\nTừng chiếc croissant với những lớp vỏ xốp giòn và vị bơ thơm lừng bên trong.', 'Pastry01-Croissant.png', 25000, 'Banhmi'),
+('M10', 'Lưới Dừa', 'Vị ngọt thơm đặc trưng của dừa kết hợp với bánh mì mềm mịn tạo nên chiếc bánh dừa hoàn hảo.', 'Pastry03-', 15000, 'Banhmi'),
+('M11', 'Sâu Kem', 'Bạn có dám thử chú sâu béo ịt đầy ụ bơ này không ?', 'Pastry04-.png', 20000, 'Banhmi'),
+('M12', 'Sú Chocolate Chip', 'Cảm nhân hương vị sô cô la trong từng miếng cắn', 'Pastry05-Chocolachip-Bun.png', 23000, 'Banhmi'),
 ('N01', 'Chocolate Almond Cake', '\"Được làm từ bông lan nâu, đen, bên cạnh lớp chocolate đen và viền hạnh nhân lát, mang đến mùi vị bùi thơm ngọt ngào.\r\n', 'SliCake01-.png', 25000, 'Banhngot'),
 ('N02', 'Lemon Cream Cake', 'Chiếc bánh nhỏ nhắn mang vị chanh nhẹ nhàng sẽ làm tươi mới mọi vị giác của bạn.', 'SliCake02-.png', 27000, 'Banhngot'),
 ('N03', 'Marble Cheesecake', 'Từ vị béo của phô mai anchor hoà cùng vị ngọt của chocolate trắng và đen đã tạo nên chiếc bánh marble cheesecake mềm mại và thơm ngon.', 'SliCake03-.png', 30000, 'Banhngot'),
