@@ -1,11 +1,10 @@
-
 <!DOCTYPE html>
 <html>
     <head>
         <title>SweetsBakery - HOME</title>
 
         <!-- SweetsBakery. logo-->
-        <link rel="icon" href="../images/logo.jpg">
+        <link rel="icon" href="../SweetBakery/images/logo.jpg">
 
 
         <!--CSS FRAMEWORK-->
@@ -18,7 +17,6 @@
        
         <link href="css/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 
-        <!--Prevent Jquery conflict -->
         <script>var $j = jQuery.noConflict(true);</script>
     </head>
     <body>
@@ -27,7 +25,7 @@
             <div class="container-fluid" style="height: 100px;">
                 <div class=" row top-header">
                     <div class="col-sm-2" style="left: 100px;" >
-                        <a href="homepage.php"><img width="100"  height=" 100" src="../images/logo.jpg"  alt="logo" /></a>
+                        <a href="homepage.php"><img width="100"  height=" 100" src="../SweetBakery/images/logo.jpg"  alt="logo" /></a>
                     </div>
                     <div class="col-sm-8" style="text-align: center;color: #FF5B35;font-weight: bold;top: 40px;font-size: 1.2em;">
                         <p>Welcome SweetsBakery</p>
@@ -45,40 +43,13 @@
                     <div class="container-fluid" >
                         <ul class="nav navbar-nav">
                             <li ><a href="homepage.php" style="color: #FF5B35"><i class="glyphicon glyphicon-home"></i></a></li>
-<<<<<<< HEAD
-=======
-                            <li class="dropdown">
-<<<<<<< HEAD
-
-                            </li>                            
-                            <li><a style="color: #FF5B35" href="banhmi.php?cat=banhmi">Bánh mì</a></li>
-                            <li><a style="color: #FF5B35" href="banhkem.php?cat=banhkem">Bánh kem</a></li>
-                            <li><a style="color: #FF5B35" href="banhngot.php?cat=banhngot">Bánh ngọt</a></li>
-                            <li><a style="color: #FF5B35" href="donggoi.php?cat=donggoi">Đóng gói</a></li>
-                            <li><a style="color: #FF5B35" href="theomua.php?cat=theomua">Theo mùa</a></li>
-                            <li><a style="color: #FF5B35" href="khac.php?cat=khac">Khác</a></li>
-=======
-                                <a class="dropdown-toggle" data-toggle="dropdown" style="color: #FF5B35" href="#">MENU<span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a style="color: #FF5B35" href="banhmi.php?cat=banhmi" >Bánh Mì</a></li>
-                                    <li><a style="color: #FF5B35" href="banhmi.php?cat=banhmi" >Bánh Ngọt</a></li>
-                                    <li><a style="color: #FF5B35" href="banhmi.php?cat=banhmi" >Bánh Kem</a></li>
-                                </ul>
-                            </li>
-=======
->>>>>>> 30ee1b4935732f377c8d9683a32d3b0478e2b132
-                            
-                            <li><a href="banhmi.php" style="color: #FF5B35" href="banhmi.php">Bánh mì</a></li>
-                            <li><a href="banhkem.php" style="color: #FF5B35" href="banhkem.php">Bánh kem</a></li>
-                            <li><a href="banhngot.php" style="color: #FF5B35" href="banhngot.php">Bánh ngọt</a></li>
-                            <li><a href="donggoi.php" style="color: #FF5B35" href="donggoi.php">Đóng gói</a></li>
-                            <li><a href="theomua.php" style="color: #FF5B35" href="theomua.php">Theo mùa</a></li>
-                            <li><a href="khac.php" style="color: #FF5B35" href="khac.php">Khác</a></li>
-<<<<<<< HEAD
-=======
->>>>>>> 6a0e8da1fc3b781534e98437ec467dde740a4ae0
->>>>>>> 6de56338d4bfba0315804d72122b1295c12b9b47
->>>>>>> 30ee1b4935732f377c8d9683a32d3b0478e2b132
+                                                      
+                            <li><a style="color: #FF5B35" href="product.php?cat=banhmi">Bánh mì</a></li>
+                            <li><a style="color: #FF5B35" href="product.php?cat=banhkem">Bánh kem</a></li>
+                            <li><a style="color: #FF5B35" href="product.php?cat=banhngot">Bánh ngọt</a></li>
+                            <li><a style="color: #FF5B35" href="product.php?cat=donggoi">Đóng gói</a></li>
+                            <li><a style="color: #FF5B35" href="product.php?cat=theomua">Theo mùa</a></li>
+                            <li><a style="color: #FF5B35" href="product.php?cat=khac">Khác</a></li>
                             <li><a style="color: #FF5B35" href="viewStores.php">Cửa hàng</a></li>
                             <li><a style="color: #FF5B35" href="aboutus.php">Về chúng tôi </a></li>
 
@@ -86,18 +57,6 @@
 
                         <ul class="nav navbar-nav navbar-right">
                             <li>
-<<<<<<< HEAD
-                                <a href="cart.php"><button class="btn btn-success btn-lg" type="button" style="background-color: #FF5B35; padding: 5px;">
-                                    <i class="glyphicon glyphicon-shopping-cart"></i> <span class="badge"> 
-                                        <?php
-                                        if (isset($_SESSION["totalQty"])) {
-                                            echo $_SESSION["totalQty"];
-                                        } else {
-                                            echo 0;
-                                        }
-                                        ?></span>
-                                </button></a>
-=======
                                 <a href="#"><button class="btn btn-success btn-lg" type="button" style="background-color: #FF5B35; padding: 5px;">
                                         <i class="glyphicon glyphicon-shopping-cart"></i> <span class="badge"> 
                                             <?php
@@ -108,7 +67,6 @@
                                             }
                                             ?></span>
                                     </button></a>
->>>>>>> 30ee1b4935732f377c8d9683a32d3b0478e2b132
                             </li>
                         </ul>
 
@@ -133,18 +91,18 @@
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner">
                     <div class="item active">
-                        <img src="../images/logo1.jpg" alt="slide1" style="width:50%;">
+                        <img src="../SweetBakery/images/logo1.jpg" alt="slide1" style="width:50%;">
                     </div>
 
                     <div class="item">
-                        <img src="../images/logo5.jpg" alt="slide2" style="width:50%;">
+                        <img src="../SweetBakery/images/logo5.jpg" alt="slide2" style="width:50%;">
                     </div>
 
                     <div class="item">
-                        <img src="../images/logo13.jpg" alt="slide3" style="width:50%;">
+                        <img src="../SweetBakery/images/logo13.jpg" alt="slide3" style="width:50%;">
                     </div>
                     <div class="item">
-                        <img src="../images/logo7.jpg" alt="slide4" style="width:50%;">
+                        <img src="../SweetBakery/images/logo7.jpg" alt="slide4" style="width:50%;">
                     </div>
                 </div>
 
@@ -152,7 +110,7 @@
         </div>
 
         <div class="row">
-            <a href="viewProduct.php"><button type="button" class="col-md-offset-5 col-md-2 btn btn-success" style="margin-top: 30px; background-color: #FF5B35;">All products</button></a> 
+            <a href="product.php"><button type="button" class="col-md-offset-5 col-md-2 btn btn-success" style="margin-top: 30px; background-color: #FF5B35;">All products</button></a> 
         </div>
 
         <div class="container">
@@ -173,22 +131,22 @@
                 <div class="col-md-3 contact-section-grid wow fadeInLeft" data-wow-delay="0.4s">
                     <h4 style="color: #FF5B35">Menu</h4>
                     <ul>
-                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="banhmi.php?cat=banhmi" >Bánh Mì</a></li>
+                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="product.php?cat=banhmi" >Bánh Mì</a></li>
                     </ul>
                     <ul>
-                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="banhkem.php?cat=banhkem" >Bánh Kem</a></li>
+                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="product.php?cat=banhkem" >Bánh Kem</a></li>
                     </ul>
                     <ul>
-                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="banhngot.php?cat=banhngot" >Bánh Ngọt</a></li>
+                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="product.php?cat=banhngot" >Bánh Ngọt</a></li>
                     </ul>
                     <ul>
-                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="donggoi.php?cat=donggoi" >Đóng Gói</a></li>
+                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="product.php?cat=donggoi" >Đóng Gói</a></li>
                     </ul>
                     <ul>
-                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="theomua.php?cat=theomua" >Theo Mùa</a></li>
+                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="product.php?cat=theomua" >Theo Mùa</a></li>
                     </ul>
                     <ul>
-                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="khac.php?cat=khac" >Khác</a></li>
+                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="product.php?cat=khac" >Khác</a></li>
                     </ul>
                 </div>
 
@@ -211,42 +169,6 @@
             
             
         </div>
-<<<<<<< HEAD
-    
-<style>
-            .fa {
-    padding: 20px;
-    font-size: 30px;
-    width: 70px;
-    text-align: center;
-    text-decoration: none;
-    margin: 5px 2px;
-    border-radius: 50%;
-}
- 
-.fa:hover {
-    opacity: 0.7;
-}
- 
-.fa-facebook {
-    background: #FF5B35;
-    color: white;
-}
- 
-.fa-twitter {
-    background: #FF5B35;
-    color: white;
-}
- 
-.fa-google {
-    background: #FF5B35;
-    color: white;
-}
-.carousel-inner{
-    horizontal-align: center;
-}
-        </style>
-=======
 
         <script>
             function showProduct(ten) {
@@ -268,4 +190,3 @@
 </html>
 
 
->>>>>>> 30ee1b4935732f377c8d9683a32d3b0478e2b132
