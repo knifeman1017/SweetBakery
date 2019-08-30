@@ -1,0 +1,38 @@
+
+          body {font-family: "Lato", sans-serif;}
+
+
+            .sidebar {
+                height: 100%;
+                width: 28%;
+                position: fixed;
+                z-index: 1;
+                top: 0;
+                left: 0;
+                background-color: #A82128;
+                overflow-x: hidden;
+                padding-top: 16px;
+            }
+
+            .sidebar a {
+                padding: 6px 8px 6px 16px;
+                text-decoration: none;
+                font-size: 25px;
+                color: white ;
+                display: block;
+            }
+
+            .sidebar a:hover {
+                color: #263238;
+            }
+
+            .main {
+                margin-left: 380px; /* Same as the width of the sidenav */
+                padding: 0px 10px;
+            }
+
+            @media screen and (max-height: 450px) {
+                .sidebar {padding-top: 50px;}
+                .sidebar a {font-size: 15px;}
+            }
+   
