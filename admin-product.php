@@ -68,6 +68,7 @@ if (mysqli_errno($link)) {
                     }
                     ?>
                        </tbody>
+            </table>
         </div>
 
     </body>
