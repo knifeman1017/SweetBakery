@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -45,12 +47,12 @@
                         <ul class="nav navbar-nav">
                             <li ><a href="homepage.php" style="color: #FF5B35"><i class="glyphicon glyphicon-home"></i></a></li>
                             
-                            <li><a href="banhmi.php" style="color: #FF5B35" href="banhmi.php">Bánh mì</a></li>
-                            <li><a href="banhkem.php" style="color: #FF5B35" href="banhkem.php">Bánh kem</a></li>
-                            <li><a href="banhngot.php" style="color: #FF5B35" href="banhngot.php">Bánh ngọt</a></li>
-                            <li><a href="donggoi.php" style="color: #FF5B35" href="donggoi.php">Đóng gói</a></li>
-                            <li><a href="theomua.php" style="color: #FF5B35" href="theomua.php">Theo mùa</a></li>
-                            <li><a href="khac.php" style="color: #FF5B35" href="khac.php">Khác</a></li>
+                            <li><a style="color: #FF5B35" href="product.php?cat=banhmi">Bánh mì</a></li>
+                            <li><a  style="color: #FF5B35" href="product.php?cat=banhkem">Bánh kem</a></li>
+                            <li><a  style="color: #FF5B35" href="product.php?cat=banhngot">Bánh ngọt</a></li>
+                            <li><a style="color: #FF5B35" href="product.php?cat=donggoi">Đóng gói</a></li>
+                            <li><a  style="color: #FF5B35" href="product.php?cat=theomua">Theo mùa</a></li>
+                            <li><a  style="color: #FF5B35" href="product.php?cat=khac">Khác</a></li>
                             <li><a style="color: #FF5B35" href="viewStores.php">Cửa hàng</a></li>
                             <li><a style="color: #FF5B35" href="aboutus.php">Về chúng tôi </a></li>
 
@@ -73,7 +75,7 @@
                         
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="SignUp.php"   style="color: #FF5B35"><span class="glyphicon glyphicon-user" ></span> Sign Up</a></li>
-                        <li><a href="#"  style="color: #FF5B35"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                            <li><a href="#"  style="color: #FF5B35"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                         </ul>
                     </div>
                 </nav>
@@ -93,17 +95,17 @@
                         <div class="modal-body">
                             <h4 id="wronginfo" style="color: red"></h4>
                             <div class="form-group">
-                                <label for="AccountID">Account ID</label>
-                                <input  type="text" class="form-control" name="AccountID" id="AccountID" required="" title="Please type your account ID " placeholder="Enter you account ID">
+                                <label>Account ID</label>
+                                <input  type="text" name="txtUser" class="form-control"  required="" title="Please type your account ID " placeholder="Enter you account ID">
                             </div>
                             <div class="form-group">
-                                <label for="AccountPass">Password</label>
-                                <input type="password" class="form-control" name="AccountPass" id="AccountPass" required="" title="Please type your password" placeholder="Enter your password">
+                                <label>Password</label>
+                                <input type="password" name="txtPass" class="form-control"  required="" title="Please type your password" placeholder="Enter your password">
                             </div>
                             <a href="SignUp.php"><p data-toggle="modal" data-target="#Signup" data-dismiss="modal">Do not have an account?</p></a>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-success btn-lg" id="btnOK">LOGIN</button>
+                            <input type="submit" name="btLogin" class="btn btn-success btn-lg" value="LOGIN" >
                         </div>
                     </div>
                 </div>
@@ -130,22 +132,22 @@
                 <div class="col-md-3 contact-section-grid wow fadeInLeft" data-wow-delay="0.4s">
                     <h4 style="color: #FF5B35">Menu</h4>
                     <ul>
-                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="banhmi.php" >Bánh Mì</a></li>
+                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="product.php?cat=banhmi" >Bánh Mì</a></li>
                     </ul>
                     <ul>
-                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="banhkem.php" >Bánh Kem</a></li>
+                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="product.php?cat=banhkem" >Bánh Kem</a></li>
                     </ul>
                     <ul>
-                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="banhngot.php" >Bánh Ngọt</a></li>
+                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="product.php?cat=banhngot" >Bánh Ngọt</a></li>
                     </ul>
                     <ul>
-                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="donggoi.php" >Đóng Gói</a></li>
+                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="product.php?cat=donggoi" >Đóng Gói</a></li>
                     </ul>
                     <ul>
-                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="theomua.php" >Theo Mùa</a></li>
+                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="product.php?cat=theomua" >Theo Mùa</a></li>
                     </ul>
                     <ul>
-                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="khac.php" >Khác</a></li>
+                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="product.php?cat=khac" >Khác</a></li>
                     </ul>
                 </div>
             
@@ -204,3 +206,45 @@
         </style>
     </body>
 </html>
+<?php
+
+//kiem tra nut submit da duoc bam chua
+if (isset($_POST["btLogin"]) == TRUE) {
+    // lay du lieu trong 2 o username, password
+    $user = $_POST["txtUser"];
+    $password = $_POST["txtPass"];
+
+    // tao ket noi voi db
+    include_once './lib/connect.inc';
+
+    //tao linh truy van
+    $sql = "select * from tb_customer where customer_id = '$user'";
+
+    //thuc hien hieu lenh truy van
+    $result = mysqli_query($link, $sql);
+
+    //kiem tra loi
+    if (mysqli_connect_errno($link)) {
+        // neu co loi sai => thong bao loi
+        mysqli_error($link);
+        exit();
+    }
+    if (mysqli_num_rows($result) == 0) {
+        die('<h3> tai khoan ko ton tai, vui long nhap lai !!!</h3>');
+    }
+    // da tim thay dong co ma tk == user, tiep tuc kiem tra password
+    //doc dong du lieu 
+    $row = mysqli_fetch_row($result);
+    if ($row[1] == $password) {
+        // tai khoan va mat khau hop le => chuyen trang 
+        if ($row[2] == 1) {
+            header("Location: homepage.php");
+        }
+       
+       
+    }
+     else {
+            die("<h3>mat ma ko dunh vui long nhap lai</h3>");
+        }
+}
+?>      
