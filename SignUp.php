@@ -123,7 +123,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="sumbit" class="btn btn-primary" name="btnCreate">Create</button>
+                                <button type="submit" class="btn btn-primary" name="btnCreate">Create</button>
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                             </div>
                         </div>
@@ -226,12 +226,12 @@
     </body>
 </html>
 <?php
-     if (isset($_GET["btnCreate"]) == TRUE) {
-    $cusID = $_GET["CusID"];
-    $pass = $_GET["CusPass"];
-    $cusName = $_GET["CusName"];
-    $cusEmail = $_GET["CusMail"];
-    $cusTel = $_GET["CusTel"];
+     if (isset($_POST["btnCreate"]) == TRUE) {
+    $cusID = $_POST["CusID"];
+    $pass = $_POST["CusPass"];
+    $cusName = $_POST["CusName"];
+    $cusEmail = $_POST["CusMail"];
+    $cusTel = $_POST["CusTel"];
     
     include_once './lib/connect.inc';
     $sql = "insert into tb_customer (customer_id, customer_password, customer_name, customer_email, customer_tel) "
