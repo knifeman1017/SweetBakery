@@ -150,20 +150,21 @@
                     </ul>
                 </div>
 
-                <div id="link" class="col-md-3 contact-section-grid wow fadeInLeft">
-                    <h4 style="color: #FF5B35">Follow Us On...</h4>
-                    <a href="#" class="fa fa-facebook"></a>
+                <footer class="panel-footer" id="footer">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <h4 style="color: #FF5B35">Sweets Bakery</h4>
 
-                    <a href="#" class="fa fa-twitter"></a>
-                    <a href="#" class="fa fa-google"></a>
-                </div>
-                <div class="col-md-3 contact-section-grid wow fadeInLeft">
-                    <i class="fa fa-map-marker" style="color: #FF5B35" ></i>
-                    <h4 style="color: #FF5B35">590 Cách Mạng Tháng Tám, Quận 3, TPHCM</h4>
-                    <i class="fa fa-phone" style="color: #FF5B35"></i>
-                    <h4 style="color: #FF5B35">099 999 999</h4>
-
-                </div>
+                            <h5 style="color: #FF5B35">2019 &copy; All Rights Reserved</h5>
+                        </div>
+                        <div class="col-xs-6 text-right">
+                            <h4>Follow Us</h4>
+                            <a href="#" class="fa fa-facebook"></a>
+                            <a href="#" class="fa fa-twitter"></a>
+                            <a href="#" class="fa fa-google"></a>
+                        </div>
+                    </div>
+                </footer>
 
             </div>
             

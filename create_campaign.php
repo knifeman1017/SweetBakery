@@ -29,36 +29,38 @@
     <a href="admin-account.php"><i class="fa fa-fw fa-user"></i> ADMIN ACCOUNT</a>
 </div>
 <div class="main">
-    <form>
+    <form action="getCampaign_product.php" method="get">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h3 class="modal-title" style="text-align: center;font-weight: bolder;color: #A82128">CREAT NEW PRODUCTS</h3>
+                    <h3 class="modal-title" style="text-align: center;font-weight: bolder;color: #A82128">CREATE NEW CAMPAIGN</h3>
                 </div>
                 <div class="modal-body">
                     <div class="modal-body">
                         <h4 id="wronginfo" style="color: red"></h4>
                         <div class="form-group">
-                            <label>CAMPAIGN NAME</label>
-                            <input  type="text" class="form-control" name="txtName" required="" pattern="[A-Za-z 0-9]{3,50}" placeholder="Product name must be 3-50 characters" >
+                            <label class="">CAMPAIGN NAME</label>
+                            <input  type="text" class="form-control" name="txtName" required="" pattern="[A-Za-z 0-9]{3,50}" placeholder="Campaign name must be 3-50 characters" >
                             <label>CAMPAIGN DESCRIPTION</label>
                             <textarea  type="text" class="form-control" name="txtDes" required="" cols="10" rows="5" maxlength="300" placeholder="Optional" ></textarea>
-                            <label>IMAGES (.png)</label>
-                            <input  type="file" class="form-control" name="fileImages" id="fileImages" required="" accept="images/png" title="Please upload the product image">
-
-                            <label>PRICE</label>
-                            <input  type="number" class="form-control" name="numPrice" min="10000" max="600000" required="" placeholder="Price must be between 1000 and 1000000" >
-                            <label>CATEGORY</label>
-                            <select class="form-control" name="txtCate"required="">
-                                <option value="" selected="" disabled="">---Please select---</option>
-                                <option value="banhmi"> Bánh Mì</option>
-                                <option value="banhngot">Bánh Ngọt</option>
-                                <option value="banhkem">Bánh Kem</option>
-                                <option value="donggoi">Đóng gói</option>
-                                <option value="theomua">Theo mùa</option>
-                                <option value="khac">Khác</option>
-                            </select>
+                            <label>CAMPAIGN STATUS</label>
+                            <label class="radio-inline">
+                                <input type="radio" name="rdCamp" value="1" checked>Active
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="rdCamp" value="0" >Inactive
+                            </label>
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <label>FROM DATE</label>
+                                    <input  type="date" class="form-control" name="dateFrom" required="">
+                                </div>
+                                <div class="col-lg-3">
+                                    <label>TO DATE</label>
+                                    <input  type="date" class="form-control" name="dateTo" required="">
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div style="text-align: center;">
@@ -69,23 +71,7 @@
             </div>
         </div>
     </form>
-    <?php
-    if (isset($_POST["submit"])) {
-        $id = $_POST["txtID"];
-        $name = $_POST["txtName"];
-        $description = $_POST["txtDes"];
-        $price = $_POST["numPrice"];
-        $category = $_POST["txtCate"];
-        include_once '../SweetBakery/lib/connect.inc';
-        $sql = "insert into tb_product (product_id,product_name,product_description,product_price,product_category) values ('$id','$name','$description',$price,'$category')";
-        $result = mysqli_query($link, $sql);
-        if (mysqli_errno($link)) {
-            echo mysqli_error($link);
-            exit();
-        }
-        header('location:admin-product.php');
-    }
-    ?>
+
 </div>
 </body>
 </html>
