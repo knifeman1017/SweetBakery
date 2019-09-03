@@ -113,43 +113,6 @@
             <a href="product.php"><button type="button" class="col-md-offset-5 col-md-2 btn btn-success" style="margin-top: 30px; background-color: #FF5B35;">All products</button></a> 
         </div>
 
-        <div class="container">
-            <div class="contact-section-grids">
-                <div class="col-md-3 contact-section-grid wow fadeInLeft" data-wow-delay="0.4s">
-                    <h4 style="color: #FF5B35">Site Links</h4>
-                    <ul>
-                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="#">Về chúng tôi</a></li>
-                    </ul>
-                    <ul>
-                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="#">Giỏ hàng</a></li>
-                    </ul>
-                    <ul>
-                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="#">Cửa hàng</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-md-3 contact-section-grid wow fadeInLeft" data-wow-delay="0.4s">
-                    <h4 style="color: #FF5B35">Menu</h4>
-                    <ul>
-                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="product.php?cat=banhmi" >Bánh Mì</a></li>
-                    </ul>
-                    <ul>
-                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="product.php?cat=banhkem" >Bánh Kem</a></li>
-                    </ul>
-                    <ul>
-                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="product.php?cat=banhngot" >Bánh Ngọt</a></li>
-                    </ul>
-                    <ul>
-                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="product.php?cat=donggoi" >Đóng Gói</a></li>
-                    </ul>
-                    <ul>
-                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="product.php?cat=theomua" >Theo Mùa</a></li>
-                    </ul>
-                    <ul>
-                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="product.php?cat=khac" >Khác</a></li>
-                    </ul>
-                </div>
-
                 <footer class="panel-footer" id="footer">
                     <div class="row">
                         <div class="col-xs-6">
