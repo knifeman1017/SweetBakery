@@ -18,6 +18,46 @@
         <link href="css/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 
         <script>var $j = jQuery.noConflict(true);</script>
+        <style>
+            img{
+                vertical-align: middle;
+                margin: auto;
+            }
+            .fa {
+                padding: 20px;
+                font-size: 30px;
+                width: 70px;
+                text-align: center;
+                text-decoration: none;
+                margin: 5px 2px;
+                border-radius: 50%;
+                color: #FF5B35;
+            }
+
+            .fa:hover {
+                opacity: 0.7;
+            }
+
+            .fa-facebook {
+                background: #FF5B35;
+                color: white;
+            }
+
+            .fa-twitter {
+                background: #FF5B35;
+                color: white;
+            }
+
+            .fa-google {
+                background: #FF5B35;
+                color: white;
+            }
+
+            .fa-youtube {
+                background: #FF5B35;
+                color: white;
+            }
+        </style>
     </head>
     <body>
         <!-- Header-->
@@ -134,20 +174,6 @@
             
         </div>
 
-        <script>
-            function showProduct(ten) {
-                if (window.XMLHttpRequest) {
-                    // code for IE7+, Firefox, Chrome, Opera, Safari
-                    xmlhttp = new XMLHttpRequest();
-                } else { // code for IE6, IE5
-                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-                xmlhttp.onreadystatechange = function () {
-                    if (this.readyState == 4 && this.status == 200) {
-                        document.getElementById("proList").innerHTML = this.responseText;
-                    }
-                }
-        </script>
 
     </div>
 </body>
