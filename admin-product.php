@@ -52,7 +52,7 @@ $res_data = mysqli_query($link, $sql);
             <a href="admin-feedback.php"><i class="fa fa-fw fa-envelope "></i>CUSTOMER FEEDBACK</a>
             <a href="admin-account.php"><i class="fa fa-fw fa-user"></i> ADMIN ACCOUNT</a>
         </div>
-        <div class="main">    
+        <div class="main" style="margin-left: 30%">
             <h3 class="modal-title" style="text-align: center;font-weight: bolder;color: #A82128">Add, Edit or Delete Menu Items</h3><br>
 
             <a href="Create-product.php" class="btn btn-primary" >Add New Product</a><br><br>

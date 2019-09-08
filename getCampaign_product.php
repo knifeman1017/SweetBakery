@@ -59,7 +59,7 @@ if (mysqli_errno($link)) {
                    echo "<td><img src='../SweetBakery/Images/$row[3]' style='width:50%'/></td>";
                    echo "<td>$row[4]</td>";
                    echo "<td>$row[5]</td>";
-                   echo "<td><a type='button' href='edit-Product.php?id=$row[0]' class='btn btn-info'><i class='glyphicon glyphicon-plus-sign' style='color: wheat' ></i></a></td>";
+                   echo "<td><a type='button' href='addCampaign_product.php?id=$row[0]' class='btn btn-info'><i class='glyphicon glyphicon-plus-sign' style='color: wheat' ></i></a></td>";
 
                    echo "</tr>";
                }
@@ -68,6 +68,8 @@ if (mysqli_errno($link)) {
            </table>
        </div>
        <div class="col-lg-3 panel">
+           <div class="row">
+               <div class="col-lg-12">
            <h3>Campaign info</h3>
 
            <?php
@@ -83,6 +85,41 @@ if (mysqli_errno($link)) {
            echo "From Date: $campfrom<br>";
            echo "To Date: $campto<br>";
            ?>
+               </div>
+               <div class="col-lg-12">
+                   <h3>Product List</h3>
+
+                   <?php
+                   session_start();
+                   if(isset($_SESSION["proCamp"])==FALSE){
+                      echo'Please add some product!';
+                   }else{
+                    $order = $_SESSION["proCamp"];
+                    echo "<table class='table table-bordered'>";
+                    echo "<thead>";
+                    echo '<tr>';
+                    echo '<th>So TT</th>';
+                    echo '<th>Ma SP</th>';
+                    echo '<th>Ten SP</th>';
+                    echo '<th>Action</th>';
+                    echo '</tr>';
+                    echo "</thead>";
+                    echo '<tbody>';
+                    $stt=1;
+                    foreach ($order as $p) {
+                        echo '<tr>';
+                        echo "<td>$stt</td>";
+                        echo "<td>$p->proID</td>";
+                        echo "<td>$p->proName</td>";
+                        echo '</tr>';
+                        $stt++;
+                    }
+                    echo '</tbody>';
+                    echo '</table>';
+                   }
+                   ?>
+               </div>
+           </div>
        </div>
    </div>
 
