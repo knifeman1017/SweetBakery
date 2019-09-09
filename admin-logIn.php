@@ -38,18 +38,18 @@
     </body>
 </html>
 <?php
-
+  // tao ket noi voi db
+    include_once '../SweetBakery/lib/connect.inc';
 //kiem tra nut submit da duoc bam chua
 if (isset($_GET["btLogin"]) == TRUE) {
     // lay du lieu trong 2 o username, password
     $user = $_GET["user"];
     $password = $_GET["pass"];
 
-    // tao ket noi voi db
-    include_once './lib/connect.inc';
+  
 
     //tao linh truy van
-    $sql = "select * from tb_customer where customer_id = '$user'";
+    $sql = "select * from tb_admin where admin_id = '$user'";
 
     //thuc hien hieu lenh truy van
     $result = mysqli_query($link, $sql);
@@ -66,11 +66,13 @@ if (isset($_GET["btLogin"]) == TRUE) {
     // da tim thay dong co ma tk == user, tiep tuc kiem tra password
     //doc dong du lieu 
     $row = mysqli_fetch_row($result);
-    if ($row[1] == $password) {
+    if( ($row[1] == $password)||($row[2] == 1)) {
         // tai khoan va mat khau hop le => chuyen trang 
-        if ($row[2] == 1) {
-            header("Location: admin-Index.php");
-        }
+       
+         
+     
+            header("Location: admin-index.php");
+        
        
        
     }
