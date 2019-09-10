@@ -55,22 +55,19 @@
                             <li><a style="color: #FF5B35" href="aboutus.php">Về chúng tôi </a></li>
 
                         </ul>
-                        
+
                         <ul class="nav navbar-nav navbar-right">
                             <li>
                                 <a href="#"><button class="btn btn-success btn-lg" type="button" style="background-color: #FF5B35; padding: 5px;">
-                                    <i class="glyphicon glyphicon-shopping-cart"></i> <span class="badge"> 
-                                        <?php
-                                        if (isset($_SESSION["totalQty"])) {
-                                            echo $_SESSION["totalQty"];
-                                        } else {
-                                            echo 0;
-                                        }
-                                        ?></span>
-                                </button></a>
+                                        <i class="glyphicon glyphicon-shopping-cart"></i> <span class="badge">
+                                            <?php
+                                            session_start();
+                                            $order = $_SESSION['cart'];
+                                            echo sizeof($order);
+                                            ?></span>
+                                    </button></a>
                             </li>
                         </ul>
-                        
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="SignUp.php"   style="color: #FF5B35"><span class="glyphicon glyphicon-user" ></span> Sign Up</a></li>
                             <li><a href="Login.php"  style="color: #FF5B35"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
@@ -96,7 +93,69 @@
                                         <th>Total</th>
                                     </tr>
                                 </thead>
+                                <tbody>
+                                <tr>
+                                    <?php
+                                        $ids=[];
+                                    if (isset($_SESSION["cart"])) {
+                                        foreach ($_SESSION["cart"] as $key => $value) {
+                                            array_push($ids, $key);  // <=>ids[] = $key
+                                        }
+                                    }
+                                    $strIDS = join("','", $ids);  //noi mang thanh chuoi, moi phan tu cach nhau dau phay
+                                    $strIDS = "'" . $strIDS . "'";
+                                    $sql1 = "select * from tb_product where product_id in ({$strIDS})";
+                                    include_once '../SweetBakery/lib/connect.inc';
+                                    $rs1 = mysqli_query($link, $sql1);
+                                    $rows = mysqli_fetch_all($rs1);
+
+                                    $totalAmount = 0;
+                                    $amount = 0;
+                                    $qty = 0;
+                                    $id = '';
+                                    foreach ($rows as $r) {
+                                    $id = $r[0];
+                                    $qty = $_SESSION["cart"][$id];
+                                    $totalQTY += $qty;
+                                    $amount = $qty * $r[3];
+                                    $totalAmount += $amount;
+                                    ?>
+                                <tbody>
+                                <tr>
+                                    <td style="width: 150px;"><img src="images/product images/<?php echo $r[4]; ?>" alt="<?php echo $r[2]; ?>" style="width: 120px;height: 100px;"></td>
+                                    <td style="font-weight: bold;width: 30%;"><?php echo $r[2]; ?></td>
+                                    <td style="width: 100px;">
+                                        <div class="input-group">
+                                                    <span class="input-group-btn">
+                                                        <button type="button" class="btn btn-danger btn-sm" onclick="substract('<?php echo $r[0]; ?>')">
+                                                            <span class="glyphicon glyphicon-minus"></span>
+                                                        </button>
+                                                    </span>
+                                            <input class="form-control qtyValue" id="qtyVal<?php echo $r[0]; ?>"  type="number" max="100" min="1"  style="border-radius: 5px;width: 50px;text-align: center; padding: 10px;" value="<?php echo $qty; ?>"  onchange="change('<?php echo $r[0]; ?>')">
+                                            <span class="input-group-btn">
+                                                        <button type="button" class="btn btn-danger btn-sm" onclick="add('<?php echo $r[0]; ?>')">
+                                                            <span class="glyphicon glyphicon-plus"></span>
+                                                        </button>
+                                                    </span>
+                                        </div>
+                                    </td>
+                                    <td style="">VND <?php echo number_format($amount); ?></td>
+                                    <td>   <div class="col-md-2" title="Remove food item" onclick="remove('<?php echo $r[0]; ?>')"><i class="glyphicon glyphicon-remove-circle" style="color: #A82128"></i></div></td>
+                                </tr>
+                                </tbody>
+                                <?php
+                                $_SESSION["xcart"][$id]["productID"] = $id;
+                                $_SESSION["xcart"][$id]["productName"] = $r[2];
+                                $_SESSION["xcart"][$id]["price"] = $r[3];
+                                $_SESSION["xcart"][$id]["amount"] = $amount;
+                                $_SESSION["xcart"][$id]["qty"] = $qty;
+                                }
+                                //Save the total number of ordered items
+                                $_SESSION["totalQty"] = $totalQTY;
+                                echo "<p id='qty' style='display:none;'>" . $_SESSION["totalQty"] . "</p>";
+                                ?>
                             </table>
+
                         </div>
                     </div>
                     

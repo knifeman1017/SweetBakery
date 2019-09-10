@@ -64,14 +64,12 @@ if (mysqli_errno($link)) {
 
                         <ul class="nav navbar-nav navbar-right">
                             <li>
-                                <a href="#"><button class="btn btn-success btn-lg" type="button" style="background-color: #FF5B35; padding: 5px;">
+                                <a href="cart_view.php"><button class="btn btn-success btn-lg" type="button" style="background-color: #FF5B35; padding: 5px;">
                                         <i class="glyphicon glyphicon-shopping-cart"></i> <span class="badge"> 
                                             <?php
-                                            if (isset($_SESSION["totalQty"])) {
-                                                echo $_SESSION["totalQty"];
-                                            } else {
-                                                echo 0;
-                                            }
+                                            session_start();
+                                            $order = $_SESSION['cart'];
+                                            echo sizeof($order);
                                             ?></span>
                                     </button></a>
                             </li>
@@ -92,6 +90,7 @@ if (mysqli_errno($link)) {
             <div id="Banhmi" class="tabcontent" >
                 <div class="row" >
                     <?php
+                    include_once "../SweetBakery/lib/connect.inc";
                     while ($row = mysqli_fetch_row($result)) {
                         echo "<div class='column'>";
                         echo " <div class='card'>";
@@ -99,7 +98,7 @@ if (mysqli_errno($link)) {
                         echo "<div class='container'>";
                         echo "<h5>$row[1]</h5>";
                         echo "<p>$row[4]đ</p>";
-                        echo "<p><button class='btn btn-success btn-lg' class='button'>Order</button></p>";
+                        echo "<p><a class='btn btn-success btn-lg' href='product_cart.php?id=$row[0]'>Order</a></p>";
                         echo "</div>";
                         echo "</div>";
                         echo "</div>";

@@ -60,7 +60,7 @@
                         
                         <ul class="nav navbar-nav navbar-right">
                             <li>
-                                <a href="cart.php"><button class="btn btn-success btn-lg" type="button" style="background-color: #FF5B35; padding: 5px;">
+                                <a href="cart_view.php"><button class="btn btn-success btn-lg" type="button" style="background-color: #FF5B35; padding: 5px;">
                                     <i class="glyphicon glyphicon-shopping-cart"></i> <span class="badge"> 
                                         <?php
                                         if (isset($_SESSION["totalQty"])) {
@@ -85,7 +85,7 @@
         
         
         <!--Đăng nhập-->
-            <div class="modal-dialog" role="document">
+            <form class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -109,7 +109,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
         
         
