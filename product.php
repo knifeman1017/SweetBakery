@@ -92,20 +92,21 @@ if (mysqli_errno($link)) {
             <div id="Banhmi" class="tabcontent" >
                 <div class="row" >
                     <?php
-                    class   Product{
+                     include_once '../SweetBakery/lib/data.inc';
 
-                    }
-                    while ($p = mysqli_fetch_object($result,'Product')) {
+                   foreach($proList as $p) {
+
                         echo "<div class='column'>";
                         echo " <div class='card'>";
                         echo "<img src='../SweetBakery/Images/$p->Images'style='width:100%' title='$p->product_description'/>";
                         echo "<div class='container'>";
                         echo "<h5>$p->product_name</h5>";
                         echo "<p>$p->product_price đ</p>";
-                        echo "<p><button class='btn btn-success btn-lg' href='f'>Order</button></p>";
+                        echo "<p><a class='btn btn-success btn-lg' href='product_add_cart.php?id=$p->product_id'>Add to Cart</a></p>";
                         echo "</div>";
                         echo "</div>";
                         echo "</div>";
+
                     }
                     ?>
                 </div>

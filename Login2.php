@@ -3,14 +3,40 @@
     <head>
         <meta charset="utf-8">
        <!-- SweetsBakery. logo-->
-        <link rel="icon" href="../SweetBakery/images/logo.jpg">
-        <title>Login Admin</title>
+        <link rel="icon" href="../SweetBakery/Images/logo.jpg">
+
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
         <link href="css/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <title>SweetsBakery - Login</title>
+
+        <!--CSS FRAMEWORK-->
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="css/jquery.fancybox.min.css" type="text/css"/>
+        <link href = "//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel = "stylesheet">
+        <link href="css/animate.css" rel='stylesheet' type='text/css' />
+
+
+        <link href="css/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
     </head>
     <body style="background: url(images/logo.jpg);">
+    <!-- Header-->
+    <div class="header" style="background-color: #F4F4F4">
+        <div class="container-fluid" style="height: 100px;">
+            <div class=" row top-header">
+                <div class="col-sm-2" style="left: 100px;" >
+                    <a href="homepage.php"><img width="100"  height=" 100" src="../images/logo.jpg"  alt="logo" /></a>
+                </div>
+                <div class="col-sm-8" style="text-align: center;color: #FF5B35;font-weight: bold;top: 40px;font-size: 1.2em;">
+                    <p>Welcome SweetsBakery</p>
+                    <p>VIỆT NAM</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
         <div class="container w-50 border border-primary" style="border-radius: 25px;margin-top: 10%; background: white;">
             <h1 class="mt-5" align="center">LOGIN ADMIN</h1>
             <hr/>        

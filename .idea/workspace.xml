@@ -46,6 +46,11 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\wamp64\www\SweetBakery" />
+    </key>
+  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -81,6 +86,7 @@
       <workItem from="1567911379174" duration="3847000" />
       <workItem from="1568023765592" duration="167000" />
       <workItem from="1568087302229" duration="1266000" />
+      <workItem from="1568088654484" duration="9086000" />
     </task>
     <servers />
   </component>
