@@ -91,10 +91,23 @@
 
                         <ul class="nav navbar-nav navbar-right">
                             <li>
+<<<<<<< HEAD
                                 <a href="product_cart_view.php"><button class="btn btn-success btn-lg" type="button" style="background-color: #FF5B35; padding: 5px;">
                                         <i class="glyphicon glyphicon-shopping-cart"></i> <span class="badge"> 
 
                                     </button></a>
+=======
+                                <a href="cart_view.php"><button class="btn btn-success btn-lg" type="button" style="background-color: #FF5B35; padding: 5px;">
+                                    <i class="glyphicon glyphicon-shopping-cart"></i> <span class="badge"> 
+                                        <?php
+                                        if (isset($_SESSION["totalQty"])) {
+                                            echo $_SESSION["totalQty"];
+                                        } else {
+                                            echo 0;
+                                        }
+                                        ?></span>
+                                </button></a>
+>>>>>>> 4eed696b298c5dd5be0b48bb755a47430215e437
                             </li>
                         </ul>
 
@@ -105,17 +118,27 @@
                     </div>
                 </nav>
             </div>
+<<<<<<< HEAD
         </div>
 
 
             <!--Đăng nhập-->
             <div class="modal-dialog" role="document">
+=======
+        
+        
+        
+        
+        <!--Đăng nhập-->
+            <form class="modal-dialog" role="document">
+>>>>>>> 4eed696b298c5dd5be0b48bb755a47430215e437
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h3 class="modal-title" style="text-align: center;font-weight: bolder;color: #A82128">LOGIN ACCOUNT</h3>
                     </div>
                     <form method="get">
+<<<<<<< HEAD
                         <div class="form-group row text-right">
                             <label for="user" class="font-weight-bold col-sm-3 col-form-label ">User</label>
                             <div class="col-sm-9">
@@ -133,6 +156,61 @@
                             <input type="reset" class="form-control-sm btn btn-info" value="Reset">
                         </div>
                     </form>
+=======
+                <div class="form-group row text-right">
+                    <label for="user" class="font-weight-bold col-sm-3 col-form-label ">User</label>
+                    <div class="col-sm-9">
+                        <input type="text" id="user" name="txtUser" class="form-control w-75" placeholder="Enter User" required />
+                        
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+        
+              <!--footer -->
+        <div class="container">
+            <div class="contact-section-grids">
+                 <div class="col-md-3 contact-section-grid wow fadeInLeft" data-wow-delay="0.4s">
+                    <h4 style="color: #FF5B35">Site Links</h4>
+                    <ul>
+                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="#">Về chúng tôi</a></li>
+                    </ul>
+                    <ul>
+                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="#">Giỏ hàng</a></li>
+                    </ul>
+                    <ul>
+                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="#">Cửa hàng</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-md-3 contact-section-grid wow fadeInLeft" data-wow-delay="0.4s">
+                    <h4 style="color: #FF5B35">Menu</h4>
+                    <ul>
+                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="product.php?cat=banhmi" >Bánh Mì</a></li>
+                    </ul>
+                    <ul>
+                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="product.php?cat=banhkem" >Bánh Kem</a></li>
+                    </ul>
+                    <ul>
+                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="product.php?cat=banhngot" >Bánh Ngọt</a></li>
+                    </ul>
+                    <ul>
+                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="product.php?cat=donggoi" >Đóng Gói</a></li>
+                    </ul>
+                    <ul>
+                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="product.php?cat=theomua" >Theo Mùa</a></li>
+                    </ul>
+                    <ul>
+                        <li class="data" style="color: #FF5B35"><a style="color: #FF5B35" href="product.php?cat=khac" >Khác</a></li>
+                    </ul>
+                </div>
+                <div class="form-group mb-5" align="center">
+                    <input class="form-control-sm btn btn-primary" type="submit" value="Login" name="btLogin" />
+                    <input type="reset" class="form-control-sm btn btn-info" value="Reset">
+                </div>
+            </form>
+>>>>>>> 4eed696b298c5dd5be0b48bb755a47430215e437
                 </div>
             </div>
 

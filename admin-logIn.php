@@ -38,9 +38,15 @@
     </body>
 </html>
 <?php
+<<<<<<< HEAD
+=======
+  // tao ket noi voi db
+    include_once '../SweetBakery/lib/connect.inc';
+>>>>>>> 4eed696b298c5dd5be0b48bb755a47430215e437
 //kiem tra nut submit da duoc bam chua
 if (isset($_POST["btLogin"]) == TRUE) {
     // lay du lieu trong 2 o username, password
+<<<<<<< HEAD
     $taikhoan = $_POST['txtUser'];
     $password = $_POST["txtPass"];
 echo $taikhoan;
@@ -51,6 +57,16 @@ echo $password;
     //tao linh truy van
     $sql = "SELECT * FROM tb_customer WHERE customer_id like '$taikhoan'";
     echo $sql;
+=======
+    $user = $_GET["user"];
+    $password = $_GET["pass"];
+
+  
+
+    //tao linh truy van
+    $sql = "select * from tb_admin where admin_id = '$user'";
+
+>>>>>>> 4eed696b298c5dd5be0b48bb755a47430215e437
     //thuc hien hieu lenh truy van
     $result = mysqli_query($link, $sql);
 
@@ -66,8 +82,20 @@ echo $password;
     // da tim thay dong co ma tk == user, tiep tuc kiem tra password
     //doc dong du lieu 
     $row = mysqli_fetch_row($result);
+<<<<<<< HEAD
     if ($row[1] == $password) {
         header("Location: product.php");
+=======
+    if( ($row[1] == $password)||($row[2] == 1)) {
+        // tai khoan va mat khau hop le => chuyen trang 
+       
+         
+     
+            header("Location: admin-index.php");
+        
+       
+       
+>>>>>>> 4eed696b298c5dd5be0b48bb755a47430215e437
     }
      else {
             die("<h3>mat ma ko dung vui long nhap lai</h3>");

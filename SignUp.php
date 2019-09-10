@@ -60,7 +60,11 @@
                         
                         <ul class="nav navbar-nav navbar-right">
                             <li>
+<<<<<<< HEAD
                                 <a href="product_cart_view.php"><button class="btn btn-success btn-lg" type="button" style="background-color: #FF5B35; padding: 5px;">
+=======
+                                <a href="cart_view.php"><button class="btn btn-success btn-lg" type="button" style="background-color: #FF5B35; padding: 5px;">
+>>>>>>> 4eed696b298c5dd5be0b48bb755a47430215e437
                                     <i class="glyphicon glyphicon-shopping-cart"></i> <span class="badge"> 
                                         <?php
                                         if (isset($_SESSION["totalQty"])) {

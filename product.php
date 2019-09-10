@@ -64,14 +64,12 @@ if (mysqli_errno($link)) {
 
                         <ul class="nav navbar-nav navbar-right">
                             <li>
-                                <a href="#"><button class="btn btn-success btn-lg" type="button" style="background-color: #FF5B35; padding: 5px;">
+                                <a href="cart_view.php"><button class="btn btn-success btn-lg" type="button" style="background-color: #FF5B35; padding: 5px;">
                                         <i class="glyphicon glyphicon-shopping-cart"></i> <span class="badge"> 
                                             <?php
-                                            if (isset($_SESSION["totalQty"])) {
-                                                echo $_SESSION["totalQty"];
-                                            } else {
-                                                echo 0;
-                                            }
+                                            session_start();
+                                            $order = $_SESSION['cart'];
+                                            echo sizeof($order);
                                             ?></span>
                                     </button></a>
                             </li>
@@ -92,17 +90,28 @@ if (mysqli_errno($link)) {
             <div id="Banhmi" class="tabcontent" >
                 <div class="row" >
                     <?php
+<<<<<<< HEAD
                      include_once '../SweetBakery/lib/data.inc';
 
                    foreach($proList as $p) {
 
+=======
+                    include_once "../SweetBakery/lib/connect.inc";
+                    while ($row = mysqli_fetch_row($result)) {
+>>>>>>> 4eed696b298c5dd5be0b48bb755a47430215e437
                         echo "<div class='column'>";
                         echo " <div class='card'>";
                         echo "<img src='../SweetBakery/Images/$p->Images'style='width:100%' title='$p->product_description'/>";
                         echo "<div class='container'>";
+<<<<<<< HEAD
                         echo "<h5>$p->product_name</h5>";
                         echo "<p>$p->product_price đ</p>";
                         echo "<p><a class='btn btn-success btn-lg' href='product_add_cart.php?id=$p->product_id'>Add to Cart</a></p>";
+=======
+                        echo "<h5>$row[1]</h5>";
+                        echo "<p>$row[4]đ</p>";
+                        echo "<p><a class='btn btn-success btn-lg' href='product_cart.php?id=$row[0]'>Order</a></p>";
+>>>>>>> 4eed696b298c5dd5be0b48bb755a47430215e437
                         echo "</div>";
                         echo "</div>";
                         echo "</div>";

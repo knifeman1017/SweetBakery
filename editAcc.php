@@ -1,3 +1,14 @@
+<?php
+include_once './lib/connect.inc';
+$sql = "select * from tb_customer";
+$result = mysqli_query($link, $sql);
+$row = mysqli_fetch_row($result);
+if (mysqli_errno($link)) {
+    echo mysqli_error($link);
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -57,7 +68,11 @@
 
                         <ul class="nav navbar-nav navbar-right">
                             <li>
+<<<<<<< HEAD
                                 <a href="product_cart_view.php"><button class="btn btn-success btn-lg" type="button" style="background-color: #FF5B35; padding: 5px;">
+=======
+                                <a href="cart_view.php"><button class="btn btn-success btn-lg" type="button" style="background-color: #FF5B35; padding: 5px;">
+>>>>>>> 4eed696b298c5dd5be0b48bb755a47430215e437
                                         <i class="glyphicon glyphicon-shopping-cart"></i> <span class="badge"> 
                                             <?php
                                             if (isset($_SESSION["totalQty"])) {
@@ -84,24 +99,24 @@
                         <div class="panel-heading">
                             <h3 class="panel-title">ACCOUNT INFORMATION</h3>
                         </div>
-                        <div class="panel-body">
-                            <form action="#" method="post" id="frEdit">
+                             <div class="panel-body">
+                                 <form action="editAcc2.php" method="post" id="frEdit">
                                 <div class="form-group">
                                     <div class="form-group">
                                         <label for="MemberName">Full Name</label>
-                                        <input type="text" class="form-control" name="MemberName" id="MemberName" id="MemberName" placeholder="Your name must be 5-30 characters (no numbers or special characters)"   value="" pattern="[a-z A-Z]{5,30}" required="" >
+                                        <input type="text" class="form-control" name="MemberName" id="MemberName" id="MemberName" placeholder="Your name must be 5-30 characters (no numbers or special characters)"   value="<?php echo $row[2]; ?>" pattern="[a-z A-Z]{5,30}" required="" >
                                     </div>
                                     <label for="MemberID">Account ID</label>
-                                    <input type="text" class="form-control" name="MemberID" id="MemberID"  required="" value=""readonly=""  pattern="[a-z_A-Z]{5,30}">
+                                    <input type="text" class="form-control" name="MemberID" id="MemberID"  required="" value="<?php echo $row[0]; ?>"readonly=""  pattern="[a-z_A-Z]{5,30}">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="MemberName">Tel</label>
-                                    <input type="text" class="form-control" name="MemberTel" id="MemberTel"  required="" value="" placeholder="Your tel number must be 10-11 digits" pattern="[0-9]{10,11}" >
+                                    <input type="text" class="form-control" name="MemberTel" id="MemberTel"  required="" value="<?php echo $row[4]; ?>" placeholder="Your tel number must be 10-11 digits" pattern="[0-9]{10,11}" >
                                 </div>
                                 <div class="form-group">
                                     <label for="MemberName">Email</label>
-                                    <input type="email" class="form-control" name="MemberMail" id="MemberMail"  required="" value="" placeholder="xxx@xxx.xxx" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" >
+                                    <input type="email" class="form-control" name="MemberMail" id="MemberMail"  required="" value="<?php echo $row[3]; ?>" placeholder="xxx@xxx.xxx" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" >
                                 </div>
                                 <div class="form-group">
                                     <label for="MemberName">Old Password</label>
@@ -115,7 +130,7 @@
                                 <div class="form-group">
                                     <label for="MemberName">Confirm Password</label>
                                     <input type="password" class="form-control"  id="confirmMemberPass"  required="" value="" >
-                                    
+                                    <span class="nosamepass" style="color: red">Passwords don't match!</span>
 
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-lg" name="btnSave">  <span class="glyphicon glyphicon-save"></span> Save changes </button>
@@ -125,7 +140,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        
             
             
             
