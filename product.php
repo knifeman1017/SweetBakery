@@ -92,14 +92,17 @@ if (mysqli_errno($link)) {
             <div id="Banhmi" class="tabcontent" >
                 <div class="row" >
                     <?php
-                    while ($row = mysqli_fetch_row($result)) {
+                    class   Product{
+
+                    }
+                    while ($p = mysqli_fetch_object($result,'Product')) {
                         echo "<div class='column'>";
                         echo " <div class='card'>";
-                        echo "<img src='../SweetBakery/Images/$row[3]'style='width:100%' title='$row[2]'/>";
+                        echo "<img src='../SweetBakery/Images/$p->Images'style='width:100%' title='$p->product_description'/>";
                         echo "<div class='container'>";
-                        echo "<h5>$row[1]</h5>";
-                        echo "<p>$row[4]đ</p>";
-                        echo "<p><button class='btn btn-success btn-lg' class='button'>Order</button></p>";
+                        echo "<h5>$p->product_name</h5>";
+                        echo "<p>$p->product_price đ</p>";
+                        echo "<p><button class='btn btn-success btn-lg' href='f'>Order</button></p>";
                         echo "</div>";
                         echo "</div>";
                         echo "</div>";
