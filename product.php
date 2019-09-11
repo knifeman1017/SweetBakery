@@ -69,11 +69,12 @@ if (mysqli_errno($link)) {
 
                         <ul class="nav navbar-nav navbar-right">
                             <li>
-                                <a href="#"><button class="btn btn-success btn-lg" type="button" style="background-color: #FF5B35; padding: 5px;">
+                                <a href="product_cart_view.php"><button class="btn btn-success btn-lg" type="button" style="background-color: #FF5B35; padding: 5px;">
                                         <i class="glyphicon glyphicon-shopping-cart"></i> <span class="badge"> 
                                             <?php
-                                            if (isset($_SESSION["totalQty"])) {
-                                                echo $_SESSION["totalQty"];
+                                            session_start();
+                                            if (isset($_SESSION["cart"])) {
+                                                echo sizeof($_SESSION['cart']);
                                             } else {
                                                 echo 0;
                                             }
@@ -105,7 +106,7 @@ if (mysqli_errno($link)) {
                         echo "<div class='container'>";
                         echo "<h5>$row[1]</h5>";
                         echo "<p>$row[4] đ</p>";
-                        echo "<p><a class='btn btn-success btn-lg' href='product_add_cart.php?id=$row[0]'>Add to cart</a></p>";
+                        echo "<p><a class='btn btn-success btn-lg' href='product_cart.php?id=$row[0]'>Add to cart</a></p>";
                         echo "</div>";
                         echo "</div>";
                         echo "</div>";

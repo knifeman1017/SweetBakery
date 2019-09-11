@@ -112,8 +112,14 @@ if (isset($_POST["btLogin"]) == TRUE) {
     //doc dong du lieu
     $row = mysqli_fetch_row($result);
     if ($row[1] == $password) {
+<<<<<<< HEAD
         header("Location: homepage.php");
         $_SESSION["ten"] = $taikhoan;
+=======
+        session_start();
+
+        header("Location: product.php");
+>>>>>>> 2020241f2ed91cb7e8464957dcf308d16f52cd36
     }
     else {
         die("<h3>mat ma ko dung vui long nhap lai</h3>");

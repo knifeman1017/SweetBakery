@@ -61,8 +61,10 @@
                                 <a href="#"><button class="btn btn-success btn-lg" type="button" style="background-color: #FF5B35; padding: 5px;">
                                     <i class="glyphicon glyphicon-shopping-cart"></i> <span class="badge"> 
                                         <?php
-                                        if (isset($_SESSION["totalQty"])) {
-                                            echo $_SESSION["totalQty"];
+                                        include_once '../SweetBakery/lib/data.inc';
+                                        session_start();
+                                        if (isset($_SESSION["cart"])) {
+                                            echo sizeof($_SESSION["cart"]);
                                         } else {
                                             echo 0;
                                         }
@@ -90,13 +92,48 @@
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
+                                        <th>STT</th>
                                         <th>Photo Product</th>
                                         <th>Product Name</th>
                                         <th>Quantity</th>
+                                        <th>Price</th>
                                         <th>Total</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
-                            </table>
+                                <tbody>
+                                <tr>
+                                    <?php
+
+                                    if(isset($_SESSION["cart"])==FALSE){
+                                        //chua co gio hang -> quay ve trang dat hang
+                                        echo "Chưa có sản phẩm nào trong giỏ hàng!!!";
+                                        exit();
+                                    }
+                                    //da co gio hang: lay noi dung gio hang -> bien order
+                                    $order = $_SESSION["cart"];
+                                    $qty=1;
+                                    $stt=1;
+                                    $tong=0;
+                                    $grand=0;
+                                    foreach ($order as $p) {
+                                        $amt = $p->product_price;
+                                        $grand+=$amt;
+                                        echo '<tr>';
+                                        echo "<td>$stt</td>";
+                                        echo "<td><img src='../SweetBakery/Images/$p->Images'style='width:25%' title='$p->product_description'/>";
+                                        echo "<td>$p->product_name</td>";
+                                        echo "<td>$qty</td>";
+                                        echo "<td>$p->product_price</td>";
+                                        echo "<td>$amt</td>";
+                                        echo "<td><a type='button' href='product_cart_remove?id=$p->product_id' class='btn btn-info'><i class='glyphicon glyphicon-remove-sign' style='color: wheat' ></i></a></td>";
+                                        echo '</tr>';
+                                        $stt++;
+                                    }
+                                    ?>
+                                </tr>
+                                </tbody>
+                              </table>
                         </div>
                     </div>
                     
@@ -110,7 +147,7 @@
                             <div class="panel-body">
                                 <table class="table"> 
                                     <tr>
-                                        <td><a href="pizza.php" ><button  type="submit" class="btn btn-primary btn-lg">Continue shopping</button></a></td>
+                                        <td><a href="product.php" ><button  type="submit" class="btn btn-primary btn-lg">Continue shopping</button></a></td>
                                         <td style="padding-left: 50px;">
                                             <form action="#" method="post" id="frCheckout">
                                                 <input  type="submit" name="btnCheckout" class="btn btn-success btn-lg" value="Checkout">
