@@ -108,6 +108,8 @@ if (isset($_POST["btLogin"]) == TRUE) {
     //doc dong du lieu
     $row = mysqli_fetch_row($result);
     if ($row[1] == $password) {
+        session_start();
+
         header("Location: product.php");
     }
     else {

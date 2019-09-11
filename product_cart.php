@@ -1,11 +1,12 @@
 <?php
 include_once '../SweetBakery/lib/connect.inc';
+include_once  '../SweetBakery/lib/data.inc';
 session_start();
 
 //kiem tra trang co nhan tham so id khong?
 if(isset($_GET["id"])==FALSE){
     //quay ve trang san pham
-    header("product.php");
+    header("location:product.php");
 
     exit();
 }
@@ -17,15 +18,13 @@ $ms = $_GET["id"];
 if(isset($_SESSION["cart"][$ms])==FALSE){
     //truong hop chua co mat hang nay trong gio hang
 
-    $sql = "Select * from tb_product where product_id like '$ms'";
-    $result  = mysqli_query($link,$sql);
+    //tim san pham co ma so $ms trong danh sach proList
+    $p = search($ms,$proList);
 
     //luu san pham $p vao gio hang
-    $_SESSION["cart"][$ms]=$result;
+    $_SESSION["cart"][$ms]=$p;
+
 }
-
-
-header("product.php");
+header("location:product.php");
 ?>
-
 
