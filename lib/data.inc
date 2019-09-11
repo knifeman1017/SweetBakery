@@ -1,8 +1,8 @@
 <?php
 include_once 'connect.inc';
-class   Product{
-}
+class Product{
 
+}
 $sql = "select * from tb_product";
 $result = mysqli_query($link,$sql);
 

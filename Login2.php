@@ -61,6 +61,21 @@
             </form>
            
         </div>
+    <footer class="panel-footer" id="footer">
+        <div class="row">
+            <div class="col-xs-6">
+                <h4 style="color: #FF5B35">Sweets Bakery</h4>
+
+                <h5 style="color: #FF5B35">2019 &copy; All Rights Reserved</h5>
+            </div>
+            <div class="col-xs-6 text-right">
+                <h4 style="color: #FF5B35">Follow Us</h4>
+                <a href="#" class="fa fa-facebook"></a>
+                <a href="#" class="fa fa-twitter"></a>
+                <a href="#" class="fa fa-google"></a>
+            </div>
+        </div>
+    </footer>
     </body>
 </html>
 <?php

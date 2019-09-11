@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <?php
-$prodcat = '%' . $_GET["cat"] . '%';
-echo $prodcat;
+if(isset($_GET["cat"])){
+    $prodcat = '%' . $_GET["cat"] . '%';
+    $sql = "select * from tb_product where product_category like '$prodcat' ";
+}else{
+    $sql = "select * from tb_product";
+}
+
 include_once '../SweetBakery/lib/connect.inc';
-$sql = "select * from tb_product where product_category like '$prodcat' ";
+
 $result = mysqli_query($link, $sql);
 if (mysqli_errno($link)) {
     echo mysqli_error($link);
@@ -64,12 +69,14 @@ if (mysqli_errno($link)) {
 
                         <ul class="nav navbar-nav navbar-right">
                             <li>
-                                <a href="cart_view.php"><button class="btn btn-success btn-lg" type="button" style="background-color: #FF5B35; padding: 5px;">
+                                <a href="#"><button class="btn btn-success btn-lg" type="button" style="background-color: #FF5B35; padding: 5px;">
                                         <i class="glyphicon glyphicon-shopping-cart"></i> <span class="badge"> 
                                             <?php
-                                            session_start();
-                                            $order = $_SESSION['cart'];
-                                            echo sizeof($order);
+                                            if (isset($_SESSION["totalQty"])) {
+                                                echo $_SESSION["totalQty"];
+                                            } else {
+                                                echo 0;
+                                            }
                                             ?></span>
                                     </button></a>
                             </li>
@@ -87,36 +94,23 @@ if (mysqli_errno($link)) {
 
 
             <!-- Tab content -->
-            <div id="Banhmi" class="tabcontent" >
+            <div class="container" style="margin:auto;vertical-align: middle">
                 <div class="row" >
                     <?php
-<<<<<<< HEAD
-                     include_once '../SweetBakery/lib/data.inc';
 
-                   foreach($proList as $p) {
-
-=======
-                    include_once "../SweetBakery/lib/connect.inc";
-                    while ($row = mysqli_fetch_row($result)) {
->>>>>>> 4eed696b298c5dd5be0b48bb755a47430215e437
+                    while($row=mysqli_fetch_row($result)){
                         echo "<div class='column'>";
                         echo " <div class='card'>";
-                        echo "<img src='../SweetBakery/Images/$p->Images'style='width:100%' title='$p->product_description'/>";
+                        echo "<img src='../SweetBakery/Images/$row[3]'style='width:100%' title='$row[2]'/>";
                         echo "<div class='container'>";
-<<<<<<< HEAD
-                        echo "<h5>$p->product_name</h5>";
-                        echo "<p>$p->product_price đ</p>";
-                        echo "<p><a class='btn btn-success btn-lg' href='product_add_cart.php?id=$p->product_id'>Add to Cart</a></p>";
-=======
                         echo "<h5>$row[1]</h5>";
-                        echo "<p>$row[4]đ</p>";
-                        echo "<p><a class='btn btn-success btn-lg' href='product_cart.php?id=$row[0]'>Order</a></p>";
->>>>>>> 4eed696b298c5dd5be0b48bb755a47430215e437
+                        echo "<p>$row[4] đ</p>";
+                        echo "<p><a class='btn btn-success btn-lg' href='product_add_cart.php?id=$row[0]'>Add to cart</a></p>";
                         echo "</div>";
                         echo "</div>";
                         echo "</div>";
-
                     }
+
                     ?>
                 </div>
             </div>
