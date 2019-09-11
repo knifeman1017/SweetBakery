@@ -1,3 +1,15 @@
+<?php
+session_start();
+include_once './lib/connect.inc';
+if (isset($_GET['logout']) && $_GET['logout'] == true) {
+    //Erase all session when log out
+    session_destroy();
+    unset($_GET["logout"]);
+    header("location:homepage.php");
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,51 +25,18 @@
         <link href = "//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel = "stylesheet">
         <link href="css/animate.css" rel='stylesheet' type='text/css' />
         
-        
+         <!-- JAVASCRIPT FRAMEWORK-->
+        <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.bundle.js" ></script>
+        <script type="text/javascript" src="js/jquery.min.js" ></script>
+        <script type="text/javascript" src="js/jquery.flexisel.js"></script>
+        <script type="text/javascript" src="js/move-top.js"></script>
+        <script type="text/javascript" src="js/easing.js"></script>
+        <script src="js/wow.min.js"></script>
        
         <link href="css/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 
         <script>var $j = jQuery.noConflict(true);</script>
-        <style>
-            img{
-                vertical-align: middle;
-                margin: auto;
-            }
-            .fa {
-                padding: 20px;
-                font-size: 30px;
-                width: 70px;
-                text-align: center;
-                text-decoration: none;
-                margin: 5px 2px;
-                border-radius: 50%;
-                color: #FF5B35;
-            }
-
-            .fa:hover {
-                opacity: 0.7;
-            }
-
-            .fa-facebook {
-                background: #FF5B35;
-                color: white;
-            }
-
-            .fa-twitter {
-                background: #FF5B35;
-                color: white;
-            }
-
-            .fa-google {
-                background: #FF5B35;
-                color: white;
-            }
-
-            .fa-youtube {
-                background: #FF5B35;
-                color: white;
-            }
-        </style>
     </head>
     <body>
         <!-- Header-->
@@ -97,7 +76,7 @@
 
                         <ul class="nav navbar-nav navbar-right">
                             <li>
-                                <a href="#"><button class="btn btn-success btn-lg" type="button" style="background-color: #FF5B35; padding: 5px;">
+                                <a href="cart.php"><button class="btn btn-success btn-lg" type="button" style="background-color: #FF5B35; padding: 5px;">
                                         <i class="glyphicon glyphicon-shopping-cart"></i> <span class="badge"> 
                                             <?php
                                             if (isset($_SESSION["totalQty"])) {
@@ -110,10 +89,28 @@
                             </li>
                         </ul>
 
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a href="SignUp.php"   style="color: #FF5B35"><span class="glyphicon glyphicon-user" ></span> Sign Up</a></li>
+                        <ul class="nav navbar-nav navbar-right ">
+                            <?php
+                            if (isset($_SESSION["ten"])) {
+                                ?>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" style="color: #FF5B35"  href="#"><span class="glyphicon glyphicon-user"></span> Hello, <?php echo $_SESSION["ten"]; ?></a>
+                                    <ul class="dropdown-menu" >
+                                        <li><a href="editAcc.php"> <span class="glyphicon glyphicon-pencil"></span> Profile</a></li>
+                                        <li><a href="#"> <span class="glyphicon glyphicon-shopping-cart"> History </span></a></li>
+                                        <li><a href="homepage.php?logout=true"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                                    </ul>
+                                </li>
+                                  <?php
+                            } else {
+                                ?>
+                             <li><a href="SignUp.php"   style="color: #FF5B35"><span class="glyphicon glyphicon-user" ></span> Sign Up</a></li>
                             <li><a href="Login.php"  style="color: #FF5B35"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                        <?php
+                            }
+                        ?>
                         </ul>
+                        
                     </div>
                 </nav>
             </div>
@@ -153,6 +150,8 @@
             <a href="product.php"><button type="button" class="col-md-offset-5 col-md-2 btn btn-success" style="margin-top: 30px; background-color: #FF5B35;">All products</button></a> 
         </div>
 
+       
+
                 <footer class="panel-footer" id="footer">
                     <div class="row">
                         <div class="col-xs-6">
@@ -161,7 +160,7 @@
                             <h5 style="color: #FF5B35">2019 &copy; All Rights Reserved</h5>
                         </div>
                         <div class="col-xs-6 text-right">
-                            <h4>Follow Us</h4>
+                            <h4 style="color: #FF5B35">Follow Us</h4>
                             <a href="#" class="fa fa-facebook"></a>
                             <a href="#" class="fa fa-twitter"></a>
                             <a href="#" class="fa fa-google"></a>
@@ -174,9 +173,58 @@
             
         </div>
 
+        <script>
+            function showProduct(ten) {
+                if (window.XMLHttpRequest) {
+                    // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp = new XMLHttpRequest();
+                } else { // code for IE6, IE5
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("proList").innerHTML = this.responseText;
+                    }
+                }
+        </script>
 
     </div>
 </body>
 </html>
 
-
+  <style>
+            .fa {
+    padding: 20px;
+    font-size: 30px;
+    width: 70px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+    border-radius: 50%;
+}
+ 
+.fa:hover {
+    opacity: 0.7;
+}
+ 
+.fa-facebook {
+    background: #3B5998;
+    color: white;
+}
+ 
+.fa-twitter {
+    background: #55ACEE;
+    color: white;
+}
+ 
+.fa-google {
+    background: #dd4b39;
+    color: white;
+}
+ 
+.fa-youtube {
+    background: #bb0000;
+    color: white;
+}
+        </style>
+        

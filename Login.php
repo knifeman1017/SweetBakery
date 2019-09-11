@@ -1,3 +1,8 @@
+<?php
+session_start();
+include_once './lib/connect.inc';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +25,7 @@
 
     <link href="css/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 </head>
-<body style="background: url(images/logo.jpg);">
+<body >
 <!-- Header-->
 <div class="header" style="background-color: #F4F4F4">
     <div class="container-fluid" style="height: 100px;">
@@ -84,8 +89,7 @@ if (isset($_POST["btLogin"]) == TRUE) {
     // lay du lieu trong 2 o username, password
     $taikhoan = $_POST['txtUser'];
     $password = $_POST["txtPass"];
-    echo $taikhoan;
-    echo $password;
+   
     // tao ket noi voi db
     include_once '../SweetBakery/lib/connect.inc';
 
@@ -108,10 +112,12 @@ if (isset($_POST["btLogin"]) == TRUE) {
     //doc dong du lieu
     $row = mysqli_fetch_row($result);
     if ($row[1] == $password) {
-        header("Location: product.php");
+        header("Location: homepage.php");
+        $_SESSION["ten"] = $taikhoan;
     }
     else {
         die("<h3>mat ma ko dung vui long nhap lai</h3>");
     }
+    
 }
 ?>
