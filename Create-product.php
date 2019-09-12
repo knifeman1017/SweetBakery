@@ -29,7 +29,7 @@
             <a href="admin-account.php"><i class="fa fa-fw fa-user"></i> ADMIN ACCOUNT</a>
         </div>
         <div class="main">
-            <form action="upload_create.php" method="post" enctype="multipart/form-data">
+            <form action="upload-create.php" method="post" enctype="multipart/form-data">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -46,11 +46,8 @@
                                     <input  type="text" class="form-control" name="txtName" required="" pattern="[A-Za-z 0-9]{3,50}" placeholder="Product name must be 3-50 characters" >
                                     <label>PRODUCT DESCRIPTION</label>
                                     <textarea  type="text" class="form-control" name="txtDes" required="" cols="10" rows="5" maxlength="300" placeholder="Optional" ></textarea>
-
-                                        Select image to upload:
-                                        <input type="file" name="fileToUpload" id="fileToUpload">
-
-                                                                 <br>
+                                    <label>IMAGES(.png)</label>
+                                    <input  type="file" class="form-control" name="fileToUpload" id="fileToUpload" required="" accept="images/png" title="Please upload the product image">
                                     <label>PRICE</label>
                                     <input  type="number" class="form-control" name="numPrice" min="10000" max="600000" required="" placeholder="Price must be between 1000 and 1000000" >
                                     <label>CATEGORY</label>
@@ -74,6 +71,9 @@
                 </div>
             </form>
 
+            <?php
+         
+            ?>
         </div>
     </body>
 </html>
