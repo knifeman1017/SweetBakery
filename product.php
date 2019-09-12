@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <?php
+session_start();
 if(isset($_GET["cat"])){
     $prodcat = '%' . $_GET["cat"] . '%';
     $sql = "select * from tb_product where product_category like '$prodcat' ";
@@ -21,7 +22,7 @@ if (mysqli_errno($link)) {
         <title>Product</title>
         <link href="css/css/product.css" rel="stylesheet" type="text/css"/>
         <!-- logo-->
-        <link rel="icon" href="images/logo.jpg">
+        <link rel="icon" href="../SweetBakery/Images/logo.jpg">
         <!--CSS FRAMEWORK-->
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="css/jquery.fancybox.min.css" type="text/css"/>
@@ -34,62 +35,8 @@ if (mysqli_errno($link)) {
 
     </style>
     <body>
-        <!-- Header-->
-        <div class="header" style="background-color: #F4F4F4">
-            <div class="container-fluid" style="height: 100px;">
-                <div class=" row top-header">
-                    <div class="col-sm-2" style="left: 100px;" >
-                        <a href="homepage.php"><img width="100"  height=" 100" src="../SweetBakery/images/logo.jpg"  alt="logo" /></a>
-                    </div>
-                    <div class="col-sm-8" style="text-align: center;color: #FF5B35;font-weight: bold;top: 40px;font-size: 1.2em;">
-                        <p>Welcome SweetsBakery</p>
-                        <p>VIỆT NAM</p>
-                    </div>
-
-                </div>
-            </div>
-        </div>
         <!--Menu-->
-        <div class="menu-bar">
-            <div class="container-fluid">
-                <nav class="navbar navbar-inverse">
-                    <div class="container-fluid" >
-                        <ul class="nav navbar-nav">
-                            <li ><a href="homepage.php" style="color: #FF5B35"><i class="glyphicon glyphicon-home"></i></a></li>
-                            <li><a style="color: #FF5B35" href="product.php?cat=banhmi">Bánh mì</a></li>
-                            <li><a style="color: #FF5B35" href="product.php?cat=banhkem">Bánh kem</a></li>
-                            <li><a style="color: #FF5B35" href="product.php?cat=banhngot">Bánh ngọt</a></li>
-                            <li><a style="color: #FF5B35" href="product.php?cat=donggoi">Đóng gói</a></li>
-                            <li><a style="color: #FF5B35" href="product.php?cat=theomua">Theo mùa</a></li>
-                            <li><a style="color: #FF5B35" href="product.php?cat=khac">Khác</a></li>
-                            <li><a style="color: #FF5B35" href="viewStores.php">Cửa hàng</a></li>
-                            <li><a style="color: #FF5B35" href="aboutus.php">Về chúng tôi </a></li>
-
-                        </ul>
-
-                        <ul class="nav navbar-nav navbar-right">
-                            <li>
-                                <a href="product_cart_view.php"><button class="btn btn-success btn-lg" type="button" style="background-color: #FF5B35; padding: 5px;">
-                                        <i class="glyphicon glyphicon-shopping-cart"></i> <span class="badge"> 
-                                            <?php
-                                            session_start();
-                                            if (isset($_SESSION["cart"])) {
-                                                echo sizeof($_SESSION['cart']);
-                                            } else {
-                                                echo 0;
-                                            }
-                                            ?></span>
-                                    </button></a>
-                            </li>
-                        </ul>
-
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a href="SignUp.php"   style="color: #FF5B35"><span class="glyphicon glyphicon-user" ></span> Sign Up</a></li>
-                            <li><a href="Login.php"  style="color: #FF5B35"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
+          <?php include_once '../SweetBakery/menu_visitor.inc'?>
             <h1 style="color: #FF5B35;">Sản Phẩm</h1>
             <br>
 
@@ -106,7 +53,10 @@ if (mysqli_errno($link)) {
                         echo "<div class='container'>";
                         echo "<h5>$row[1]</h5>";
                         echo "<p>$row[4] đ</p>";
-                        echo "<p><a class='btn btn-success btn-lg' href='product_cart.php?id=$row[0]'>Add to cart</a></p>";
+                        if(isset($_SESSION["customer"])){           echo "<p><a class='btn btn-success btn-lg'  href='product_cart.php?id=$row[0]'>Add to cart</a></p>";}else{
+                            echo "<p><a class='btn btn-success btn-lg'  href='Login.php'>Add to cart</a></p>";
+                        }
+
                         echo "</div>";
                         echo "</div>";
                         echo "</div>";

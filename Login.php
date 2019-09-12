@@ -1,20 +1,9 @@
-<?php
-session_start();
-include_once './lib/connect.inc';
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <!-- SweetsBakery. logo-->
-    <link rel="icon" href="../SweetBakery/Images/logo.jpg">
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-    <link href="css/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-    <title>SweetsBakery - Login</title>
+   <!-- SweetsBakery. Cart-->
+    <link rel="icon" href="../SweetBakery/images/logo.jpg">
 
     <!--CSS FRAMEWORK-->
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -24,6 +13,10 @@ include_once './lib/connect.inc';
 
 
     <link href="css/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+
+    <!--Prevent Jquery conflict -->
+    <script>var $j = jQuery.noConflict(true);</script>
+
 </head>
 <body >
 <!-- Header-->
@@ -31,7 +24,7 @@ include_once './lib/connect.inc';
     <div class="container-fluid" style="height: 100px;">
         <div class=" row top-header">
             <div class="col-sm-2" style="left: 100px;" >
-                <a href="homepage.php"><img width="100"  height=" 100" src="../images/logo.jpg"  alt="logo" /></a>
+                <a href="homepage.php"><img width="100"  height=" 100" src="../SweetBakery/images/logo.jpg"  alt="logo" /></a>
             </div>
             <div class="col-sm-8" style="text-align: center;color: #FF5B35;font-weight: bold;top: 40px;font-size: 1.2em;">
                 <p>Welcome SweetsBakery</p>
@@ -41,9 +34,8 @@ include_once './lib/connect.inc';
         </div>
     </div>
 </div>
-
 <div class="container w-50 border border-primary" style="border-radius: 25px;margin-top: 10%; background: white;">
-    <h1 class="mt-5" align="center">LOGIN ADMIN</h1>
+    <h1 class="mt-5" align="center">PLEASE LOG-IN YOUR ACCOUNT</h1>
     <hr/>
     <form method="post">
         <div class="form-group row text-right">
@@ -110,16 +102,11 @@ if (isset($_POST["btLogin"]) == TRUE) {
     }
     // da tim thay dong co ma tk == user, tiep tuc kiem tra password
     //doc dong du lieu
-    $row = mysqli_fetch_row($result);
-    if ($row[1] == $password) {
-<<<<<<< HEAD
-        header("Location: homepage.php");
-        $_SESSION["ten"] = $taikhoan;
-=======
+    $tk = mysqli_fetch_object($result);
+    if ($tk->customer_password == $password) {
         session_start();
-
-        header("Location: product.php");
->>>>>>> 2020241f2ed91cb7e8464957dcf308d16f52cd36
+        $_SESSION["customer"] = $tk;
+        header("Location: homepage.php");
     }
     else {
         die("<h3>mat ma ko dung vui long nhap lai</h3>");
