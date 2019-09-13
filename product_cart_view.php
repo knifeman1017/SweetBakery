@@ -1,7 +1,12 @@
 <?php
 include_once '../SweetBakery/lib/data.inc';
 session_start();
+//da co gio hang: lay noi dung gio hang -> bien order
 $order = $_SESSION["cart"];
+$customer = $_SESSION["customer"];
+echo '<pre>';
+print_r($customer);
+echo '</pre>';
  ?>
 
 <!DOCTYPE html>
@@ -11,26 +16,25 @@ $order = $_SESSION["cart"];
 
         <!-- SweetsBakery. Cart-->
         <link rel="icon" href="../images/logo.jpg">
-
+        <script src="js/jquery-3.2.1.min.js" type="text/javascript">var $j = jQuery.noConflict(true);</script>
 
         <!--CSS FRAMEWORK-->
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="css/jquery.fancybox.min.css" type="text/css"/>
         <link href = "//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel = "stylesheet">
         <link href="css/animate.css" rel='stylesheet' type='text/css' />
-        
+
        
         <link href="css/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
         
         <!--Prevent Jquery conflict -->
-        <script>var $j = jQuery.noConflict(true);</script>
-          
+
     </head>
     <body>
         <!--Menu-->
         <?php include_once '../SweetBakery/menu_visitor.inc'?>
         <!--Cart-->
-        <form action="">
+        <form action="checkout.php" method="post">
             <div class="container-fluid" style="min-height: 150px;">
             <h2 style="color: #FF5B35;margin-bottom: 10px;margin-top: 10px;">SHOPPING CART</h2>
                 <div class="row">
@@ -64,12 +68,12 @@ $order = $_SESSION["cart"];
                                         exit();
                                     }
 
-                                    //da co gio hang: lay noi dung gio hang -> bien order
 
-                                    $qty=1;
+                                                                                    $qty=1;
                                     $stt=1;
                                     $tong=0;
                                     $grand=0;
+
                                     foreach ($order as $p) {
                                         $amt = $p->product_price*$p->qty;
                                         $grand+=$amt;
@@ -78,10 +82,17 @@ $order = $_SESSION["cart"];
                                         echo "<td>$stt</td>";
                                         echo "<td><img src='../SweetBakery/Images/$p->Images'style='width:25%' title='$p->product_description'/>";
                                         echo "<td>$p->product_name</td>";
-                                        echo "<td><input type='number' name min='1' id='quantity' value='$p->qty'></td>";
+                                        ?>
+                                        <td>
+                                            <input class="form-control qtyValue" id="qtyVal<?php echo $p->product_id; ?>" name="qtyVal<?php echo $p->product_id; ?>"  type="number" max="100" min="1"  style="border-radius: 5px;width: 50px;text-align: center; padding: 10px;" value="1" >
+                                        </td>
+                                    <?php
                                         echo "<td>$p->product_price</td>";
-                                        echo "<td>$amt</td>";
-                                        echo "<td><a type='button' href='product_cart_remove?id=$p->product_id' class='btn btn-info'><i class='glyphicon glyphicon-remove-sign' style='color: wheat' ></i></a></td>";
+                                        ?>
+                                        <td><input type="number" readonly id="amt<?php echo $p->product_id?>" class="form-control" value="<?php echo $amt?>" ></input></td>
+                                    <?php
+                                    $act = "true";
+                                        echo "<td><a type='button' href='product_cart?id=$p->product_id&act=$act' title='Remove this Product' onclick='return confirm(\"Are u sure?\")' class='btn btn-info'><i class='glyphicon glyphicon-remove-sign' style='color: wheat' ></i></a></td>";
                                         echo '</tr>';
                                         $stt++;
                                     }
@@ -96,7 +107,7 @@ $order = $_SESSION["cart"];
                                     <thead>
                                     <tr>
                                         <th>Thành Tiền</th>
-                                        <th><?php     echo $grand; ?></th>
+                                        <th><input type="number" name="cart_grand" readonly id="cart_grand" class="form-control" value="<?php     echo $grand; ?>"></input></th>
                                     </tr>
                                     </thead>
                                 </table>
@@ -113,6 +124,10 @@ $order = $_SESSION["cart"];
                                 <a href="" data-toggle="modal" data-target="#Orderinfo"><button id="Edit" type="button" class="btn btn-primary form-control"><i class="glyphicon glyphicon-edit"></i></button></a>
                             </div>
                             <div class="panel-body">
+                                        <p> <b>Name: </b> <?php       echo "$customer->customer_name </p>";?>
+                            <p> <b>Email: </b> <?php       echo "$customer->customer_email </p>";?>
+                            <p> <b>Phone No.: </b> <?php       echo "$customer->customer_tel </p>";?>
+                            <p><b>Address</b></p>
                                 <table class="table"> 
                                     <tr>
                                         <td><a href="product.php" ><button  type="submit" class="btn btn-primary btn-lg">Continue shopping</button></a></td>
@@ -221,8 +236,21 @@ $order = $_SESSION["cart"];
 }
         </style>
     </body>
-<script>
-    var qty = document.getElementById("quantity").value();
-    var amt = qty*<?php echo  ?>
-</script>
+    <script>
+    <?php
+    foreach ($order as $p){ ?>
+        $("#btn<?php echo $p->product_id?>").on('click', function()  {
+   var curqty = $("#qtyVal<?php echo $p->product_id; ?>").val();
+   $("#qtyVal<?php echo $p->product_id; ?>").val(++curqty);
+});
+        $("#qtyVal<?php echo $p->product_id; ?>").on('change',function(){
+            var curqty = $("#qtyVal<?php echo $p->product_id; ?>").val();
+            var amt = curqty*<?php echo $p->product_price?>;
+            var grand = <?php echo $grand?>;
+            grand += amt;
+            $("#amt<?php echo $p->product_id?>").val(amt);
+            $("#cart_grand").val(grand);
+        });
+         <?php   } ?>
+    </script>
 </html>

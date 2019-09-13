@@ -13,6 +13,7 @@ if(isset($_GET["id"])==FALSE){
 
 //lay ma so san pham dat mua
 $ms = $_GET["id"];
+$act = $_GET["act"];
 
 //kiem tra ma so san pham $ms da co trong gio hang chua
 if(isset($_SESSION["cart"][$ms])==FALSE){
@@ -20,11 +21,17 @@ if(isset($_SESSION["cart"][$ms])==FALSE){
 
     //tim san pham co ma so $ms trong danh sach proList
     $p = search($ms,$proList);
+    $p->qty=1;
 
     //luu san pham $p vao gio hang
     $_SESSION["cart"][$ms]=$p;
-
+    header("location:product.php");
+}else{
+    if ($act){
+        unset($_SESSION["cart"][$ms]);
+        header("location: product_cart_view.php");
+    }
 }
-header("location:product.php");
+
 ?>
 
