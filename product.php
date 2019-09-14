@@ -29,6 +29,14 @@ if (mysqli_errno($link)) {
         <link href="css/animate.css" rel='stylesheet' type='text/css' />
         <link href="css/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 
+        <!-- JAVASCRIPT FRAMEWORK-->
+        <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.bundle.js" ></script>
+        <script type="text/javascript" src="js/jquery.min.js" ></script>
+        <script type="text/javascript" src="js/jquery.flexisel.js"></script>
+        <script type="text/javascript" src="js/move-top.js"></script>
+        <script type="text/javascript" src="js/easing.js"></script>
+        <script src="js/wow.min.js"></script>
     </head>
     <style>
             .fa {

@@ -1,7 +1,28 @@
 <?php
 include_once '../SweetBakery/lib/data.inc';
-//kiem tra nut check-out da duoc bam hay chua
+include_once 'lib/connect.inc';
+if(isset($_GET["btnConfirm"])) {
+    $sql = "select max(order_id) as max from tb_order";
+    $result1 = mysqli_query($link, $sql);
+    $row = mysqli_fetch_row($result1);
+    $order_id = $row[0];
+    $sql1 = "insert into tb_order values (null,'$customer->customer_id','2019-09-13',0,'2019-09-15',null)";
+    mysqli_query($link, $sql1);
+    $grand = 0;
+    foreach ($order as $p) {
+        $amt = $p->product_price * $p->qty;
+        $grand += $amt;
+        $sql2 = "insert into tb_orderitem values ($order_id,'$p->product_id',$p->qty,$amt)";
+        mysqli_query($link, $sql2);
+    }
+    header("location:homepage.php");
+    unset($_SESSION["cart"]);
+}
 
+//kiem tra nut check-out da duoc bam hay chua
+if(isset($_POST['btnCheckout'])==FALSE){
+    header("location:product_cart_view.php");
+}
 session_start();
 //da co gio hang: lay noi dung gio hang -> bien order
 $order = $_SESSION["cart"];
@@ -37,7 +58,7 @@ foreach ($order as $p){
 <!--Menu-->
 <?php include_once '../SweetBakery/menu_visitor.inc'?>
 <!--Cart-->
-<form action="checkout2.php">
+<form action="checkout.php">
     <div class="container-fluid" style="min-height: 150px;">
         <h2 style="color: #FF5B35;margin-bottom: 10px;margin-top: 10px;">SHOPPING CART</h2>
         <div class="row">
